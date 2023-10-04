@@ -7,6 +7,7 @@ public class DogPlayerMovement : MonoBehaviour
     public bool isActiviated = false;
     public GameObject birdObject;
     public GameObject fishObject;
+    List<string> items = new List<string>();
 
     Rigidbody2D rb;
     // Start is called before the first frame update
@@ -35,6 +36,16 @@ public class DogPlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector3(0, 3, 0);
             Debug.Log("jumping");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+
+        if (collision.gameObject.name == "key")
+        {
+            items.Add("key");
         }
     }
 }
