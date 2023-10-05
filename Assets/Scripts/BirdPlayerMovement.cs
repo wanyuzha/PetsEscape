@@ -30,10 +30,15 @@ public class BirdPlayerMovement : MonoBehaviour
         float dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector3(dirX * 7, rb.velocity.y, 0);
 
+        float dirY = Input.GetAxis("Vertical");
+        rb.velocity = new Vector3(rb.velocity.x, dirY * 7, 0);
+
+        /*
         if (Input.GetButtonDown("Jump"))
         {
             rb.velocity = new Vector3(0, 7, 0);
             Debug.Log("jumping");
         }
+        */
     }
 }
