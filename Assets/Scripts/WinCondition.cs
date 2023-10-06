@@ -15,13 +15,11 @@ public class WinCondition : MonoBehaviour
     public void Start()
     {
         winText = GameObject.Find("WinText").GetComponent<Text>();
-        Debug.Log(winText);
         winText.gameObject.SetActive(false);
     }
     public static void FishWin()
     {
         fish = true;
-        Debug.Log("Fish Wins");
         CheckWinCondition();
     }
 
@@ -35,7 +33,6 @@ public class WinCondition : MonoBehaviour
     public static void DogWin()
     {
         dog = true;
-        Debug.Log("Dog Wins");
         CheckWinCondition();
     }
 
@@ -43,12 +40,7 @@ public class WinCondition : MonoBehaviour
     {
         if (fish && bird && dog)
         {
-            
             Debug.Log("All Win! Display winning sign");
         }
     }
-
-    
-
-
 }
