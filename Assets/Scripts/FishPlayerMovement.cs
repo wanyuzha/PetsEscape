@@ -41,7 +41,7 @@ public class FishPlayerMovement : MonoBehaviour
         if (other.gameObject.name == "FishGoal")
         {
             Debug.Log("Name is FishGoal");
-            WinCondition.DogWin();
+            WinCondition.FishWin();
         }
     }
 

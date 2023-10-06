@@ -64,10 +64,10 @@ public class DogPlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collider Triggered");
-        if (other.gameObject.name == "door")
+        
+        if (other.gameObject.name == "DogGoal")
         {
-            Debug.Log("Name is door");
+   
             WinCondition.DogWin();
         }
     }

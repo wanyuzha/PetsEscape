@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WinCondition : MonoBehaviour
 {
@@ -8,18 +9,26 @@ public class WinCondition : MonoBehaviour
     public static bool fish = false;
     public static bool bird = false;
     public static bool dog = false;
+    public static Text winText;
 
-    
+
+    public void Start()
+    {
+        winText = GameObject.Find("WinText").GetComponent<Text>();
+        Debug.Log(winText);
+        winText.gameObject.SetActive(false);
+    }
     public static void FishWin()
     {
         fish = true;
+        Debug.Log("Fish Wins");
         CheckWinCondition();
     }
 
     public static void BirdWin()
     {
         bird = true;
-        Debug.Log("Bird Wins");
+        winText.gameObject.SetActive(true);
         CheckWinCondition();
     }
 
@@ -34,9 +43,12 @@ public class WinCondition : MonoBehaviour
     {
         if (fish && bird && dog)
         {
-            Debug.Log("Win!");
+            
+            Debug.Log("All Win! Display winning sign");
         }
     }
 
-   
+    
+
+
 }
