@@ -7,6 +7,7 @@ public class ReleaseBarrier : MonoBehaviour
     
     public GameObject Block;
     public float moveDistance = 2f;
+    public bool pressed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,19 +23,20 @@ public class ReleaseBarrier : MonoBehaviour
     {
         Debug.Log("touched");
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
-
+        
         Debug.Log(collision.gameObject.name);
 
         if(collision.gameObject.name == "dog")
         {
             //release the barrier in drainage
             MoveBlockUp();
+            pressed = true;
         }
     }
     
     private void MoveBlockUp()
     {
-        if (Block != null)
+        if (Block != null && !pressed)
         {
             Vector3 targetPosition = Block.transform.position + Vector3.up * moveDistance;
             Block.transform.position = Vector3.Lerp(Block.transform.position, targetPosition, Time.deltaTime * 5f);
