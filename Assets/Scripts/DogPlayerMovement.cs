@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DogPlayerMovement : MonoBehaviour
 {
@@ -11,12 +13,20 @@ public class DogPlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private float previousHeight;
 
+    private bool inWater = false;
+    public int health = 10;
+
+    public GameObject panel;
+    public Text textComponent;
+    public Button rsButton;
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         previousHeight = transform.position.y;
+        InvokeRepeating("CheckInWater", 1, 1);
+        panel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,6 +37,11 @@ public class DogPlayerMovement : MonoBehaviour
             isActiviated = true;
             birdObject.GetComponent<BirdPlayerMovement>().isActiviated = false;
             fishObject.GetComponent<FishPlayerMovement>().isActiviated = false;
+        }
+
+        if (health < 0)
+        {
+            EndGame("Dog died!");
         }
 
         if (!isActiviated)
@@ -60,6 +75,42 @@ public class DogPlayerMovement : MonoBehaviour
             previousHeight = transform.position.y;
         }
 
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.name.StartsWith("Water"))
+        {
+            Debug.Log("dog leave water");
+            inWater = false;
+        }
+
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.name.StartsWith("Water"))
+        {
+            Debug.Log("dog enter water");
+            inWater = true;
+            health = 10;
+        }
+
+    }
+
+    void CheckInWater()
+    {
+        if (inWater)
+        {
+            health--;
+        }
+    }
+
+    void EndGame(string str)
+    {
+        textComponent.text = str;
+        Time.timeScale = 0;
+        panel.SetActive(true);
     }
 }
 

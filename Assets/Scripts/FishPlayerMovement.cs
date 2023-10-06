@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FishPlayerMovement : MonoBehaviour
 {
@@ -11,12 +13,16 @@ public class FishPlayerMovement : MonoBehaviour
     private bool inWater = true;
     public int health = 10;
 
+    public GameObject panel;
+    public Text textComponent;
+    public Button rsButton;
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("CheckInWater", 1, 1);
+        panel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,6 +33,11 @@ public class FishPlayerMovement : MonoBehaviour
             isActiviated = true;
             dogObject.GetComponent<DogPlayerMovement>().isActiviated = false;
             birdObject.GetComponent<BirdPlayerMovement>().isActiviated = false;
+        }
+
+        if (health < 0)
+        {
+            EndGame("Fish died!");
         }
 
         if (!isActiviated)
@@ -66,6 +77,13 @@ public class FishPlayerMovement : MonoBehaviour
         {
             health--;
         }
+    }
+
+    void EndGame(string str)
+    {
+        textComponent.text = str;
+        Time.timeScale = 0;
+        panel.SetActive(true);
     }
 
 }
