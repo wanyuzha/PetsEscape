@@ -34,5 +34,18 @@ public class FishPlayerMovement : MonoBehaviour
         float dirY = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, dirY, 0);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Collider Triggered");
+        if (other.gameObject.name == "FishGoal")
+        {
+            Debug.Log("Name is FishGoal");
+            WinCondition.DogWin();
+        }
+    }
+
+
+
 }
 

@@ -7,12 +7,14 @@ public class BirdPlayerMovement : MonoBehaviour
     public bool isActiviated;
     public GameObject dogObject;
     public GameObject fishObject;
+    
 
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -40,5 +42,15 @@ public class BirdPlayerMovement : MonoBehaviour
             Debug.Log("jumping");
         }
         */
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Collider Triggered");
+        if(other.gameObject.name == "window")
+        {
+            Debug.Log("Name is window");
+            WinCondition.BirdWin();
+        }
     }
 }

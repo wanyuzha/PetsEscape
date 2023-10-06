@@ -40,7 +40,7 @@ public class DogPlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(0, 4, 0);
             Debug.Log("jumping");
 
-            //防止卡在砖块的垂直边界上，所以暂时用这个条件语句，只有跳起一定高度才让isJumping = true
+            //??????????????????????????????????????????????????????????????????????isJumping = true
             if(transform.position.y - previousHeight>0.8)
             isJumping = true;
         }
@@ -61,5 +61,17 @@ public class DogPlayerMovement : MonoBehaviour
         }
 
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Collider Triggered");
+        if (other.gameObject.name == "door")
+        {
+            Debug.Log("Name is door");
+            WinCondition.DogWin();
+        }
+    }
+
+
 }
 
