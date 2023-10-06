@@ -13,6 +13,8 @@ public class FishPlayerMovement : MonoBehaviour
     private bool inWater = true;
     public int health = 10;
 
+    public GameObject bubble;
+
     public GameObject panel;
     public Text textComponent;
     public Button rsButton;
@@ -48,6 +50,12 @@ public class FishPlayerMovement : MonoBehaviour
 
         float dirY = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, dirY, 0);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            bubble.GetComponent<Renderer>().enabled = true;
+            bubble.transform.position = transform.position;
+        }
     }
 
     void OnTriggerExit2D(Collider2D coll)
@@ -87,5 +95,3 @@ public class FishPlayerMovement : MonoBehaviour
     }
 
 }
-
-

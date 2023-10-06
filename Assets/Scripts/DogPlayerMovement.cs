@@ -51,13 +51,13 @@ public class DogPlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(dirX * 7, rb.velocity.y, 0);
 
         if (Input.GetKey("space") && !isJumping)
-        {   
+        {
             rb.velocity = new Vector3(0, 4, 0);
             Debug.Log("jumping");
 
-            //·ÀÖ¹¿¨ÔÚ×©¿éµÄ´¹Ö±±ß½çÉÏ£¬ËùÒÔÔÝÊ±ÓÃÕâ¸öÌõ¼þÓï¾ä£¬Ö»ÓÐÌøÆðÒ»¶¨¸ß¶È²ÅÈÃisJumping = true
-            if(transform.position.y - previousHeight>0.8)
-            isJumping = true;
+            //ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½×©ï¿½ï¿½Ä´ï¿½Ö±ï¿½ß½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä£¬Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß¶È²ï¿½ï¿½ï¿½isJumping = true
+            if (transform.position.y - previousHeight > 0.8)
+                isJumping = true;
         }
     }
 
@@ -113,4 +113,3 @@ public class DogPlayerMovement : MonoBehaviour
         panel.SetActive(true);
     }
 }
-

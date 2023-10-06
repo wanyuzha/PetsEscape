@@ -17,6 +17,7 @@ public class BirdPlayerMovement : MonoBehaviour
     public Text textComponent;
     public Button rsButton;
     Rigidbody2D rb;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class BirdPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             isActiviated = true;
             dogObject.GetComponent<DogPlayerMovement>().isActiviated = false;
