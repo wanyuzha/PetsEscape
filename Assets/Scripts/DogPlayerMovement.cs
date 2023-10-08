@@ -11,7 +11,7 @@ public class DogPlayerMovement : MonoBehaviour
     public GameObject fishObject;
     List<string> items = new List<string>();
     private bool isJumping = false;
-    private float previousHeight;
+    // private float previousHeight;
 
     private bool inWater = false;
     public int health = 10;
@@ -24,7 +24,7 @@ public class DogPlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        previousHeight = transform.position.y;
+        // previousHeight = transform.position.y;
         InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
     }
@@ -48,16 +48,13 @@ public class DogPlayerMovement : MonoBehaviour
             return;
 
         float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector3(dirX * 7, rb.velocity.y, 0);
+        rb.velocity = new Vector2(dirX * 6, rb.velocity.y);
 
-        if (Input.GetKey("space") && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
-            rb.velocity = new Vector3(0, 4, 0);
+            isJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, 6);
             Debug.Log("jumping");
-
-            //��ֹ����ש��Ĵ�ֱ�߽��ϣ�������ʱ�����������䣬ֻ������һ���߶Ȳ���isJumping = true
-            if (transform.position.y - previousHeight > 0.8)
-                isJumping = true;
         }
     }
 
@@ -72,7 +69,7 @@ public class DogPlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             isJumping = false;
-            previousHeight = transform.position.y;
+            // previousHeight = transform.position.y;
         }
 
     }

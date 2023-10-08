@@ -17,7 +17,7 @@ public class BirdPlayerMovement : MonoBehaviour
     public Text textComponent;
     public Button rsButton;
     Rigidbody2D rb;
-    
+
     // Start is called before the first frame update
     void Start()
     {

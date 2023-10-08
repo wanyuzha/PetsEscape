@@ -46,7 +46,7 @@ public class FishPlayerMovement : MonoBehaviour
             return;
 
         float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector3(dirX * 7, rb.velocity.y, 0);
+        rb.velocity = new Vector3(dirX * 5, rb.velocity.y, 0);
 
         float dirY = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, dirY, 0);
