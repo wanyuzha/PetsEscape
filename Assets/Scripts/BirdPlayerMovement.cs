@@ -71,7 +71,16 @@ public class BirdPlayerMovement : MonoBehaviour
             inWater = true;
             health = 10;
         }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "LightSaber")
+        {
+            // touch the wire
+            Destroy(gameObject);
+            EndGame("Bird died!");
+        }
     }
 
     void CheckInWater()
