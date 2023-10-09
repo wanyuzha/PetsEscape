@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class DogPlayerMovement : MonoBehaviour
 {
     public bool isActiviated = false;
-    public GameObject birdObject;
-    public GameObject fishObject;
     List<string> items = new List<string>();
     private bool isJumping = false;
     // private float previousHeight;
@@ -32,13 +30,6 @@ public class DogPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            isActiviated = true;
-            birdObject.GetComponent<BirdPlayerMovement>().isActiviated = false;
-            fishObject.GetComponent<FishPlayerMovement>().isActiviated = false;
-        }
-
         if (health < 0)
         {
             EndGame("Dog died!");

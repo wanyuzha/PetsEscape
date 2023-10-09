@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class BirdPlayerMovement : MonoBehaviour
 {
     public bool isActiviated;
-    public GameObject dogObject;
-    public GameObject fishObject;
 
     private bool inWater = false;
     public int health = 10;
@@ -29,17 +27,13 @@ public class BirdPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            isActiviated = true;
-            dogObject.GetComponent<DogPlayerMovement>().isActiviated = false;
-            fishObject.GetComponent<FishPlayerMovement>().isActiviated = false;
-        }
-
         if (health < 0)
         {
             EndGame("Bird died!");
         }
+
+        if (!this.gameObject.activeSelf)
+            return;
 
         if (!isActiviated)
             return;
