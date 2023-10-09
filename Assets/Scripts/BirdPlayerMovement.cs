@@ -16,12 +16,19 @@ public class BirdPlayerMovement : MonoBehaviour
     public Button rsButton;
     Rigidbody2D rb;
 
+    private List<string> targetName = new List<string>();
+    private bool isPickupAnything = false;
+    private GameObject collideObject;
+    private GameObject pickupObject;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
+
+        targetName.Add("target_pickup_for_test");
     }
 
     // Update is called once per frame
@@ -51,6 +58,31 @@ public class BirdPlayerMovement : MonoBehaviour
             Debug.Log("jumping");
         }
         */
+
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            /*
+             * collideObject: only valid when there is collision otherwise it will be null
+             * isPickupAnything: bool if true means something being picked up and reference caught by pickupObject
+             * set the parent of pickupObject makes bird and object a whole
+             */
+            if (!isPickupAnything && collideObject != null)
+            {
+                collideObject.transform.SetParent(this.transform);
+                pickupObject = collideObject;
+                pickupObject.GetComponent<Rigidbody2D>().isKinematic = true;
+                //Physics.IgnoreCollision(this.gameObject.AddComponent<Collider>(), collideObject.GetComponent<Collider>());
+                collideObject = null;
+                isPickupAnything = true;
+            }
+            else if(isPickupAnything)
+            {
+                pickupObject.transform.SetParent(null);
+                pickupObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                pickupObject = null;
+                isPickupAnything = false;
+            }
+        }
     }
 
     void OnTriggerExit2D(Collider2D coll)
@@ -80,6 +112,20 @@ public class BirdPlayerMovement : MonoBehaviour
             // touch the wire
             Destroy(gameObject);
             EndGame("Bird died!");
+        }
+        else if (targetName.Contains(collision.gameObject.name))
+        {
+            Debug.Log("try picking");
+            
+            collideObject = collision.gameObject;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == collideObject.name)
+        {
+            collideObject = null;
         }
     }
 

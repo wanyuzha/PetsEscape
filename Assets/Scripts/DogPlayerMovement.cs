@@ -56,6 +56,8 @@ public class DogPlayerMovement : MonoBehaviour
         if (collision.gameObject.name == "key")
         {
             items.Add("key");
+            //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            //SceneManager.LoadScene(currentSceneIndex + 1);
         }
         if (collision.gameObject.CompareTag("ground"))
         {
