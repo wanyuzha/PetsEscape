@@ -3,46 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class BirdPlayerMovement : MonoBehaviour
 {
-    public bool isActiviated;
+    public bool isActivated;
 
-    private bool inWater = false;
-    public int health = 10;
-
+    //private bool inWater = false;
     public GameObject panel;
     public Text textComponent;
-    public Button rsButton;
+    //public Button rsButton;
     Rigidbody2D rb;
 
     private List<string> targetName = new List<string>();
     private bool isPickupAnything = false;
     private GameObject collideObject;
     private GameObject pickupObject;
+    public GameObject tutorialText;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        InvokeRepeating("CheckInWater", 1, 1);
+        //InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
-
+        Debug.Log("Scene reloaded!");
         targetName.Add("target_pickup_for_test");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health < 0)
-        {
-            EndGame("Bird died!");
-        }
 
         if (!this.gameObject.activeSelf)
+        {
+            
             return;
 
-        if (!isActiviated)
+        }
+
+        if (!isActivated)
             return;
 
         float dirX = Input.GetAxis("Horizontal");
@@ -66,6 +67,7 @@ public class BirdPlayerMovement : MonoBehaviour
              * isPickupAnything: bool if true means something being picked up and reference caught by pickupObject
              * set the parent of pickupObject makes bird and object a whole
              */
+            Debug.Log("isPickingupAnything: "+isPickupAnything);
             if (!isPickupAnything && collideObject != null)
             {
                 collideObject.transform.SetParent(this.transform);
@@ -81,11 +83,12 @@ public class BirdPlayerMovement : MonoBehaviour
                 pickupObject.GetComponent<Rigidbody2D>().isKinematic = false;
                 pickupObject = null;
                 isPickupAnything = false;
+                
             }
         }
     }
 
-    void OnTriggerExit2D(Collider2D coll)
+/*    void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.name.StartsWith("Water"))
         {
@@ -95,7 +98,7 @@ public class BirdPlayerMovement : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+   void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.name.StartsWith("Water"))
         {
@@ -103,7 +106,7 @@ public class BirdPlayerMovement : MonoBehaviour
             inWater = true;
             health = 10;
         }
-    }
+    }*/
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -116,31 +119,42 @@ public class BirdPlayerMovement : MonoBehaviour
         else if (targetName.Contains(collision.gameObject.name))
         {
             Debug.Log("try picking");
-            
+            TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
+            myText.text="Press Z to pick up the item";
+            tutorialText.SetActive(true);
             collideObject = collision.gameObject;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.name == collideObject.name)
+        Debug.Log("gameobject name: " + collision.gameObject.name);
+        
+        if(collideObject!=null)
         {
-            collideObject = null;
+            Debug.Log("collideObject: "+ collideObject.name);
+            if (collision.gameObject.name == collideObject.name)
+            {   
+                collideObject = null;
+            }
         }
+
     }
 
-    void CheckInWater()
+ /*   void CheckInWater()
     {
         if (inWater)
         {
             health--;
         }
     }
+    */
 
     void EndGame(string str)
     {
         textComponent.text = str;
-        Time.timeScale = 0;
+        Time.timeScale = 1;//changed this from 0 to 1 because otherwise input.getAxis won't work after reloading the scene.
         panel.SetActive(true);
     }
+
 }

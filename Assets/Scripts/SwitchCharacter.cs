@@ -21,11 +21,11 @@ public class SwitchCharacter : MonoBehaviour
         birdScript = bird.GetComponent<BirdPlayerMovement>();
         dogScript = dog.GetComponent<DogPlayerMovement>();
         fishScript = fish.GetComponent<FishPlayerMovement>();
-        birdScript.isActiviated = true;
+        birdScript.isActivated = true;
         arrows.Add(bird.transform.Find("redarrow").gameObject);
-        dogScript.isActiviated = false;
+        dogScript.isActivated = false;
         arrows.Add(dog.transform.Find("redarrow").gameObject);
-        fishScript.isActiviated = false;
+        fishScript.isActivated = false;
         arrows.Add(fish.transform.Find("redarrow").gameObject);
 
         arrows[0].SetActive(true);
@@ -41,15 +41,15 @@ public class SwitchCharacter : MonoBehaviour
             // cancel the activation
             if (currentCharacterIndex == 0)
             {
-                birdScript.isActiviated = false;
+                birdScript.isActivated = false;
             }
             else if (currentCharacterIndex == 1)
             {
-                dogScript.isActiviated = false;
+                dogScript.isActivated = false;
             }
             else if (currentCharacterIndex == 2)
             {
-                fishScript.isActiviated = false;
+                fishScript.isActivated = false;
             }
             arrows[currentCharacterIndex].SetActive(false);
             // update the activation
@@ -57,15 +57,15 @@ public class SwitchCharacter : MonoBehaviour
             currentCharacterIndex = (currentCharacterIndex + 1) % 3;
             if(currentCharacterIndex == 0)
             {
-                birdScript.isActiviated = true;
+                birdScript.isActivated = true;
             }
             else if(currentCharacterIndex == 1)
             {
-                dogScript.isActiviated = true;
+                dogScript.isActivated = true;
             }
             else if(currentCharacterIndex == 2)
             {
-                fishScript.isActiviated = true;
+                fishScript.isActivated = true;
             }
             arrows[currentCharacterIndex].SetActive(true);
         }

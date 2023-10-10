@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class FishPlayerMovement : MonoBehaviour
 {
-    public bool isActiviated = false;
+    public bool isActivated = false;
 
     private bool inWater = true;
     public int health = 10;
@@ -33,7 +33,7 @@ public class FishPlayerMovement : MonoBehaviour
             EndGame("Fish died!");
         }
 
-        if (!isActiviated)
+        if (!isActivated)
             return;
 
         float dirX = Input.GetAxis("Horizontal");
@@ -53,7 +53,7 @@ public class FishPlayerMovement : MonoBehaviour
     {
         if (coll.name.StartsWith("Water"))
         {
-            Debug.Log("fish leave water");
+            //Debug.Log("fish leave water");
             inWater = false;
         }
 

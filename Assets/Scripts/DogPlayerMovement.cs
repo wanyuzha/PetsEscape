@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class DogPlayerMovement : MonoBehaviour
 {
-    public bool isActiviated = false;
+    public bool isActivated = false;
     List<string> items = new List<string>();
     private bool isJumping = false;
     // private float previousHeight;
@@ -15,6 +16,8 @@ public class DogPlayerMovement : MonoBehaviour
     public int health = 10;
 
     public GameObject panel;
+    public GameObject door;
+    public GameObject tutorialText;
     public Text textComponent;
     public Button rsButton;
     Rigidbody2D rb;
@@ -25,6 +28,7 @@ public class DogPlayerMovement : MonoBehaviour
         // previousHeight = transform.position.y;
         InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -35,7 +39,7 @@ public class DogPlayerMovement : MonoBehaviour
             EndGame("Dog died!");
         }
 
-        if (!isActiviated)
+        if (!isActivated)
             return;
 
         float dirX = Input.GetAxis("Horizontal");
@@ -52,7 +56,15 @@ public class DogPlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.gameObject.name);
-
+        if(collision.gameObject.name == "door")
+        {
+            Collider2D colliderComponent = collision.gameObject.GetComponent<Collider2D>();
+            if(colliderComponent!=null)
+            {
+                Destroy(colliderComponent);
+            }
+            showTutorialText("Use key to open the door\npress any key to continue");
+        }
         if (collision.gameObject.name == "key")
         {
             items.Add("key");
@@ -94,6 +106,15 @@ public class DogPlayerMovement : MonoBehaviour
         {
             health--;
         }
+    }
+
+    void showTutorialText(string str)
+    {       
+        TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
+        myText.text=str;
+        tutorialText.SetActive(true);
+        Debug.Log(myText);
+
     }
 
     void EndGame(string str)
