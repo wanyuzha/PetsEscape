@@ -4258,7 +4258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActivated: 0
-  health: 10
   panel: {fileID: 1137370337}
   door: {fileID: 0}
   tutorialText: {fileID: 0}

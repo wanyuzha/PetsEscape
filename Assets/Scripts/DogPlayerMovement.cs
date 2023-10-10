@@ -13,7 +13,6 @@ public class DogPlayerMovement : MonoBehaviour
     // private float previousHeight;
 
     private bool inWater = false;
-    public int health = 10;
 
     public GameObject panel;
     public GameObject door;
@@ -24,6 +23,7 @@ public class DogPlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         // previousHeight = transform.position.y;
         InvokeRepeating("CheckInWater", 1, 1);
@@ -34,11 +34,6 @@ public class DogPlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health < 0)
-        {
-            EndGame("Dog died!");
-        }
-
         if (!isActivated)
             return;
 
@@ -56,14 +51,15 @@ public class DogPlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.gameObject.name);
-        if(collision.gameObject.name == "door")
+        
+        if(collision.gameObject.name == "DetectJump")
         {
             Collider2D colliderComponent = collision.gameObject.GetComponent<Collider2D>();
             if(colliderComponent!=null)
             {
                 Destroy(colliderComponent);
             }
-            showTutorialText("Use key to open the door\npress any key to continue");
+            showTutorialText("Use Space to jump");
         }
         if (collision.gameObject.name == "key")
         {
@@ -79,7 +75,7 @@ public class DogPlayerMovement : MonoBehaviour
 
     }
 
-    void OnTriggerExit2D(Collider2D coll)
+/*     void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.name.StartsWith("Water"))
         {
@@ -87,15 +83,24 @@ public class DogPlayerMovement : MonoBehaviour
             inWater = false;
         }
 
-    }
+    } */
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+        if(coll.gameObject.name == "door")
+        {   
+            Debug.Log("Dog entered Door");
+            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+            if(colliderComponent!=null)
+            {
+                Destroy(colliderComponent);
+            }
+            showTutorialText("Use key to open the door\npress any key to continue");
+        }
         if (coll.name.StartsWith("Water"))
         {
             Debug.Log("dog enter water");
             inWater = true;
-            health = 10;
         }
 
     }
@@ -104,7 +109,7 @@ public class DogPlayerMovement : MonoBehaviour
     {
         if (inWater)
         {
-            health--;
+            EndGame("Dog died");
         }
     }
 

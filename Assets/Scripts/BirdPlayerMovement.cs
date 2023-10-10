@@ -23,6 +23,7 @@ public class BirdPlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         //InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
@@ -159,7 +160,7 @@ public class BirdPlayerMovement : MonoBehaviour
     void EndGame(string str)
     {
         textComponent.text = str;
-        Time.timeScale = 1;//changed this from 0 to 1 because otherwise input.getAxis won't work after reloading the scene.
+        Time.timeScale = 0;
         panel.SetActive(true);
     }
 
