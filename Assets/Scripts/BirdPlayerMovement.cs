@@ -8,18 +8,17 @@ using TMPro;
 public class BirdPlayerMovement : MonoBehaviour
 {
     public bool isActivated;
-
-    //private bool inWater = false;
     public GameObject panel;
+    public GameObject tutorialText;
     public Text textComponent;
-    //public Button rsButton;
-    Rigidbody2D rb;
 
+    private Rigidbody2D rb;
     private List<string> targetName = new List<string>();
     private bool isPickupAnything = false;
     private GameObject collideObject;
     private GameObject pickupObject;
-    public GameObject tutorialText;
+    private bool firstTry = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +26,6 @@ public class BirdPlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
-        Debug.Log("Scene reloaded!");
         targetName.Add("target_pickup_for_test");
         
     }
@@ -37,12 +35,8 @@ public class BirdPlayerMovement : MonoBehaviour
     {
 
         if (!this.gameObject.activeSelf)
-        {
-            
             return;
-
-        }
-
+        
         if (!isActivated)
             return;
 
@@ -52,6 +46,10 @@ public class BirdPlayerMovement : MonoBehaviour
         float dirY = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, dirY * 7, 0);
 
+        if(pickupObject!=null)
+        {
+            pickupObject.GetComponent<Rigidbody2D>().velocity = rb.velocity; 
+        }
         /*
         if (Input.GetButtonDown("Jump"))
         {
@@ -72,10 +70,12 @@ public class BirdPlayerMovement : MonoBehaviour
             {
                 collideObject.transform.SetParent(this.transform);
                 pickupObject = collideObject;
+                
                 pickupObject.GetComponent<Rigidbody2D>().isKinematic = true;
                 //Physics.IgnoreCollision(this.gameObject.AddComponent<Collider>(), collideObject.GetComponent<Collider>());
                 collideObject = null;
                 isPickupAnything = true;
+                Debug.Log(dirY);
             }
             else if(isPickupAnything)
             {
@@ -117,12 +117,18 @@ public class BirdPlayerMovement : MonoBehaviour
             EndGame("Bird died!");
         }
         else if (targetName.Contains(collision.gameObject.name))
-        {
+        {   
             Debug.Log("try picking");
-            TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
-            myText.text="Press Z to pick up the item";
-            tutorialText.SetActive(true);
             collideObject = collision.gameObject;
+            //if trying to pick up the item for the first time, show tutorial text
+            if(firstTry)
+            {
+                TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
+                myText.text="Press Z to pick up the item";
+                tutorialText.SetActive(true);
+                firstTry=false;
+            }
+            
         }
     }
 

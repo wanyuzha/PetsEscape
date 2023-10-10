@@ -468,8 +468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActivated: 0
   panel: {fileID: 1137370337}
-  textComponent: {fileID: 1786870440}
   tutorialText: {fileID: 2034106340}
+  textComponent: {fileID: 1786870440}
 --- !u!1 &79466163
 GameObject:
   m_ObjectHideFlags: 0
@@ -6961,7 +6961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -238, y: -60.118}
+  m_AnchoredPosition: {x: -36, y: -67}
   m_SizeDelta: {x: 516.42, y: 120.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1178717446
@@ -7305,8 +7305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -0.0098419, y: 0.0062447}
+  m_SizeDelta: {x: 102.97, y: 109.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458501103
 MonoBehaviour:
@@ -8333,7 +8333,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
