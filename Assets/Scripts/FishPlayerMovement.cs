@@ -9,7 +9,13 @@ public class FishPlayerMovement : MonoBehaviour
     public bool isActivated = false;
 
     private bool inWater = true;
-    public int health = 10;
+    private bool isJumping = false;
+    public int health = 5;
+
+    const int SPEED_IN_WATER = 5;
+    const int SPEED_ON_GROUND = 1;
+    const int SPEED_JUMPING_Y = 5;
+    const int SPEED_JUMPING_X = 3;
 
     public GameObject bubble;
 
@@ -37,15 +43,46 @@ public class FishPlayerMovement : MonoBehaviour
             return;
 
         float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector3(dirX * 5, rb.velocity.y, 0);
-
         float dirY = Input.GetAxis("Vertical");
-        rb.velocity = new Vector3(rb.velocity.x, dirY, 0);
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (inWater)
         {
-            bubble.GetComponent<Renderer>().enabled = true;
-            bubble.transform.position = transform.position;
+            if (rb.gravityScale > 0)
+            {
+                rb.gravityScale -= 0.01f;
+                rb.velocity = new Vector3(dirX * SPEED_IN_WATER, rb.velocity.y, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector3(dirX * SPEED_IN_WATER, dirY * SPEED_IN_WATER, 0);
+            }
+        } else
+        {
+            if (isJumping)
+            {
+                rb.velocity = new Vector3(dirX * SPEED_JUMPING_X, rb.velocity.y, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector3(dirX * SPEED_ON_GROUND, rb.velocity.y, 0);
+            }
+            
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space) && !inWater && !isJumping)
+        {
+            isJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, SPEED_JUMPING_Y);
+            Debug.Log("fish jumping");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (inWater)
+            {
+                bubble.GetComponent<Renderer>().enabled = true;
+                bubble.transform.position = transform.position;
+            }
+            
         }
     }
 
@@ -55,6 +92,7 @@ public class FishPlayerMovement : MonoBehaviour
         {
             //Debug.Log("fish leave water");
             inWater = false;
+            rb.gravityScale = 1;
         }
 
     }
@@ -67,8 +105,17 @@ public class FishPlayerMovement : MonoBehaviour
             inWater = true;
             health = 10;
         }
-
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            Debug.Log("fish on ground");
+            isJumping = false;
+        }
+    }
+
 
     void CheckInWater()
     {

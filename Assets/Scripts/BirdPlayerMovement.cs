@@ -12,6 +12,8 @@ public class BirdPlayerMovement : MonoBehaviour
     public GameObject tutorialText;
     public Text textComponent;
 
+    const int SPEED = 7;
+
     private Rigidbody2D rb;
     private List<string> targetName = new List<string>();
     private bool isPickupAnything = false;
@@ -23,18 +25,23 @@ public class BirdPlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 1)
+        {
+            firstTry = true;
+        }
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         //InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
         targetName.Add("target_pickup_for_test");
-        
+        targetName.Add("key");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (!this.gameObject.activeSelf)
             return;
         
@@ -42,10 +49,10 @@ public class BirdPlayerMovement : MonoBehaviour
             return;
 
         float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector3(dirX * 7, rb.velocity.y, 0);
+        rb.velocity = new Vector3(dirX * SPEED, rb.velocity.y, 0);
 
         float dirY = Input.GetAxis("Vertical");
-        rb.velocity = new Vector3(rb.velocity.x, dirY * 7, 0);
+        rb.velocity = new Vector3(rb.velocity.x, dirY * SPEED, 0);
 
         if(pickupObject!=null)
         {

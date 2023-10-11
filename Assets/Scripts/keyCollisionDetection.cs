@@ -19,7 +19,6 @@ public class keyCollisionDetection : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("hitting");
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
         Debug.Log(collision.gameObject.name);
 

@@ -10,6 +10,7 @@ public class DogPlayerMovement : MonoBehaviour
     public bool isActivated = false;
     List<string> items = new List<string>();
     private bool isJumping = false;
+    private bool firstTry = false;
     // private float previousHeight;
 
     private bool inWater = false;
@@ -17,17 +18,29 @@ public class DogPlayerMovement : MonoBehaviour
     public GameObject panel;
     public GameObject door;
     public GameObject tutorialText;
-    public Text textComponent;
-    public Button rsButton;
+    public Text textComponent; 
+
     Rigidbody2D rb;
+
+    private GameObject collideObject;
+    private List<string> targetName = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 1)
+        {
+            firstTry = true;
+        }
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         // previousHeight = transform.position.y;
         InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
+
+        targetName.Add("target_pickup_for_test");
+        targetName.Add("Chair");
 
     }
 
@@ -44,7 +57,24 @@ public class DogPlayerMovement : MonoBehaviour
         {
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, 6);
-            Debug.Log("jumping");
+            Debug.Log("dog jumping");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            crunch();
+        }
+    }
+
+    void crunch()
+    {
+        if (collideObject != null)
+        {
+            if (Vector2.Distance(collideObject.transform.position, transform.position) < 2){
+                Destroy(collideObject);
+                collideObject = null;
+            }
+            
         }
     }
 
@@ -69,8 +99,21 @@ public class DogPlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("ground"))
         {
+            Debug.Log("dog on ground");
             isJumping = false;
             // previousHeight = transform.position.y;
+        }
+        if (targetName.Contains(collision.gameObject.name))
+        {
+            Debug.Log("try biting");
+            collideObject = collision.gameObject;
+            //if trying to pick up the item for the first time, show tutorial text
+            if (firstTry)
+            {
+                showTutorialText("Press Z to crunch an item nearby");
+                firstTry = false;
+            }
+
         }
 
     }
