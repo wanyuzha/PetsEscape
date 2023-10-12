@@ -23,7 +23,7 @@ public class DogPlayerMovement : MonoBehaviour
     Rigidbody2D rb;
 
     private GameObject collideObject;
-    private List<string> targetName = new List<string>();
+    public List<string> targetName = new List<string>();
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +41,7 @@ public class DogPlayerMovement : MonoBehaviour
 
         targetName.Add("target_pickup_for_test");
         targetName.Add("Chair");
+        targetName.Add("obstacle");
 
     }
 
