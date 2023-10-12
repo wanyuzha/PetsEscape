@@ -5,39 +5,30 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class BirdPlayerMovement : MonoBehaviour
+public class BirdPlayerMovement : Animal
 {
-    public bool isActivated;
-    public GameObject panel;
-    public GameObject tutorialText;
-    public Text textComponent;
 
     const int SPEED = 7;
 
-    private Rigidbody2D rb;
-    private List<string> targetName = new List<string>();
     private bool isPickupAnything = false;
     private GameObject collideObject;
     private GameObject pickupObject;
-    private bool firstTry = true;
     private string currentLevel;
 
-    // Start is called before the first frame update
-    void Start()
+    public BirdPlayerMovement()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (currentSceneIndex == 1)
-        {
-            firstTry = true;
-        }
-        Time.timeScale = 1;
-        rb = GetComponent<Rigidbody2D>();
-        //InvokeRepeating("CheckInWater", 1, 1);
-        panel.SetActive(false);
+        AnimalName = "Bird";
         targetName.Add("target_pickup_for_test");
         targetName.Add("key");
+    }
+
+    // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+        isActivated = true;
         currentLevel = SceneManager.GetActiveScene().name;
-        Debug.Log(currentLevel);
+        Debug.Log(currentSceneIndex);
 
     }
 
@@ -50,22 +41,11 @@ public class BirdPlayerMovement : MonoBehaviour
         if (!isActivated)
             return;
 
-        float dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector3(dirX * SPEED, rb.velocity.y, 0);
+        moveX(SPEED);
 
-        // make the character's sprite direction same as motion
-        if (dirX > 0)
-        {
-            transform.localScale = new Vector3(-1.5f, 1.5f, 1);
-        }
-        else if (dirX < 0)
-        {
-            transform.localScale = new Vector3(1.5f, 1.5f, 1);
-        }
+        moveY(SPEED);
 
-        float dirY = Input.GetAxis("Vertical");
-        rb.velocity = new Vector3(rb.velocity.x, dirY * SPEED, 0);
-
+        // update picked up item
         if(pickupObject!=null)
         {
             pickupObject.GetComponent<Rigidbody2D>().velocity = rb.velocity; 
@@ -79,7 +59,7 @@ public class BirdPlayerMovement : MonoBehaviour
         */
         
         // level 1 not trigger the pickup skill for bird
-        if (Input.GetKeyDown(KeyCode.Z) && currentLevel!="Level 1")
+        if (Input.GetKeyDown(KeyCode.Z) && currentSceneIndex != 0)
         {
             /*
              * collideObject: only valid when there is collision otherwise it will be null
@@ -96,7 +76,7 @@ public class BirdPlayerMovement : MonoBehaviour
                 //Physics.IgnoreCollision(this.gameObject.AddComponent<Collider>(), collideObject.GetComponent<Collider>());
                 collideObject = null;
                 isPickupAnything = true;
-                Debug.Log(dirY);
+                //Debug.Log(dirY);
             }
             else if(isPickupAnything)
             {
@@ -109,28 +89,29 @@ public class BirdPlayerMovement : MonoBehaviour
         }
     }
 
-/*    void OnTriggerExit2D(Collider2D coll)
-    {
-        if (coll.name.StartsWith("Water"))
+    /*    void OnTriggerExit2D(Collider2D coll)
         {
-            Debug.Log("bird leave water");
-            inWater = false;
+            if (coll.name.StartsWith("Water"))
+            {
+                Debug.Log("bird leave water");
+                inWater = false;
+            }
+
         }
 
-    }
-
-   void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.name.StartsWith("Water"))
+       void OnTriggerEnter2D(Collider2D coll)
         {
-            Debug.Log("bird enter water");
-            inWater = true;
-            health = 10;
-        }
-    }*/
+            if (coll.name.StartsWith("Water"))
+            {
+                Debug.Log("bird enter water");
+                inWater = true;
+                health = 10;
+            }
+        }*/
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
         if (collision.gameObject.name == "LightSaber")
         {
             // touch the wire
@@ -142,18 +123,16 @@ public class BirdPlayerMovement : MonoBehaviour
             Debug.Log("try picking");
             collideObject = collision.gameObject;
             //if trying to pick up the item for the first time, show tutorial text
-            if(firstTry && currentLevel != "Level 1")
+            if(firstTry && currentSceneIndex != 0)
             {
-                TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
-                myText.text="Press Z to pick up the item";
-                tutorialText.SetActive(true);
+                showTutorialText("Press Z to pick up the item");
                 firstTry=false;
             }
             
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("gameobject name: " + collision.gameObject.name);
         
@@ -167,21 +146,4 @@ public class BirdPlayerMovement : MonoBehaviour
         }
 
     }
-
- /*   void CheckInWater()
-    {
-        if (inWater)
-        {
-            health--;
-        }
-    }
-    */
-
-    void EndGame(string str)
-    {
-        textComponent.text = str;
-        Time.timeScale = 0;
-        panel.SetActive(true);
-    }
-
 }

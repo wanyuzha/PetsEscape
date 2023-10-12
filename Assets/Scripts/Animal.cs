@@ -8,22 +8,23 @@ using TMPro;
 
 public class Animal : MonoBehaviour
 {
-    private string AnimalName;
+    protected string AnimalName;
 
     public bool isActivated;
     public GameObject panel;
     public GameObject tutorialText;
     public Text textComponent;
 
-    private bool inWater;
-    private bool canJump;
-    private bool isJumping = false;
+    protected bool inWater;
+    protected bool canJump;
+    protected bool isJumping = false;
 
-    private Rigidbody2D rb;
-    private List<string> targetName;
-    private List<string> items;
+    protected Rigidbody2D rb;
+    protected List<string> targetName;
+    protected List<string> items;
 
-    private bool firstTry;
+    protected bool firstTry;
+    protected int currentSceneIndex;
 
     public Animal() {
         firstTry = false;
@@ -32,9 +33,9 @@ public class Animal : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex == 1)
         {
             firstTry = true;
@@ -51,19 +52,28 @@ public class Animal : MonoBehaviour
         
     }
 
-    void moveX(float speed)
+    protected void moveX(float speed)
     {
         float dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
+        // make the character's sprite direction same as motion
+        if (dirX > 0)
+        {
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+        }
+        else if (dirX < 0)
+        {
+            transform.localScale = new Vector3(1.5f, 1.5f, 1);
+        }
     }
 
-    void moveY(float speed)
+    protected void moveY(float speed)
     {
         float dirY = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, dirY * speed, 0);
     }
 
-    void jump(float speed)
+    protected void jump(float speed)
     {
         if (canJump && !isJumping)
         {
@@ -73,7 +83,7 @@ public class Animal : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D coll)
+    protected virtual void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log(coll.gameObject.name);
         if (coll.gameObject.name == "DetectJump")
@@ -93,7 +103,7 @@ public class Animal : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D coll)
+    protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.name.StartsWith("Water"))
         {
@@ -109,7 +119,7 @@ public class Animal : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D coll)
+    protected virtual void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.name.StartsWith("Water"))
         {
@@ -122,16 +132,14 @@ public class Animal : MonoBehaviour
 
 
 
-    public virtual void CheckInWater() {
+    protected virtual void CheckInWater() {
         if (inWater)
         {
             EndGame(string.Concat(AnimalName, " died of water!"));
         }
     }
 
-    public virtual void UseSkill() { }
-
-    void showTutorialText(string str)
+    protected void showTutorialText(string str)
     {
         TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
         myText.text = str;
@@ -140,7 +148,7 @@ public class Animal : MonoBehaviour
 
     }
 
-    void EndGame(string str)
+    protected void EndGame(string str)
     {
         textComponent.text = str;
         Time.timeScale = 0;
