@@ -44,6 +44,16 @@ public class FishPlayerMovement : MonoBehaviour
 
         float dirX = Input.GetAxis("Horizontal");
         float dirY = Input.GetAxis("Vertical");
+
+        if (dirX > 0)
+        {
+            transform.localScale = new Vector3(0.8f, 0.8f, 1);
+        }
+        else if (dirX < 0)
+        {
+            transform.localScale = new Vector3(-0.8f, 0.8f, 1);
+        }
+
         if (inWater)
         {
             if (rb.gravityScale > 0)

@@ -20,7 +20,7 @@ public class BirdPlayerMovement : MonoBehaviour
     private GameObject collideObject;
     private GameObject pickupObject;
     private bool firstTry = true;
-
+    private string currentLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +36,8 @@ public class BirdPlayerMovement : MonoBehaviour
         panel.SetActive(false);
         targetName.Add("target_pickup_for_test");
         targetName.Add("key");
+        currentLevel = SceneManager.GetActiveScene().name;
+        Debug.Log(currentLevel);
 
     }
 
@@ -51,6 +53,16 @@ public class BirdPlayerMovement : MonoBehaviour
         float dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector3(dirX * SPEED, rb.velocity.y, 0);
 
+        // make the character's sprite direction same as motion
+        if (dirX > 0)
+        {
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+        }
+        else if (dirX < 0)
+        {
+            transform.localScale = new Vector3(1.5f, 1.5f, 1);
+        }
+
         float dirY = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(rb.velocity.x, dirY * SPEED, 0);
 
@@ -65,8 +77,9 @@ public class BirdPlayerMovement : MonoBehaviour
             Debug.Log("jumping");
         }
         */
-
-        if(Input.GetKeyDown(KeyCode.Z))
+        
+        // level 1 not trigger the pickup skill for bird
+        if (Input.GetKeyDown(KeyCode.Z) && currentLevel!="Level 1")
         {
             /*
              * collideObject: only valid when there is collision otherwise it will be null
@@ -129,7 +142,7 @@ public class BirdPlayerMovement : MonoBehaviour
             Debug.Log("try picking");
             collideObject = collision.gameObject;
             //if trying to pick up the item for the first time, show tutorial text
-            if(firstTry)
+            if(firstTry && currentLevel != "Level 1")
             {
                 TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
                 myText.text="Press Z to pick up the item";

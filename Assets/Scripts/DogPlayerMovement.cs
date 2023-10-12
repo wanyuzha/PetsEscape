@@ -51,6 +51,16 @@ public class DogPlayerMovement : MonoBehaviour
             return;
 
         float dirX = Input.GetAxis("Horizontal");
+        float x = transform.localScale.x;
+        float y = transform.localScale.y;
+        if (dirX > 0)
+        {
+            transform.localScale = new Vector3(1.5f, 1.5f, 1);
+        }
+        else if (dirX < 0)
+        {
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1); 
+        }
         rb.velocity = new Vector2(dirX * 6, rb.velocity.y);
 
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
