@@ -13,11 +13,12 @@ public class BirdPlayerMovement : Animal
     private bool isPickupAnything = false;
     private GameObject collideObject;
     private GameObject pickupObject;
-    private string currentLevel;
 
     public BirdPlayerMovement()
     {
         AnimalName = "Bird";
+        direction = -1;
+        canJump = false;
         targetName.Add("target_pickup_for_test");
         targetName.Add("key");
     }
@@ -27,9 +28,7 @@ public class BirdPlayerMovement : Animal
     {
         base.Start();
         isActivated = true;
-        currentLevel = SceneManager.GetActiveScene().name;
         Debug.Log(currentSceneIndex);
-
     }
 
     // Update is called once per frame
@@ -112,13 +111,7 @@ public class BirdPlayerMovement : Animal
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if (collision.gameObject.name == "LightSaber")
-        {
-            // touch the wire
-            Destroy(gameObject);
-            EndGame("Bird died!");
-        }
-        else if (targetName.Contains(collision.gameObject.name))
+        if (targetName.Contains(collision.gameObject.name))
         {   
             Debug.Log("try picking");
             collideObject = collision.gameObject;

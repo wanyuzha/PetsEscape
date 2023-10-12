@@ -4,12 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class FishPlayerMovement : MonoBehaviour
+public class FishPlayerMovement : Animal
 {
-    public bool isActivated = false;
-
-    private bool inWater = true;
-    private bool isJumping = false;
     public int health = 5;
 
     const int SPEED_IN_WATER = 5;
@@ -19,16 +15,13 @@ public class FishPlayerMovement : MonoBehaviour
 
     public GameObject bubble;
 
-    public GameObject panel;
-    public Text textComponent;
-    public Button rsButton;
-    Rigidbody2D rb;
+    public FishPlayerMovement() {
+        AnimalName = "Fish";
+    }
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        InvokeRepeating("CheckInWater", 1, 1);
-        panel.SetActive(false);
+        base.Start();
     }
 
     // Update is called once per frame
@@ -59,30 +52,28 @@ public class FishPlayerMovement : MonoBehaviour
             if (rb.gravityScale > 0)
             {
                 rb.gravityScale -= 0.01f;
-                rb.velocity = new Vector3(dirX * SPEED_IN_WATER, rb.velocity.y, 0);
+                moveX(SPEED_IN_WATER);
             }
             else
             {
-                rb.velocity = new Vector3(dirX * SPEED_IN_WATER, dirY * SPEED_IN_WATER, 0);
+                moveX(SPEED_IN_WATER);
+                moveY(SPEED_IN_WATER);
             }
         } else
         {
             if (isJumping)
             {
-                rb.velocity = new Vector3(dirX * SPEED_JUMPING_X, rb.velocity.y, 0);
+                moveX(SPEED_JUMPING_X);
             }
             else
             {
-                rb.velocity = new Vector3(dirX * SPEED_ON_GROUND, rb.velocity.y, 0);
+                moveX(SPEED_ON_GROUND);
             }
-            
         }
         
-        if (Input.GetKeyDown(KeyCode.Space) && !inWater && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && !inWater)
         {
-            isJumping = true;
-            rb.velocity = new Vector2(rb.velocity.x, SPEED_JUMPING_Y);
-            Debug.Log("fish jumping");
+            jump(SPEED_JUMPING_Y);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -96,50 +87,33 @@ public class FishPlayerMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D coll)
+    protected override void OnTriggerExit2D(Collider2D coll)
     {
-        if (coll.name.StartsWith("Water"))
-        {
-            //Debug.Log("fish leave water");
-            inWater = false;
-            rb.gravityScale = 1;
-        }
-
+        base.OnTriggerExit2D(coll);
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    protected override void OnTriggerEnter2D(Collider2D coll)
     {
+        base.OnTriggerEnter2D(coll);
         if (coll.name.StartsWith("Water"))
         {
-            Debug.Log("fish enter water");
-            inWater = true;
             health = 10;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("ground"))
-        {
-            Debug.Log("fish on ground");
             isJumping = false;
         }
     }
 
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+       base.OnCollisionEnter2D(collision);
+    }
 
-    void CheckInWater()
+
+    protected override void CheckInWater()
     {
         if (!inWater)
         {
             health--;
         }
-    }
-
-    void EndGame(string str)
-    {
-        textComponent.text = str;
-        Time.timeScale = 0;
-        panel.SetActive(true);
     }
 
 }

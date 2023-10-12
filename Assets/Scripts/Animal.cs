@@ -9,14 +9,15 @@ using TMPro;
 public class Animal : MonoBehaviour
 {
     protected string AnimalName;
+    protected int direction = 1;
 
-    public bool isActivated;
+    public bool isActivated = false;
     public GameObject panel;
     public GameObject tutorialText;
     public Text textComponent;
 
     protected bool inWater;
-    protected bool canJump;
+    protected bool canJump = true;
     protected bool isJumping = false;
 
     protected Rigidbody2D rb;
@@ -57,13 +58,9 @@ public class Animal : MonoBehaviour
         float dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
         // make the character's sprite direction same as motion
-        if (dirX > 0)
+        if (dirX * transform.localScale.x *  direction < 0)
         {
-            transform.localScale = new Vector3(-1.5f, 1.5f, 1);
-        }
-        else if (dirX < 0)
-        {
-            transform.localScale = new Vector3(1.5f, 1.5f, 1);
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
         }
     }
 
@@ -101,16 +98,6 @@ public class Animal : MonoBehaviour
             isJumping = false;
             // previousHeight = transform.position.y;
         }
-    }
-
-    protected virtual void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.name.StartsWith("Water"))
-        {
-            Debug.Log(string.Concat(AnimalName, "enter water"));
-            inWater = true;
-            isJumping = false;
-        }
         if (coll.gameObject.name == "LightSaber")
         {
             // touch the wire
@@ -119,8 +106,19 @@ public class Animal : MonoBehaviour
         }
     }
 
+    protected virtual void OnTriggerEnter2D(Collider2D coll)
+    {
+        Debug.Log(coll.gameObject.name);
+        if (coll.name.StartsWith("Water"))
+        {
+            Debug.Log(string.Concat(AnimalName, "enter water"));
+            inWater = true;
+        }
+    }
+
     protected virtual void OnTriggerExit2D(Collider2D coll)
     {
+        Debug.Log(coll.gameObject.name);
         if (coll.name.StartsWith("Water"))
         {
             Debug.Log(string.Concat(AnimalName, " leave water"));
