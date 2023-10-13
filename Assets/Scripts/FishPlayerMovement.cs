@@ -98,6 +98,7 @@ public class FishPlayerMovement : Animal
     protected override void OnTriggerEnter2D(Collider2D coll)
     {
         base.OnTriggerEnter2D(coll);
+
         if (coll.name.StartsWith("Water"))
         {
             health = 10;

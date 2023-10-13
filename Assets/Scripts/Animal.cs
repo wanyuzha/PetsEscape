@@ -17,11 +17,11 @@ public class Animal : MonoBehaviour
     public Text textComponent;
 
     protected bool inWater;
-    protected bool canJump = true;
+    // protected bool canJump = true;
     protected bool isJumping = false;
 
     protected Rigidbody2D rb;
-    protected List<string> targetName;
+    // protected List<string> targetName;
     protected List<string> items;
 
     protected bool firstTry;
@@ -30,7 +30,7 @@ public class Animal : MonoBehaviour
     public Animal()
     {
         firstTry = false;
-        targetName = new List<string>();
+        // targetName = new List<string>();
         items = new List<string>();
     }
 
@@ -81,7 +81,8 @@ public class Animal : MonoBehaviour
 
     protected void jump(float speed)
     {
-        if (canJump && !isJumping)
+        // if (canJump && !isJumping)
+        if (!isJumping)
         {
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
@@ -101,7 +102,7 @@ public class Animal : MonoBehaviour
             }
             showTutorialText("Use Space to jump");
         }
-        if (coll.gameObject.CompareTag("ground"))
+        if (coll.gameObject.CompareTag("ground") || coll.gameObject.CompareTag("canCrunch"))
         {
             Debug.Log(string.Concat(AnimalName, " on ground"));
             isJumping = false;

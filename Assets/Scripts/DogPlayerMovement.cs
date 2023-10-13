@@ -17,9 +17,9 @@ public class DogPlayerMovement : Animal
     public DogPlayerMovement()
     {
         AnimalName = "Dog";
-        targetName.Add("target_pickup_for_test");
-        targetName.Add("Chair");
-        targetName.Add("obstacle");
+        // targetName.Add("target_pickup_for_test");
+        // targetName.Add("Chair");
+        // targetName.Add("obstacle");
     }
 
     // Start is called before the first frame update
@@ -72,13 +72,14 @@ public class DogPlayerMovement : Animal
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+
         if (collision.gameObject.name == "key")
         {
             items.Add("key");
             //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             //SceneManager.LoadScene(currentSceneIndex + 1);
         }
-        if (targetName.Contains(collision.gameObject.name))
+        if (collision.gameObject.CompareTag("canCrunch"))
         {
             Debug.Log("try biting");
             collideObject = collision.gameObject;

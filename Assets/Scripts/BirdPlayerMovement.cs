@@ -18,9 +18,9 @@ public class BirdPlayerMovement : Animal
     {
         AnimalName = "Bird";
         direction = -1;
-        canJump = false;
-        targetName.Add("target_pickup_for_test");
-        targetName.Add("key");
+        // canJump = false;
+        // targetName.Add("target_pickup_for_test");
+        // targetName.Add("key");
     }
 
     // Start is called before the first frame update
@@ -113,7 +113,8 @@ public class BirdPlayerMovement : Animal
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if (targetName.Contains(collision.gameObject.name))
+
+        if (collision.gameObject.CompareTag("canGrab"))
         {
             Debug.Log("try picking");
             collideObject = collision.gameObject;
