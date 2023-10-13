@@ -27,7 +27,8 @@ public class Animal : MonoBehaviour
     protected bool firstTry;
     protected int currentSceneIndex;
 
-    public Animal() {
+    public Animal()
+    {
         firstTry = false;
         targetName = new List<string>();
         items = new List<string>();
@@ -50,7 +51,7 @@ public class Animal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     protected void moveX(float speed)
@@ -58,7 +59,7 @@ public class Animal : MonoBehaviour
         float dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
         // make the character's sprite direction same as motion
-        if (dirX * transform.localScale.x *  direction < 0)
+        if (dirX * transform.localScale.x * direction < 0)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
         }
@@ -130,7 +131,8 @@ public class Animal : MonoBehaviour
 
 
 
-    protected virtual void CheckInWater() {
+    protected virtual void CheckInWater()
+    {
         if (inWater)
         {
             EndGame(string.Concat(AnimalName, " died of water!"));

@@ -36,7 +36,7 @@ public class SwitchCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             // cancel the activation
             if (currentCharacterIndex == 0)
@@ -53,17 +53,17 @@ public class SwitchCharacter : MonoBehaviour
             }
             arrows[currentCharacterIndex].SetActive(false);
             // update the activation
-            Debug.Log("current index is "+currentCharacterIndex);
+            Debug.Log("current index is " + currentCharacterIndex);
             currentCharacterIndex = (currentCharacterIndex + 1) % 3;
-            if(currentCharacterIndex == 0)
+            if (currentCharacterIndex == 0)
             {
                 birdScript.isActivated = true;
             }
-            else if(currentCharacterIndex == 1)
+            else if (currentCharacterIndex == 1)
             {
                 dogScript.isActivated = true;
             }
-            else if(currentCharacterIndex == 2)
+            else if (currentCharacterIndex == 2)
             {
                 fishScript.isActivated = true;
             }

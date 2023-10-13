@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class keyCollisionDetection : MonoBehaviour
 {
     // Start is called before the first frame update
-  
+
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,8 +24,8 @@ public class keyCollisionDetection : MonoBehaviour
         Debug.Log(collision.gameObject.name);
 
         // for level 1, bird just collide the key but not catch it
-        if(SceneManager.GetActiveScene().name == "Level 1")
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        if (SceneManager.GetActiveScene().name == "Level 1")
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
         if (collision.gameObject.name == "dog")
         {

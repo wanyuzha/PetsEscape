@@ -15,7 +15,8 @@ public class FishPlayerMovement : Animal
 
     public GameObject bubble;
 
-    public FishPlayerMovement() {
+    public FishPlayerMovement()
+    {
         AnimalName = "Fish";
     }
     // Start is called before the first frame update
@@ -59,7 +60,8 @@ public class FishPlayerMovement : Animal
                 moveX(SPEED_IN_WATER);
                 moveY(SPEED_IN_WATER);
             }
-        } else
+        }
+        else
         {
             if (isJumping)
             {
@@ -70,7 +72,7 @@ public class FishPlayerMovement : Animal
                 moveX(SPEED_ON_GROUND);
             }
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && !inWater)
         {
             jump(SPEED_JUMPING_Y);
@@ -83,7 +85,7 @@ public class FishPlayerMovement : Animal
                 bubble.GetComponent<Renderer>().enabled = true;
                 bubble.transform.position = transform.position;
             }
-            
+
         }
     }
 
@@ -104,7 +106,7 @@ public class FishPlayerMovement : Animal
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-       base.OnCollisionEnter2D(collision);
+        base.OnCollisionEnter2D(collision);
     }
 
 

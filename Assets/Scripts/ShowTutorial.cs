@@ -10,7 +10,8 @@ public class ShowTutorial : MonoBehaviour
     void Start()
     {
         int index = SceneManager.GetActiveScene().buildIndex;
-        if(index==1){
+        if (index == 1)
+        {
             tutorialText.SetActive(false);
         }
     }
@@ -18,7 +19,8 @@ public class ShowTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKeyDown){
+        if (Input.anyKeyDown)
+        {
             tutorialText.SetActive(false);
         }
     }

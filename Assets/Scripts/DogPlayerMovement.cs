@@ -36,7 +36,8 @@ public class DogPlayerMovement : Animal
         if (isJumping)
         {
             moveX(JUMP_SPEED_X);
-        } else
+        }
+        else
         {
             moveX(SPEED);
         }
@@ -56,17 +57,18 @@ public class DogPlayerMovement : Animal
     {
         if (collideObject != null)
         {
-            if (Vector2.Distance(collideObject.transform.position, transform.position) < 2){ //is nearby
+            if (Vector2.Distance(collideObject.transform.position, transform.position) < 2)
+            { //is nearby
                 Destroy(collideObject);
                 collideObject = null;
             }
-            
+
         }
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-       base.OnCollisionEnter2D(collision);
+        base.OnCollisionEnter2D(collision);
         if (collision.gameObject.name == "key")
         {
             items.Add("key");
@@ -101,11 +103,11 @@ public class DogPlayerMovement : Animal
     protected override void OnTriggerEnter2D(Collider2D coll)
     {
         base.OnTriggerEnter2D(coll);
-        if(coll.gameObject.name == "door")
-        {   
+        if (coll.gameObject.name == "door")
+        {
             Debug.Log("Dog entered Door");
             Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            if(colliderComponent!=null)
+            if (colliderComponent != null)
             {
                 Destroy(colliderComponent);
             }
