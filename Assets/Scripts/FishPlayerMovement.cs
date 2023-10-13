@@ -80,7 +80,7 @@ public class FishPlayerMovement : Animal
             jump(SPEED_JUMPING_Y);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(skillKey))
         {
             if (inWater)
             {

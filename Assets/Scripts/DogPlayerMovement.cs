@@ -35,6 +35,9 @@ public class DogPlayerMovement : Animal
             return;
 
         undisplayArrow();
+        // if (!firstTry)
+        if (currentSceneIndex > 0)
+            unshowTutorialText();
 
         if (isJumping)
         {
@@ -50,9 +53,10 @@ public class DogPlayerMovement : Animal
             jump(JUMP_SPEED_Y);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && currentSceneIndex != 0)
+        if (Input.GetKeyDown(skillKey) && currentSceneIndex != 0)
         {
             crunch();
+            firstTry = false;
         }
     }
 
@@ -87,7 +91,6 @@ public class DogPlayerMovement : Animal
             if (firstTry)
             {
                 showTutorialText("Press Z to crunch an item nearby");
-                firstTry = false;
             }
 
         }
@@ -115,7 +118,7 @@ public class DogPlayerMovement : Animal
             {
                 Destroy(colliderComponent);
             }
-            showTutorialText("Use key to open the door\npress any key to continue");
+            showTutorialText("Use the key to open the door!");
         }
     }
 

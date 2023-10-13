@@ -41,6 +41,9 @@ public class BirdPlayerMovement : Animal
             return;
 
         undisplayArrow();
+        // if (!firstTry)
+        if (currentSceneIndex > 0)
+            unshowTutorialText();
 
         moveX(SPEED);
 
@@ -60,7 +63,7 @@ public class BirdPlayerMovement : Animal
         */
 
         // level 1 not trigger the pickup skill for bird
-        if (Input.GetKeyDown(KeyCode.Z) && currentSceneIndex != 0)
+        if (Input.GetKeyDown(skillKey) && currentSceneIndex != 0)
         {
             /*
              * collideObject: only valid when there is collision otherwise it will be null
@@ -87,6 +90,7 @@ public class BirdPlayerMovement : Animal
                 isPickupAnything = false;
 
             }
+            firstTry = false;
         }
     }
 
@@ -122,7 +126,6 @@ public class BirdPlayerMovement : Animal
             if (firstTry && currentSceneIndex != 0)
             {
                 showTutorialText("Press Z to pick up the item");
-                firstTry = false;
             }
 
         }

@@ -27,6 +27,8 @@ public class Animal : MonoBehaviour
     protected bool firstTry;
     protected int currentSceneIndex;
 
+    protected UnityEngine.KeyCode skillKey = KeyCode.Z;
+
     public Animal()
     {
         firstTry = false;
@@ -93,15 +95,6 @@ public class Animal : MonoBehaviour
     protected virtual void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log(coll.gameObject.name);
-        if (coll.gameObject.name == "DetectJump")
-        {
-            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            if (colliderComponent != null)
-            {
-                Destroy(colliderComponent);
-            }
-            showTutorialText("Use Space to jump");
-        }
         if (coll.gameObject.CompareTag("ground") || coll.gameObject.CompareTag("canCrunch"))
         {
             Debug.Log(string.Concat(AnimalName, " on ground"));
@@ -119,6 +112,15 @@ public class Animal : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
         Debug.Log(coll.gameObject.name);
+        if (coll.gameObject.name == "DetectJump")
+        {
+            // Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+            // if (colliderComponent != null)
+            // {
+            // Destroy(colliderComponent);
+            // }
+            showTutorialText("Use Space to jump!");
+        }
         if (coll.name.StartsWith("Water"))
         {
             Debug.Log(string.Concat(AnimalName, "enter water"));
@@ -129,16 +131,17 @@ public class Animal : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D coll)
     {
         Debug.Log(coll.gameObject.name);
+        if (coll.gameObject.name == "DetectJump")
+        {
+            tutorialText.SetActive(false);
+        }
         if (coll.name.StartsWith("Water"))
         {
             Debug.Log(string.Concat(AnimalName, " leave water"));
             inWater = false;
             rb.gravityScale = 1;
         }
-
     }
-
-
 
     protected virtual void CheckInWater()
     {
@@ -150,11 +153,17 @@ public class Animal : MonoBehaviour
 
     protected void showTutorialText(string str)
     {
-        TMP_Text myText = tutorialText.GetComponentInChildren<TMP_Text>();
-        myText.text = str;
+        tutorialText.GetComponentInChildren<TMP_Text>().text = str;
         tutorialText.SetActive(true);
-        Debug.Log(myText);
+        // Debug.Log(myText);
+    }
 
+    protected void unshowTutorialText()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(skillKey) || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            tutorialText.SetActive(false);
+        }
     }
 
     protected void EndGame(string str)
