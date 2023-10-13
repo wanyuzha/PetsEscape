@@ -54,6 +54,14 @@ public class Animal : MonoBehaviour
 
     }
 
+    protected void undisplayArrow()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            transform.Find("redarrow").gameObject.SetActive(false);
+        }
+    }
+
     protected void moveX(float speed)
     {
         float dirX = Input.GetAxis("Horizontal");

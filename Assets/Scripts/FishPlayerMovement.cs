@@ -36,6 +36,8 @@ public class FishPlayerMovement : Animal
         if (!isActivated)
             return;
 
+        undisplayArrow();
+
         float dirX = Input.GetAxis("Horizontal");
         float dirY = Input.GetAxis("Vertical");
 
@@ -85,7 +87,6 @@ public class FishPlayerMovement : Animal
                 bubble.GetComponent<Renderer>().enabled = true;
                 bubble.transform.position = transform.position;
             }
-
         }
     }
 

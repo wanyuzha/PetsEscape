@@ -40,6 +40,8 @@ public class BirdPlayerMovement : Animal
         if (!isActivated)
             return;
 
+        undisplayArrow();
+
         moveX(SPEED);
 
         moveY(SPEED);

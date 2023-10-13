@@ -33,6 +33,9 @@ public class DogPlayerMovement : Animal
     {
         if (!isActivated)
             return;
+
+        undisplayArrow();
+
         if (isJumping)
         {
             moveX(JUMP_SPEED_X);
