@@ -9,8 +9,7 @@ public class ShowTutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int index = SceneManager.GetActiveScene().buildIndex;
-        if (index == 1)
+        if (SceneManager.GetActiveScene().buildIndex > 0)
         {
             tutorialText.SetActive(false);
         }
@@ -19,7 +18,7 @@ public class ShowTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             tutorialText.SetActive(false);
         }
