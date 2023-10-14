@@ -9,7 +9,7 @@ using TMPro;
 public class Animal : MonoBehaviour
 {
     protected string AnimalName;
-    protected int direction = 1;
+    // protected int direction = 1;
 
     public bool isActivated = false;
     public GameObject panel;
@@ -69,7 +69,7 @@ public class Animal : MonoBehaviour
         float dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
         // make the character's sprite direction same as motion
-        if (dirX * transform.localScale.x * direction < 0)
+        if (dirX * transform.localScale.x < 0)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
         }
@@ -78,7 +78,7 @@ public class Animal : MonoBehaviour
     protected void moveY(float speed)
     {
         float dirY = Input.GetAxis("Vertical");
-        rb.velocity = new Vector3(rb.velocity.x, dirY * speed, 0);
+        rb.velocity = new Vector2(rb.velocity.x, dirY * speed);
     }
 
     protected void jump(float speed)
@@ -90,6 +90,11 @@ public class Animal : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, speed);
             Debug.Log(string.Concat(AnimalName, " jumping"));
         }
+    }
+
+    protected void fly(float speed)
+    {
+        rb.velocity = new Vector2(rb.velocity.x, speed);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D coll)

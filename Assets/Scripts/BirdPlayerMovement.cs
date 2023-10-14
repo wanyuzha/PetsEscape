@@ -8,16 +8,18 @@ using TMPro;
 public class BirdPlayerMovement : Animal
 {
 
-    const int SPEED = 7;
+    const int SPEED = 5;
+    const int JUMP_SPEED_Y = 3;
 
     private bool isPickupAnything = false;
     private GameObject collideObject;
     private GameObject pickupObject;
+    private Vector3 grabOffset;
 
     public BirdPlayerMovement()
     {
         AnimalName = "Bird";
-        direction = -1;
+        // direction = -1;
         // canJump = false;
         // targetName.Add("target_pickup_for_test");
         // targetName.Add("key");
@@ -32,7 +34,7 @@ public class BirdPlayerMovement : Animal
     }
 
     // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
         if (!this.gameObject.activeSelf)
             return;
@@ -47,13 +49,18 @@ public class BirdPlayerMovement : Animal
 
         moveX(SPEED);
 
-        moveY(SPEED);
+        // moveY(SPEED);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            fly(JUMP_SPEED_Y);
+        }
 
         // update picked up item
-        if (pickupObject != null)
-        {
-            pickupObject.GetComponent<Rigidbody2D>().velocity = rb.velocity;
-        }
+        // if (pickupObject != null)
+        // {
+        //     pickupObject.GetComponent<Rigidbody2D>().velocity = rb.velocity;
+        // }
         /*
         if (Input.GetButtonDown("Jump"))
         {
@@ -63,7 +70,7 @@ public class BirdPlayerMovement : Animal
         */
 
         // level 1 not trigger the pickup skill for bird
-        if (Input.GetKeyDown(skillKey) && currentSceneIndex != 0)
+        if (Input.GetKeyDown(skillKey) && currentSceneIndex > 0)
         {
             /*
              * collideObject: only valid when there is collision otherwise it will be null
@@ -71,26 +78,34 @@ public class BirdPlayerMovement : Animal
              * set the parent of pickupObject makes bird and object a whole
              */
             Debug.Log("isPickingupAnything: " + isPickupAnything);
-            if (!isPickupAnything && collideObject != null)
-            {
-                collideObject.transform.SetParent(this.transform);
-                pickupObject = collideObject;
 
-                pickupObject.GetComponent<Rigidbody2D>().isKinematic = true;
+            if (isPickupAnything)
+            {
+                pickupObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                // pickupObject.transform.SetParent(null);
+                // pickupObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                pickupObject = null;
+                isPickupAnything = false;
+            }
+
+            else if (collideObject != null)
+            {
+                pickupObject = collideObject;
+                // pickupObject.transform.SetParent(this.transform);
+                grabOffset = pickupObject.transform.position - transform.position;
+                // pickupObject.GetComponent<Rigidbody2D>().isKinematic = true;
                 //Physics.IgnoreCollision(this.gameObject.AddComponent<Collider>(), collideObject.GetComponent<Collider>());
-                collideObject = null;
+                // collideObject = null;
                 isPickupAnything = true;
                 //Debug.Log(dirY);
             }
-            else if (isPickupAnything)
-            {
-                pickupObject.transform.SetParent(null);
-                pickupObject.GetComponent<Rigidbody2D>().isKinematic = false;
-                pickupObject = null;
-                isPickupAnything = false;
 
-            }
             firstTry = false;
+        }
+
+        if (isPickupAnything)
+        {
+            pickupObject.transform.position = transform.position + grabOffset;
         }
     }
 
@@ -123,15 +138,14 @@ public class BirdPlayerMovement : Animal
             Debug.Log("try picking");
             collideObject = collision.gameObject;
             //if trying to pick up the item for the first time, show tutorial text
-            if (firstTry && currentSceneIndex != 0)
+            if (firstTry && currentSceneIndex > 0)
             {
                 showTutorialText("Press Z to pick up the item");
             }
-
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("gameobject name: " + collision.gameObject.name);
 
@@ -143,6 +157,5 @@ public class BirdPlayerMovement : Animal
                 collideObject = null;
             }
         }
-
     }
 }

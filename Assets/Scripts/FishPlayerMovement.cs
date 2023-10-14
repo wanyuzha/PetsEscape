@@ -26,7 +26,7 @@ public class FishPlayerMovement : Animal
     }
 
     // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
         if (health < 0)
         {

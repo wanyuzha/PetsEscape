@@ -29,7 +29,7 @@ public class DogPlayerMovement : Animal
     }
 
     // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
         if (!isActivated)
             return;
@@ -53,7 +53,7 @@ public class DogPlayerMovement : Animal
             jump(JUMP_SPEED_Y);
         }
 
-        if (Input.GetKeyDown(skillKey) && currentSceneIndex != 0)
+        if (Input.GetKeyDown(skillKey) && currentSceneIndex > 0)
         {
             crunch();
             firstTry = false;
@@ -118,7 +118,7 @@ public class DogPlayerMovement : Animal
             {
                 Destroy(colliderComponent);
             }
-            showTutorialText("Use the key to open the door!");
+            showTutorialText("Use the key to open the door!\nPress [Enter] to continue!");
         }
     }
 
