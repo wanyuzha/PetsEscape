@@ -99,6 +99,18 @@ public class FishPlayerMovement : Animal
     {
         base.OnTriggerEnter2D(coll);
 
+        if(coll.gameObject.name == "FishGoal")
+        {
+            if (SceneManager.GetActiveScene().name == "Level 1")
+            {
+                Level1WinManager.FishTouchGoal();
+            }
+            if (SceneManager.GetActiveScene().name == "Level 2")
+            {
+                Level2WinManager.FishTouchGoal();
+            }
+
+        }
         if (coll.name.StartsWith("Water"))
         {
             health = 10;

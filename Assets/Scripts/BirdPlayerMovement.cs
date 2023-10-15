@@ -30,7 +30,7 @@ public class BirdPlayerMovement : Animal
     {
         base.Start();
         isActivated = true;
-        Debug.Log(currentSceneIndex);
+        //Debug.Log(currentSceneIndex);
     }
 
     // Update is called once per frame
@@ -77,7 +77,7 @@ public class BirdPlayerMovement : Animal
              * isPickupAnything: bool if true means something being picked up and reference caught by pickupObject
              * set the parent of pickupObject makes bird and object a whole
              */
-            Debug.Log("isPickingupAnything: " + isPickupAnything);
+            //Debug.Log("isPickingupAnything: " + isPickupAnything);
 
             if (isPickupAnything)
             {
@@ -132,10 +132,21 @@ public class BirdPlayerMovement : Animal
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+        if (collision.gameObject.name == "window")
+        {
+            if (SceneManager.GetActiveScene().name == "Level 1")
+            {
+                Level1WinManager.BirdTouchGate();
+            }
+            if (SceneManager.GetActiveScene().name == "Level 2")
+            {
+                Level2WinManager.BirdTouchGate();
+            }
+        }
 
         if (collision.gameObject.CompareTag("canGrab"))
         {
-            Debug.Log("try picking");
+            //Debug.Log("try picking");
             collideObject = collision.gameObject;
             //if trying to pick up the item for the first time, show tutorial text
             if (firstTry && currentSceneIndex > 0)
@@ -147,11 +158,11 @@ public class BirdPlayerMovement : Animal
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("gameobject name: " + collision.gameObject.name);
+        //Debug.Log("gameobject name: " + collision.gameObject.name);
 
         if (collideObject != null)
         {
-            Debug.Log("collideObject: " + collideObject.name);
+            //Debug.Log("collideObject: " + collideObject.name);
             if (collision.gameObject.name == collideObject.name)
             {
                 collideObject = null;

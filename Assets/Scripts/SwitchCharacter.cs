@@ -53,7 +53,7 @@ public class SwitchCharacter : MonoBehaviour
             }
             arrows[currentCharacterIndex].SetActive(false);
             // update the activation
-            Debug.Log("current index is " + currentCharacterIndex);
+            //Debug.Log("current index is " + currentCharacterIndex);
             currentCharacterIndex = (currentCharacterIndex + 1) % 3;
             if (currentCharacterIndex == 0)
             {

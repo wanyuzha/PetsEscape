@@ -79,13 +79,22 @@ public class DogPlayerMovement : Animal
 
         if (collision.gameObject.name == "key")
         {
-            items.Add("key");
+            if (SceneManager.GetActiveScene().name == "Level 1")
+            {
+                Level1WinManager.DogGetKey();
+                items.Add("key");
+            }
+            if (SceneManager.GetActiveScene().name == "Level 2")
+            {
+                Level2WinManager.DogGetKey();
+                items.Add("key");
+            }
             //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             //SceneManager.LoadScene(currentSceneIndex + 1);
         }
         if (collision.gameObject.CompareTag("canCrunch"))
         {
-            Debug.Log("try biting");
+            //Debug.Log("try biting");
             collideObject = collision.gameObject;
             //if trying to pick up the item for the first time, show tutorial text
             if (firstTry)
@@ -112,13 +121,32 @@ public class DogPlayerMovement : Animal
         base.OnTriggerEnter2D(coll);
         if (coll.gameObject.name == "door")
         {
-            Debug.Log("Dog entered Door");
-            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            if (colliderComponent != null)
+
+            if (SceneManager.GetActiveScene().name == "Level 1")
             {
-                Destroy(colliderComponent);
+                //Debug.Log("Dog entered Door");
+                Level1WinManager.DogTouchDoor();
+                Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+                if (colliderComponent != null)
+                {
+                    Destroy(colliderComponent);
+                }
+                if (!Level1WinManager.GetKey)
+                {
+                    showTutorialText("Use the key to open the door!\nPress [Enter] to continue!");
+                }
             }
-            showTutorialText("Use the key to open the door!\nPress [Enter] to continue!");
+
+            if (SceneManager.GetActiveScene().name == "Level 2")
+            {
+                //Debug.Log("Dog entered Door");
+                Level2WinManager.DogTouchDoor();
+                Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+                if (colliderComponent != null)
+                {
+                    Destroy(colliderComponent);
+                }
+            }
         }
     }
 

@@ -88,7 +88,7 @@ public class Animal : MonoBehaviour
         {
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
-            Debug.Log(string.Concat(AnimalName, " jumping"));
+            //Debug.Log(string.Concat(AnimalName, " jumping"));
         }
     }
 
@@ -99,10 +99,10 @@ public class Animal : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log(coll.gameObject.name);
+        //Debug.Log(coll.gameObject.name);
         if (coll.gameObject.CompareTag("ground") || coll.gameObject.CompareTag("canCrunch"))
         {
-            Debug.Log(string.Concat(AnimalName, " on ground"));
+            //Debug.Log(string.Concat(AnimalName, " on ground"));
             isJumping = false;
             // previousHeight = transform.position.y;
         }
@@ -116,7 +116,7 @@ public class Animal : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
-        Debug.Log(coll.gameObject.name);
+        //Debug.Log(coll.gameObject.name);
         if (coll.gameObject.name == "DetectJump")
         {
             // Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
@@ -128,21 +128,21 @@ public class Animal : MonoBehaviour
         }
         if (coll.name.StartsWith("Water"))
         {
-            Debug.Log(string.Concat(AnimalName, "enter water"));
+            //Debug.Log(string.Concat(AnimalName, "enter water"));
             inWater = true;
         }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D coll)
     {
-        Debug.Log(coll.gameObject.name);
+        //Debug.Log(coll.gameObject.name);
         if (coll.gameObject.name == "DetectJump")
         {
             tutorialText.SetActive(false);
         }
         if (coll.name.StartsWith("Water"))
         {
-            Debug.Log(string.Concat(AnimalName, " leave water"));
+            //Debug.Log(string.Concat(AnimalName, " leave water"));
             inWater = false;
             rb.gravityScale = 1;
         }
