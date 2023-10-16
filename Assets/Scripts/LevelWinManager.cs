@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class LevelWinManager : MonoBehaviour
+public class LevelWinManager : MonoBehaviour
 {
     // Use this for initialization
     public static bool BirdArrives = false;
     public static bool GetKey = false;
     public static bool DogArrives = false;
     public static bool FishArrives = false;
+    private GameObject panel;
+    private Text panelText;
 
     //public GameObject textMesh;
     void Start()
     {
         Initialize();
+        panel = HandleScene.FindSiblingGameObject("Canvas").transform.Find("Panel").gameObject;
+        panelText = panel.transform.Find("GameResult").gameObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -30,12 +35,16 @@ public abstract class LevelWinManager : MonoBehaviour
         }
         else if(WinCondition() && HandleScene.isMaxLevel())
         {
-            Debug.Log("yOU win");
+            panelText.text = "Game Complete";
+            panel.SetActive(true);
         }
 
     }
 
-    public abstract bool WinCondition();
+    public virtual bool WinCondition()
+    {
+        return BirdArrives && GetKey && DogArrives && FishArrives;
+    }
  
     public static void Initialize()
     {

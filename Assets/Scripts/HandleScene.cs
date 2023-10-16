@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class HandleScene
@@ -15,5 +16,21 @@ public static class HandleScene
     public static bool isMaxLevel()
     {
         return SceneManager.GetActiveScene().buildIndex == LevelCount - 1;
+    }
+
+
+    public static GameObject FindSiblingGameObject(string name)
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        GameObject[] rootObjects = currentScene.GetRootGameObjects();
+
+        foreach (GameObject obj in rootObjects)
+        {
+            if (obj.name == name)
+            {
+                return obj;
+            }
+        }
+        return null; 
     }
 }
