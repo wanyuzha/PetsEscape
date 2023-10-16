@@ -134,16 +134,23 @@ public class BirdPlayerMovement : Animal
         base.OnCollisionEnter2D(collision);
         if (collision.gameObject.name == "window")
         {
-            if (SceneManager.GetActiveScene().name == "Level 1")
-            {
-                Level1WinManager.BirdTouchGate();
-            }
-            if (SceneManager.GetActiveScene().name == "Level 2")
-            {
-                Level2WinManager.BirdTouchGate();
-            }
+            LevelWinManager.BirdTouchGate();
         }
 
+        if (collision.gameObject.CompareTag("canGrab"))
+        {
+            //Debug.Log("try picking");
+            collideObject = collision.gameObject;
+            //if trying to pick up the item for the first time, show tutorial text
+            if (firstTry && currentSceneIndex > 0)
+            {
+                showTutorialText("Press Z to pick up the item");
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
         if (collision.gameObject.CompareTag("canGrab"))
         {
             //Debug.Log("try picking");

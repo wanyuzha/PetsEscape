@@ -101,15 +101,7 @@ public class FishPlayerMovement : Animal
 
         if(coll.gameObject.name == "FishGoal")
         {
-            if (SceneManager.GetActiveScene().name == "Level 1")
-            {
-                Level1WinManager.FishTouchGoal();
-            }
-            if (SceneManager.GetActiveScene().name == "Level 2")
-            {
-                Level2WinManager.FishTouchGoal();
-            }
-
+            LevelWinManager.FishTouchGoal();
         }
         if (coll.name.StartsWith("Water"))
         {

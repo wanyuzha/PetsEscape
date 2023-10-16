@@ -29,6 +29,8 @@ public class Animal : MonoBehaviour
 
     protected UnityEngine.KeyCode skillKey = KeyCode.Z;
 
+    protected float startTime = 0.0f;
+
     public Animal()
     {
         firstTry = false;
@@ -160,14 +162,19 @@ public class Animal : MonoBehaviour
     {
         tutorialText.GetComponentInChildren<TMP_Text>().text = str;
         tutorialText.SetActive(true);
-        // Debug.Log(myText);
+        if(startTime == 0.0f)
+        {
+            startTime = Time.time;
+        }
     }
 
     protected void unshowTutorialText()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(skillKey) || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        float deltaTime = Time.time - startTime;
+        if (deltaTime >= 1.0f && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(skillKey) || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
             tutorialText.SetActive(false);
+            startTime = 0.0f;
         }
     }
 

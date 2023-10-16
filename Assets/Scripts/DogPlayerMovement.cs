@@ -79,18 +79,8 @@ public class DogPlayerMovement : Animal
 
         if (collision.gameObject.name == "key")
         {
-            if (SceneManager.GetActiveScene().name == "Level 1")
-            {
-                Level1WinManager.DogGetKey();
-                items.Add("key");
-            }
-            if (SceneManager.GetActiveScene().name == "Level 2")
-            {
-                Level2WinManager.DogGetKey();
-                items.Add("key");
-            }
-            //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            //SceneManager.LoadScene(currentSceneIndex + 1);
+            LevelWinManager.DogGetKey();
+            items.Add("key");
         }
         if (collision.gameObject.CompareTag("canCrunch"))
         {
@@ -121,32 +111,21 @@ public class DogPlayerMovement : Animal
         base.OnTriggerEnter2D(coll);
         if (coll.gameObject.name == "door")
         {
-
+            LevelWinManager.DogTouchDoor();
+            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+            if (colliderComponent != null)
+            {
+                Destroy(colliderComponent);
+            }
             if (SceneManager.GetActiveScene().name == "Level 1")
             {
-                //Debug.Log("Dog entered Door");
-                Level1WinManager.DogTouchDoor();
-                Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-                if (colliderComponent != null)
-                {
-                    Destroy(colliderComponent);
-                }
-                if (!Level1WinManager.GetKey)
+                if (!LevelWinManager.GetKey)
                 {
                     showTutorialText("Use the key to open the door!\nPress [Enter] to continue!");
                 }
             }
 
-            if (SceneManager.GetActiveScene().name == "Level 2")
-            {
-                //Debug.Log("Dog entered Door");
-                Level2WinManager.DogTouchDoor();
-                Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-                if (colliderComponent != null)
-                {
-                    Destroy(colliderComponent);
-                }
-            }
+            
         }
     }
 

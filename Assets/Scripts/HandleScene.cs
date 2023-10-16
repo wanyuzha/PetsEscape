@@ -1,29 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class HandleScene : MonoBehaviour
+public static class HandleScene
 {
-    public Button restart;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    public void RestartGame()
+    private static int LevelCount = 2;
+    public static void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    public void LoadNextLevel()
+    public static void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public static bool isMaxLevel()
+    {
+        return SceneManager.GetActiveScene().buildIndex == LevelCount - 1;
     }
 }
