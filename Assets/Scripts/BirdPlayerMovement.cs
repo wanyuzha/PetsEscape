@@ -44,8 +44,8 @@ public class BirdPlayerMovement : Animal
 
         undisplayArrow();
         // if (!firstTry)
-        if (currentSceneIndex > 0)
-            unshowTutorialText();
+/*         if (currentSceneIndex > 0)
+            unshowTutorialText(); */
 
         moveX(SPEED);
 
@@ -100,7 +100,7 @@ public class BirdPlayerMovement : Animal
                 //Debug.Log(dirY);
             }
 
-            firstTry = false;
+            //firstTry = false;
         }
 
         if (isPickupAnything)
@@ -144,7 +144,8 @@ public class BirdPlayerMovement : Animal
             //if trying to pick up the item for the first time, show tutorial text
             if (firstTry && currentSceneIndex > 0)
             {
-                showTutorialText("Press Z to pick up the item");
+                showTutorialText("Press Z to pick up the item\nPress [Enter] to continue");
+                firstTry=false;
             }
         }
     }
@@ -159,6 +160,7 @@ public class BirdPlayerMovement : Animal
             if (firstTry && currentSceneIndex > 0)
             {
                 showTutorialText("Press Z to pick up the item");
+                firstTry=false;
             }
         }
     }

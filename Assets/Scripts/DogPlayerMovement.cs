@@ -36,9 +36,9 @@ public class DogPlayerMovement : Animal
 
         undisplayArrow();
         // if (!firstTry)
-        if (currentSceneIndex > 0)
+/*         if (currentSceneIndex > 0)
             unshowTutorialText();
-
+ */
         if (isJumping)
         {
             moveX(JUMP_SPEED_X);
@@ -56,7 +56,6 @@ public class DogPlayerMovement : Animal
         if (Input.GetKeyDown(skillKey) && currentSceneIndex > 0)
         {
             crunch();
-            firstTry = false;
         }
     }
 
@@ -89,7 +88,8 @@ public class DogPlayerMovement : Animal
             //if trying to pick up the item for the first time, show tutorial text
             if (firstTry)
             {
-                showTutorialText("Press Z to crunch an item nearby");
+                showTutorialText("Press Z to crash an item nearby\nPress [Enter] to continue");
+                firstTry=false;
             }
 
         }
@@ -109,9 +109,13 @@ public class DogPlayerMovement : Animal
     protected override void OnTriggerEnter2D(Collider2D coll)
     {
         base.OnTriggerEnter2D(coll);
-        if (coll.gameObject.name == "door")
+
+        if(coll.gameObject.name == "doorknob")
         {
             LevelWinManager.DogTouchDoor();
+            
+        }else if (coll.gameObject.name == "door")
+        {
             Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
             if (colliderComponent != null)
             {

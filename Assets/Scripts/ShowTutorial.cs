@@ -21,6 +21,7 @@ public class ShowTutorial : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             tutorialText.SetActive(false);
+            Time.timeScale=1;
         }
     }
 }

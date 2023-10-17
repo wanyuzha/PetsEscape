@@ -121,12 +121,16 @@ public class Animal : MonoBehaviour
         //Debug.Log(coll.gameObject.name);
         if (coll.gameObject.name == "DetectJump")
         {
-            // Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            // if (colliderComponent != null)
-            // {
-            // Destroy(colliderComponent);
-            // }
-            showTutorialText("Use Space to jump!");
+            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+            Debug.Log(colliderComponent);
+            if (colliderComponent != null) Destroy(colliderComponent);
+            showTutorialText("Use Space to jump!\nPress [Enter] to continue");
+        }else if(coll.gameObject.name == "DetectFish")
+        {
+            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+            Debug.Log(colliderComponent);
+            if (colliderComponent != null) Destroy(colliderComponent);
+            showTutorialText("Use [Z] to create bubble!\nPress [Enter] to continue");
         }
         if (coll.name.StartsWith("Water"))
         {
@@ -162,6 +166,7 @@ public class Animal : MonoBehaviour
     {
         tutorialText.GetComponentInChildren<TMP_Text>().text = str;
         tutorialText.SetActive(true);
+        Time.timeScale=0;
         if(startTime == 0.0f)
         {
             startTime = Time.time;
