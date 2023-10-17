@@ -85,7 +85,7 @@ public class FishPlayerMovement : Animal
             if (inWater)
             {
                 bubble.GetComponent<Renderer>().enabled = true;
-                bubble.transform.position = transform.position;
+                bubble.transform.position = transform.position + new Vector3(0, 0.5f, 0);
             }
         }
     }

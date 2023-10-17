@@ -111,9 +111,9 @@ public class DogPlayerMovement : Animal
         base.OnTriggerEnter2D(coll);
 
         if(coll.gameObject.name == "doorknob")
-        {
+        {   
             LevelWinManager.DogTouchDoor();
-            
+
         }else if (coll.gameObject.name == "door")
         {
             Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
