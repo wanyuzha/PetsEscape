@@ -102,11 +102,18 @@ public class FishPlayerMovement : Animal
         if(coll.gameObject.name == "FishGoal")
         {
             LevelWinManager.FishTouchGoal();
-        }
-        if (coll.name.StartsWith("Water"))
+        } 
+        else if (coll.name.StartsWith("Water"))
         {
             health = 10;
             isJumping = false;
+        }
+        else if (coll.gameObject.name == "DetectFish")
+        {
+            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+            Debug.Log(colliderComponent);
+            if (colliderComponent != null) Destroy(colliderComponent);
+            showTutorialText("Use [Z] to create bubble!\nPress [Enter] to continue");
         }
     }
 

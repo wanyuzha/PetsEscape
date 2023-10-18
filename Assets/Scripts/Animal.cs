@@ -125,14 +125,8 @@ public class Animal : MonoBehaviour
             Debug.Log(colliderComponent);
             if (colliderComponent != null) Destroy(colliderComponent);
             showTutorialText("Use Space to jump!\nPress [Enter] to continue");
-        }else if(coll.gameObject.name == "DetectFish")
-        {
-            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            Debug.Log(colliderComponent);
-            if (colliderComponent != null) Destroy(colliderComponent);
-            showTutorialText("Use [Z] to create bubble!\nPress [Enter] to continue");
         }
-        if (coll.name.StartsWith("Water"))
+        else if (coll.name.StartsWith("Water"))
         {
             //Debug.Log(string.Concat(AnimalName, "enter water"));
             inWater = true;

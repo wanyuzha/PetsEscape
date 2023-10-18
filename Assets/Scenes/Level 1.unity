@@ -4632,8 +4632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.359316, y: 1.12131}
-  m_SizeDelta: {x: 504.36743, y: 543.9347}
+  m_AnchoredPosition: {x: -11.359316, y: 2.58936}
+  m_SizeDelta: {x: 504.36743, y: 617.33704}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &192056136
 MonoBehaviour:
@@ -4668,7 +4668,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "WASD\n\u2191\u2193\u2190\u2192\nZ\nEnter"
+  m_Text: "WASD\n\u2191\u2193\u2190\u2192\nZ\nEnter\nSpace"
 --- !u!222 &192056137
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4973,7 +4973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 308, y: 167}
+  m_AnchoredPosition: {x: 445, y: 210}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &333015600
@@ -8457,8 +8457,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.9, y: 1.1213}
-  m_SizeDelta: {x: 669.65, y: 547.08997}
+  m_AnchoredPosition: {x: 10.65532, y: 2.50779}
+  m_SizeDelta: {x: 657.41614, y: 616.4144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1196095068
 MonoBehaviour:
@@ -8499,7 +8499,9 @@ MonoBehaviour:
 
     use skill
 
-    close tutorial'
+    close tutorial
+
+    jump/ fly'
 --- !u!222 &1196095069
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10001,7 +10003,7 @@ PrefabInstance:
     - target: {fileID: 1104318710508238504, guid: 090095ba00d124d3da4048e5a9732b8f, type: 3}
       propertyPath: tutorialText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2034106340}
     - target: {fileID: 1104318710508238504, guid: 090095ba00d124d3da4048e5a9732b8f, type: 3}
       propertyPath: textComponent
       value: 
@@ -10135,7 +10137,7 @@ PrefabInstance:
     - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
       propertyPath: tutorialText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2034106340}
     - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
       propertyPath: textComponent
       value: 
@@ -10204,7 +10206,7 @@ PrefabInstance:
     - target: {fileID: 291997610937448909, guid: d91d4218eb51e4228a83d9c938ded36b, type: 3}
       propertyPath: tutorialText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2034106340}
     - target: {fileID: 291997610937448909, guid: d91d4218eb51e4228a83d9c938ded36b, type: 3}
       propertyPath: textComponent
       value: 
