@@ -7,6 +7,10 @@ public class bubbleController : MonoBehaviour
     public Renderer rend;
     Rigidbody2D rb;
 
+    Vector2 posLeaveWater;
+    const float HEIGHT_ABOVE_WATER = 2.0f;
+    bool inWater = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,9 @@ public class bubbleController : MonoBehaviour
     {
         if (rend.enabled)
         {
-            rb.velocity = Vector2.up;
+            rb.velocity = Vector2.zero;
+            if (inWater || transform.position.y < HEIGHT_ABOVE_WATER+ posLeaveWater.y)
+                rb.velocity = Vector2.up;
         }
     }
 
@@ -31,6 +37,15 @@ public class bubbleController : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rend.enabled = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.name.StartsWith("Water"))
+        {
+            posLeaveWater = transform.position;
+            inWater = false;
         }
     }
 }
