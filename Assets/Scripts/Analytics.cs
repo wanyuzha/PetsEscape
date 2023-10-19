@@ -11,7 +11,8 @@ public class Analytics : MonoBehaviour
 {
     // Start is called before the first frame update
     async void Start()
-    {
+    {   
+        //basic data collection such as game start, game end
         await UnityServices.InitializeAsync();
         AnalyticsService.Instance.StartDataCollection();
     }
@@ -22,6 +23,9 @@ public class Analytics : MonoBehaviour
         
     }
 
+
+    // this function is an example and not used.
+    //For birdDeadCustomEvent, it is in the animal.cs, where bird is killed by laser
     public void BirdDeadCustomEvent()
     { 
         Dictionary<string, object> parameters = new Dictionary<string, object>()

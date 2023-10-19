@@ -125,7 +125,7 @@ public class DogPlayerMovement : Animal
             {
                 if (!LevelWinManager.GetKey)
                 {
-                    showTutorialText("Use the key to open the door!\nPress [Enter] to continue!");
+                    showTutorialText("Get the key and touch doorknob, to open the door!\nPress [Enter] to continue!");
                 }
             }
 

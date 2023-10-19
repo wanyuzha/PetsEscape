@@ -115,11 +115,14 @@ public class Animal : MonoBehaviour
             Destroy(gameObject);
             EndGame(string.Concat(AnimalName, " died of laser!"));
 
-            /*
+            /* 
+             * parameter for event is unnecessary currently
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
             };
             */
+
+            // the following code sends the bird Dead Event to the unity analytics account
 
             AnalyticsService.Instance.CustomData("birdDeadEvent");
             AnalyticsService.Instance.Flush();
