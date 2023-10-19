@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.Services.Analytics;
 
 public class Animal : MonoBehaviour
 {
@@ -113,6 +114,15 @@ public class Animal : MonoBehaviour
             // touch the wire
             Destroy(gameObject);
             EndGame(string.Concat(AnimalName, " died of laser!"));
+
+            /*
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+            };
+            */
+
+            AnalyticsService.Instance.CustomData("birdDeadEvent");
+            AnalyticsService.Instance.Flush();
         }
     }
 

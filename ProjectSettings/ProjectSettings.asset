@@ -353,6 +353,7 @@ PlayerSettings:
   switchSocketConcurrencyLimit: 14
   switchScreenResolutionBehavior: 2
   switchUseCPUProfiler: 0
+  switchEnableFileSystemTrace: 0
   switchUseGOLDLinker: 0
   switchLTOSetting: 0
   switchApplicationID: 0x01004b9000490000
@@ -719,11 +720,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: f87e45db-3000-479f-ae01-7ee63840f58d
+  cloudProjectId: 53616ad1-ecba-4500-9077-e1e48688e09a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: PetsEscape
-  organizationId: encorebox
+  organizationId: bz85
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
