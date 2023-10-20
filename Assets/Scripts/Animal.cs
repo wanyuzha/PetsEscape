@@ -14,7 +14,7 @@ public class Animal : MonoBehaviour
 
     public bool isActivated = false;
     public GameObject panel;
-    public GameObject tutorialText;
+    public TextMeshProUGUI tutorialText;
     public Text textComponent;
 
     protected bool inWater;
@@ -47,16 +47,10 @@ public class Animal : MonoBehaviour
         {
             firstTry = true;
         }
-        Time.timeScale = 1;
+        // Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     protected void undisplayArrow()
@@ -112,8 +106,8 @@ public class Animal : MonoBehaviour
         if (coll.gameObject.name == "LightSaber")
         {
             // touch the wire
-            Destroy(gameObject);
-            EndGame(string.Concat(AnimalName, " died of laser!"));
+            // Destroy(gameObject);
+            EndGame(AnimalName+ " died of laser!");
 
             /* 
              * parameter for event is unnecessary currently
@@ -124,13 +118,14 @@ public class Animal : MonoBehaviour
 
             // the following code sends the bird Dead Event to the unity analytics account
 
-            AnalyticsService.Instance.CustomData("birdDeadEvent");
-            AnalyticsService.Instance.Flush();
+            // AnalyticsService.Instance.CustomData("birdDeadEvent");
+            // AnalyticsService.Instance.Flush();
         }
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
+        /*
         //Debug.Log(coll.gameObject.name);
         if (coll.gameObject.name == "DetectJump")
         {
@@ -139,7 +134,9 @@ public class Animal : MonoBehaviour
             if (colliderComponent != null) Destroy(colliderComponent);
             showTutorialText("Use Space to jump!\nPress [Enter] to continue");
         }
-        else if (coll.name.StartsWith("Water"))
+        else 
+        */
+        if (coll.gameObject.CompareTag("water"))
         {
             //Debug.Log(string.Concat(AnimalName, "enter water"));
             inWater = true;
@@ -149,15 +146,17 @@ public class Animal : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D coll)
     {
         //Debug.Log(coll.gameObject.name);
+        /*
         if (coll.gameObject.name == "DetectJump")
         {
             tutorialText.SetActive(false);
         }
-        if (coll.name.StartsWith("Water"))
+        */
+
+        if (coll.gameObject.CompareTag("water"))
         {
             //Debug.Log(string.Concat(AnimalName, " leave water"));
             inWater = false;
-            rb.gravityScale = 1;
         }
     }
 
@@ -171,8 +170,8 @@ public class Animal : MonoBehaviour
 
     protected void showTutorialText(string str)
     {
-        tutorialText.GetComponentInChildren<TMP_Text>().text = str;
-        tutorialText.SetActive(true);
+        tutorialText.text = str;
+        tutorialText.gameObject.SetActive(true);
         Time.timeScale=0;
         if(startTime == 0.0f)
         {
@@ -185,7 +184,7 @@ public class Animal : MonoBehaviour
         float deltaTime = Time.time - startTime;
         if (deltaTime >= 1.0f && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(skillKey) || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
-            tutorialText.SetActive(false);
+            tutorialText.gameObject.SetActive(false);
             startTime = 0.0f;
         }
     }

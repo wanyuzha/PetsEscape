@@ -65,6 +65,8 @@ public class FishPlayerMovement : Animal
         }
         else
         {
+            rb.gravityScale = 1;
+            
             if (isJumping)
             {
                 moveX(SPEED_JUMPING_X);

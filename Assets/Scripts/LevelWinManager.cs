@@ -24,28 +24,30 @@ public class LevelWinManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            HandleScene.RestartGame();
-        }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        // HandleScene.RestartGame();
+        // }
 
-        if (WinCondition() && !HandleScene.isMaxLevel())
+        if (WinCondition())
         {
-            HandleScene.LoadNextLevel();
+            if (HandleScene.isMaxLevel())
+            {
+                panelText.text = "Game Complete!!!";
+                panel.SetActive(true);
+            }
+            else
+            {
+                HandleScene.LoadNextLevel();
+            }
         }
-        else if(WinCondition() && HandleScene.isMaxLevel())
-        {
-            panelText.text = "Game Complete";
-            panel.SetActive(true);
-        }
-
     }
 
     public virtual bool WinCondition()
     {
         return BirdArrives && GetKey && DogArrives && FishArrives;
     }
- 
+
     public static void Initialize()
     {
         BirdArrives = false;

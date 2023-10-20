@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bubbleController : MonoBehaviour
+public class BubbleController : MonoBehaviour
 {
     public Renderer rend;
     Rigidbody2D rb;
@@ -26,7 +26,7 @@ public class bubbleController : MonoBehaviour
         if (rend.enabled)
         {
             rb.velocity = Vector2.zero;
-            if (inWater || transform.position.y < HEIGHT_ABOVE_WATER+ posLeaveWater.y)
+            if (inWater || transform.position.y < HEIGHT_ABOVE_WATER + posLeaveWater.y)
                 rb.velocity = Vector2.up;
         }
     }
