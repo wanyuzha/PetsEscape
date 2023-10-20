@@ -9,7 +9,7 @@ public class DogPlayerMovement : Animal
 {
     // private float previousHeight;
 
-    private GameObject collideObject;
+    private GameObject collideObject = null;
     const int SPEED = 6;
     const int JUMP_SPEED_X = 6;
     const int JUMP_SPEED_Y = 6;
@@ -36,9 +36,9 @@ public class DogPlayerMovement : Animal
 
         undisplayArrow();
         // if (!firstTry)
-/*         if (currentSceneIndex > 0)
-            unshowTutorialText();
- */
+        /*         if (currentSceneIndex > 0)
+                    unshowTutorialText();
+         */
         if (isJumping)
         {
             moveX(JUMP_SPEED_X);
@@ -59,7 +59,7 @@ public class DogPlayerMovement : Animal
         }
     }
 
-    void crunch()
+    private void crunch()
     {
         if (collideObject != null)
         {
@@ -68,7 +68,6 @@ public class DogPlayerMovement : Animal
                 Destroy(collideObject);
                 collideObject = null;
             }
-
         }
     }
 
@@ -78,9 +77,10 @@ public class DogPlayerMovement : Animal
 
         if (collision.gameObject.name == "key")
         {
-            LevelWinManager.DogGetKey();
             items.Add("key");
+            LevelWinManager.DogGetKey();
         }
+
         if (collision.gameObject.CompareTag("canCrunch"))
         {
             //Debug.Log("try biting");
@@ -88,12 +88,20 @@ public class DogPlayerMovement : Animal
             //if trying to pick up the item for the first time, show tutorial text
             if (firstTry)
             {
-                showTutorialText("Press Z to crash an item nearby\nPress [Enter] to continue");
-                firstTry=false;
+                showTutorialText("Use [Z] to crunch the obstacle!\nPress [Enter] to continue!");
+                firstTry = false;
             }
-
         }
 
+        if (collision.gameObject.name == "doorknob" && LevelWinManager.GetKey)
+        {
+            LevelWinManager.DogTouchDoor();
+            if (firstWin)
+            {
+                showTutorialText("Dog unlocks the Door!\nPress [Enter] to continue!");
+                firstWin = false;
+            }
+        }
     }
 
     /*     void OnTriggerExit2D(Collider2D coll)
@@ -110,26 +118,22 @@ public class DogPlayerMovement : Animal
     {
         base.OnTriggerEnter2D(coll);
 
-        if(coll.gameObject.name == "doorknob")
-        {   
-            LevelWinManager.DogTouchDoor();
-
-        }else if (coll.gameObject.name == "door")
+        if (coll.gameObject.name == "door")
         {
             Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+
+            if (currentSceneIndex == 0)
+            {
+                if (!LevelWinManager.GetKey)
+                {
+                    showTutorialText("Collect the key and touch the doorknob to open the door!\nPress [Enter] to continue!");
+                }
+            }
+
             if (colliderComponent != null)
             {
                 Destroy(colliderComponent);
             }
-            if (SceneManager.GetActiveScene().name == "Level 1")
-            {
-                if (!LevelWinManager.GetKey)
-                {
-                    showTutorialText("Get the key and touch doorknob, to open the door!\nPress [Enter] to continue!");
-                }
-            }
-
-            
         }
     }
 
@@ -137,5 +141,4 @@ public class DogPlayerMovement : Animal
     {
         base.CheckInWater();
     }
-
 }

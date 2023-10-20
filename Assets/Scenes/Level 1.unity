@@ -4994,7 +4994,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 18.5, y: -1}
@@ -5271,20 +5271,9 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 2b030b39a8b474fa496db65b435a1dda, type: 3}
 --- !u!1 &596600909 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 9160822087705271874, guid: 2b030b39a8b474fa496db65b435a1dda, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3033969271452679445, guid: 2b030b39a8b474fa496db65b435a1dda, type: 3}
   m_PrefabInstance: {fileID: 596600908}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &596600910 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4401127753813520186, guid: 2b030b39a8b474fa496db65b435a1dda, type: 3}
-  m_PrefabInstance: {fileID: 596600908}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596600909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &637780403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5314,9 +5303,9 @@ Transform:
   m_GameObject: {fileID: 637780403}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -3, y: 2.3, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 79466165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8336,7 +8325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99393329883d547a6b71529fa5af3a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rend: {fileID: 0}
+  waterArea: {fileID: 0}
 --- !u!58 &1637303028
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8720,7 +8709,7 @@ PrefabInstance:
     - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
       propertyPath: tutorialText
       value: 
-      objectReference: {fileID: 596600910}
+      objectReference: {fileID: 596600909}
     - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
       propertyPath: textComponent
       value: 

@@ -24,15 +24,28 @@ public class Analytics : MonoBehaviour
     }
 
     // this function is an example and not used.
-    //For birdDeadCustomEvent, it is in the animal.cs, where bird is killed by laser
-    public void BirdDeadCustomEvent()
+    /*
+        //For birdDeadCustomEvent, it is in the animal.cs, where bird is killed by laser
+        public void BirdDeadCustomEvent()
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                {"birdDead", "birdDead" }
+            };
+
+            AnalyticsService.Instance.CustomData("birdDead", parameters);
+            AnalyticsService.Instance.Flush();
+        }
+    */
+
+    public void BirdFlyCustomEvent()
     {
         Dictionary<string, object> parameters = new Dictionary<string, object>()
         {
-            {"birdDead", "birdDead" }
+            {"birdFly", "birdFly"}
         };
 
-        AnalyticsService.Instance.CustomData("birdDead", parameters);
+        AnalyticsService.Instance.CustomData("birdFly", parameters);
         AnalyticsService.Instance.Flush();
     }
 }

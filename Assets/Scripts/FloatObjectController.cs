@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class FloatObjectController : MonoBehaviour
 {
-    public Rigidbody2D rigidBody;
-    public GameObject bubble;
+    private Rigidbody2D rigidBody;
+    // public GameObject bubble;
 
     private float force;
-    private float waterHeight = -6.9f;
+    private float waterHeight;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        waterHeight = transform.position.y;
     }
 
     /*

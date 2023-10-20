@@ -11,12 +11,14 @@ public class LevelWinManager : MonoBehaviour
     public static bool DogArrives = false;
     public static bool FishArrives = false;
     private GameObject panel;
+    private GameObject tutorial;
     private Text panelText;
 
     //public GameObject textMesh;
     void Start()
     {
         Initialize();
+        tutorial = HandleScene.FindSiblingGameObject("Tutorial");
         panel = HandleScene.FindSiblingGameObject("Canvas").transform.Find("Panel").gameObject;
         panelText = panel.transform.Find("GameResult").gameObject.GetComponent<Text>();
     }
@@ -29,7 +31,7 @@ public class LevelWinManager : MonoBehaviour
         // HandleScene.RestartGame();
         // }
 
-        if (WinCondition())
+        if (WinCondition() && !tutorial.activeSelf)
         {
             if (HandleScene.isMaxLevel())
             {

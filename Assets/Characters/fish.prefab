@@ -188,7 +188,7 @@ MonoBehaviour:
   panel: {fileID: 0}
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
-  health: 10
+  health: 5
   bubble: {fileID: 0}
 --- !u!50 &1949116984938561833
 Rigidbody2D:

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.Services.Analytics;
 
 public class BirdPlayerMovement : Animal
 {
@@ -12,8 +13,8 @@ public class BirdPlayerMovement : Animal
     const int JUMP_SPEED_Y = 3;
 
     private bool isPickupAnything = false;
-    private GameObject collideObject;
-    private GameObject pickupObject;
+    private GameObject collideObject = null;
+    private GameObject pickupObject = null;
     private Vector3 grabOffset;
 
     public BirdPlayerMovement()
@@ -36,7 +37,7 @@ public class BirdPlayerMovement : Animal
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (!this.gameObject.activeSelf)
+        if (!gameObject.activeSelf)
             return;
 
         if (!isActivated)
@@ -44,8 +45,8 @@ public class BirdPlayerMovement : Animal
 
         undisplayArrow();
         // if (!firstTry)
-/*         if (currentSceneIndex > 0)
-            unshowTutorialText(); */
+        /*         if (currentSceneIndex > 0)
+                    unshowTutorialText(); */
 
         moveX(SPEED);
 
@@ -54,6 +55,9 @@ public class BirdPlayerMovement : Animal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             fly(JUMP_SPEED_Y);
+
+            AnalyticsService.Instance.CustomData("birdFlyEvent");
+            AnalyticsService.Instance.Flush();
         }
 
         // update picked up item
@@ -135,6 +139,11 @@ public class BirdPlayerMovement : Animal
         if (collision.gameObject.name == "window")
         {
             LevelWinManager.BirdTouchGate();
+            if (firstWin)
+            {
+                showTutorialText("Bird reaches the Window!\nPress [Enter] to continue!");
+                firstWin = false;
+            }
         }
 
         if (collision.gameObject.CompareTag("canGrab"))
@@ -142,10 +151,10 @@ public class BirdPlayerMovement : Animal
             //Debug.Log("try picking");
             collideObject = collision.gameObject;
             //if trying to pick up the item for the first time, show tutorial text
-            if (firstTry && currentSceneIndex > 0)
+            if (firstTry)
             {
-                showTutorialText("Press Z to pick up the item\nPress [Enter] to continue");
-                firstTry=false;
+                showTutorialText("Use [Z] to grab the item!\nPress again to Release.\nPress [Enter] to continue!");
+                firstTry = false;
             }
         }
     }
@@ -157,10 +166,10 @@ public class BirdPlayerMovement : Animal
             //Debug.Log("try picking");
             collideObject = collision.gameObject;
             //if trying to pick up the item for the first time, show tutorial text
-            if (firstTry && currentSceneIndex > 0)
+            if (firstTry)
             {
-                showTutorialText("Press Z to pick up the item");
-                firstTry=false;
+                showTutorialText("Use [Z] to grab the item\nPress again to Release\nPress [Enter] to continue!");
+                firstTry = false;
             }
         }
     }

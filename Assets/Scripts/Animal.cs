@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using Unity.Services.Analytics;
 
 public class Animal : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class Animal : MonoBehaviour
 
     public bool isActivated = false;
     public GameObject panel;
-    public TextMeshProUGUI tutorialText;
+    public GameObject tutorialText;
     public Text textComponent;
 
     protected bool inWater;
@@ -26,15 +25,17 @@ public class Animal : MonoBehaviour
     protected List<string> items;
 
     protected bool firstTry;
+    protected bool firstWin;
     protected int currentSceneIndex;
 
     protected UnityEngine.KeyCode skillKey = KeyCode.Z;
 
-    protected float startTime = 0.0f;
+    // protected float tutorialShowTime = 0.0f;
 
     public Animal()
     {
         firstTry = false;
+        firstWin = true;
         // targetName = new List<string>();
         items = new List<string>();
     }
@@ -51,6 +52,7 @@ public class Animal : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
+        tutorialText.SetActive(false);
     }
 
     protected void undisplayArrow()
@@ -107,7 +109,7 @@ public class Animal : MonoBehaviour
         {
             // touch the wire
             // Destroy(gameObject);
-            EndGame(AnimalName+ " died of laser!");
+            EndGame(AnimalName + " died of laser!");
 
             /* 
              * parameter for event is unnecessary currently
@@ -164,30 +166,32 @@ public class Animal : MonoBehaviour
     {
         if (inWater)
         {
-            EndGame(string.Concat(AnimalName, " died of water!"));
+            EndGame(AnimalName + " died of water!");
         }
     }
 
     protected void showTutorialText(string str)
     {
-        tutorialText.text = str;
-        tutorialText.gameObject.SetActive(true);
-        Time.timeScale=0;
-        if(startTime == 0.0f)
-        {
-            startTime = Time.time;
-        }
+        tutorialText.GetComponentInChildren<TMP_Text>().text = str;
+        tutorialText.SetActive(true);
+        Time.timeScale = 0;
+        // if(tutorialShowTime == 0.0f)
+        // {
+        // tutorialShowTime = Time.time;
+        // }
     }
 
-    protected void unshowTutorialText()
-    {
-        float deltaTime = Time.time - startTime;
-        if (deltaTime >= 1.0f && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(skillKey) || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+    /*
+        protected void unshowTutorialText()
         {
-            tutorialText.gameObject.SetActive(false);
-            startTime = 0.0f;
+            float deltaTime = Time.time - tutorialShowTime;
+            if (deltaTime > 1f && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(skillKey) || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+            {
+                tutorialText.gameObject.transform.parent.SetActive(false);
+                // tutorialShowTime = 0.0f;
+            }
         }
-    }
+    */
 
     protected void EndGame(string str)
     {

@@ -156,7 +156,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Switch Pets
+  m_Text: 'Switch Pet
 
     Move
 
@@ -164,7 +164,7 @@ MonoBehaviour:
 
     Jump/Fly
 
-    Use Skill
+    Use Pet Skill
 
     Close
     Tutorial'

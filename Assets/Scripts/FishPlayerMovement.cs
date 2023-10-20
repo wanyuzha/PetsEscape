@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class FishPlayerMovement : Animal
 {
-    public int health = 5;
+    public int health;
+    const int initialHealth = 5;
 
     const int SPEED_IN_WATER = 5;
     const int SPEED_ON_GROUND = 1;
     const int SPEED_JUMPING_Y = 5;
     const int SPEED_JUMPING_X = 3;
+    const float gravityScaleInWater = 0f;
+    const float gravityScaleOutWater = 1f;
+    const float gravityScaleStep = 0.02f;
 
     public GameObject bubble;
 
@@ -19,18 +23,20 @@ public class FishPlayerMovement : Animal
     {
         AnimalName = "Fish";
     }
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        health = initialHealth;
     }
 
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (health < 0)
+        if (health <= 0)
         {
-            EndGame("Fish died!");
+            EndGame("Fish died in lack of water!");
         }
 
         if (!isActivated)
@@ -38,35 +44,42 @@ public class FishPlayerMovement : Animal
 
         undisplayArrow();
 
-        float dirX = Input.GetAxis("Horizontal");
-        float dirY = Input.GetAxis("Vertical");
+        /*
+            float dirX = Input.GetAxis("Horizontal");
+            float dirY = Input.GetAxis("Vertical");
 
-        if (dirX > 0)
-        {
-            transform.localScale = new Vector3(0.8f, 0.8f, 1);
-        }
-        else if (dirX < 0)
-        {
-            transform.localScale = new Vector3(-0.8f, 0.8f, 1);
-        }
+            if (dirX > 0)
+            {
+                transform.localScale = new Vector3(0.8f, 0.8f, 1);
+            }
+            else if (dirX < 0)
+            {
+                transform.localScale = new Vector3(-0.8f, 0.8f, 1);
+            }
+        */
 
         if (inWater)
         {
-            if (rb.gravityScale > 0)
+            health = initialHealth;
+            isJumping = false;
+
+            if (rb.gravityScale > gravityScaleInWater)
             {
-                rb.gravityScale -= 0.01f;
+                rb.gravityScale -= gravityScaleStep;
                 moveX(SPEED_IN_WATER);
             }
             else
             {
+                rb.gravityScale = gravityScaleInWater;
                 moveX(SPEED_IN_WATER);
                 moveY(SPEED_IN_WATER);
             }
         }
+
         else
         {
-            rb.gravityScale = 1;
-            
+            rb.gravityScale = gravityScaleOutWater;
+
             if (isJumping)
             {
                 moveX(SPEED_JUMPING_X);
@@ -82,13 +95,10 @@ public class FishPlayerMovement : Animal
             jump(SPEED_JUMPING_Y);
         }
 
-        if (Input.GetKeyDown(skillKey))
+        if (inWater && Input.GetKeyDown(skillKey))
         {
-            if (inWater)
-            {
-                bubble.GetComponent<Renderer>().enabled = true;
-                bubble.transform.position = transform.position + new Vector3(0, 0.5f, 0);
-            }
+            bubble.SetActive(true);
+            bubble.transform.position = transform.position + new Vector3(0, 0.5f, 0);
         }
     }
 
@@ -101,21 +111,30 @@ public class FishPlayerMovement : Animal
     {
         base.OnTriggerEnter2D(coll);
 
-        if(coll.gameObject.name == "FishGoal")
+        if (coll.gameObject.name == "FishGoal")
         {
             LevelWinManager.FishTouchGoal();
-        } 
-        else if (coll.name.StartsWith("Water"))
-        {
-            health = 10;
-            isJumping = false;
+            if (firstWin)
+            {
+                showTutorialText("Fish reaches the end!\nPress [Enter] to continue!");
+                firstWin = false;
+            }
         }
+
         else if (coll.gameObject.name == "DetectFish")
         {
             Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            Debug.Log(colliderComponent);
-            if (colliderComponent != null) Destroy(colliderComponent);
-            showTutorialText("Use [Z] to create bubble!\nPress [Enter] to continue");
+            // Debug.Log(colliderComponent);
+            if (firstTry)
+            {
+                showTutorialText("Use [Z] to bubble!\nPress [Enter] to continue!");
+                firstTry = false;
+            }
+
+            if (colliderComponent != null)
+            {
+                Destroy(colliderComponent);
+            }
         }
     }
 
@@ -132,5 +151,4 @@ public class FishPlayerMovement : Animal
             health--;
         }
     }
-
 }
