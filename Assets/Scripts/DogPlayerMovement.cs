@@ -93,7 +93,7 @@ public class DogPlayerMovement : Animal
             }
         }
 
-        if (collision.gameObject.name == "doorknob" && LevelWinManager.GetKey)
+        if (collision.gameObject.name == "DoorKnob" && LevelWinManager.GetKey)
         {
             LevelWinManager.DogTouchDoor();
             if (firstWin)
@@ -118,7 +118,7 @@ public class DogPlayerMovement : Animal
     {
         base.OnTriggerEnter2D(coll);
 
-        if (coll.gameObject.name == "door")
+        if (coll.gameObject.name == "Door")
         {
             Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
 
@@ -126,7 +126,7 @@ public class DogPlayerMovement : Animal
             {
                 if (!LevelWinManager.GetKey)
                 {
-                    showTutorialText("Collect the key and touch the doorknob to open the door!\nPress [Enter] to continue!");
+                    showTutorialText("Door is locked! Get the key and touch the door knob to unlock!\nPress [Enter] to continue!");
                 }
             }
 

@@ -136,8 +136,10 @@ public class BirdPlayerMovement : Animal
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if (collision.gameObject.name == "window")
-        {
+        if (collision.gameObject.name == "Window")
+        {   
+            Collider2D colliderComponent = collision.gameObject.GetComponent<Collider2D>();
+            if(colliderComponent != null) Destroy(colliderComponent);
             LevelWinManager.BirdTouchGate();
             if (firstWin)
             {
