@@ -87,8 +87,10 @@ public class Animal : MonoBehaviour
         {
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
-            //Debug.Log(string.Concat(AnimalName, " jumping"));
+            
+            //Debug.Log(string.Concat(AnimalName, isJumping));
         }
+        
     }
 
     protected void fly(float speed)
@@ -101,7 +103,7 @@ public class Animal : MonoBehaviour
         //Debug.Log(coll.gameObject.name);
         if (coll.gameObject.CompareTag("ground") || coll.gameObject.CompareTag("canCrunch"))
         {
-            //Debug.Log(string.Concat(AnimalName, " on ground"));
+            //Debug.Log(string.Concat(AnimalName, " touches ground"));
             isJumping = false;
             // previousHeight = transform.position.y;
         }
@@ -124,20 +126,14 @@ public class Animal : MonoBehaviour
             // AnalyticsService.Instance.Flush();
         }
     }
-
+    protected virtual void OnCollisionStay2D(Collision2D coll)
+    {
+        isJumping = false;
+    }
+    
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
-        /*
-        //Debug.Log(coll.gameObject.name);
-        if (coll.gameObject.name == "DetectJump")
-        {
-            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            Debug.Log(colliderComponent);
-            if (colliderComponent != null) Destroy(colliderComponent);
-            showTutorialText("Use Space to jump!\nPress [Enter] to continue");
-        }
-        else 
-        */
+
         if (coll.gameObject.CompareTag("water"))
         {
             //Debug.Log(string.Concat(AnimalName, "enter water"));
@@ -148,13 +144,6 @@ public class Animal : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D coll)
     {
         //Debug.Log(coll.gameObject.name);
-        /*
-        if (coll.gameObject.name == "DetectJump")
-        {
-            tutorialText.SetActive(false);
-        }
-        */
-
         if (coll.gameObject.CompareTag("water"))
         {
             //Debug.Log(string.Concat(AnimalName, " leave water"));
@@ -163,7 +152,7 @@ public class Animal : MonoBehaviour
     }
 
     protected virtual void CheckInWater()
-    {
+    {   
         if (inWater)
         {
             EndGame(AnimalName + " died of water!");

@@ -160,7 +160,7 @@ public class BirdPlayerMovement : Animal
             }
         }
     }
-
+    /*
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("canGrab"))
@@ -174,7 +174,7 @@ public class BirdPlayerMovement : Animal
                 firstTry = false;
             }
         }
-    }
+    }*/
 
     private void OnCollisionExit2D(Collision2D collision)
     {
