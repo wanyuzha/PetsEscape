@@ -544,6 +544,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 701799065}
     - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
+      propertyPath: jumpFrom
+      value: 
+      objectReference: {fileID: 173662784}
+    - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
       propertyPath: tutorialText
       value: 
       objectReference: {fileID: 1356348503}
@@ -5401,6 +5405,10 @@ PrefabInstance:
       propertyPath: bubble
       value: 
       objectReference: {fileID: 1637303023}
+    - target: {fileID: 291997610937448909, guid: d91d4218eb51e4228a83d9c938ded36b, type: 3}
+      propertyPath: jumpFrom
+      value: 
+      objectReference: {fileID: 722899927}
     - target: {fileID: 291997610937448909, guid: d91d4218eb51e4228a83d9c938ded36b, type: 3}
       propertyPath: tutorialText
       value: 
