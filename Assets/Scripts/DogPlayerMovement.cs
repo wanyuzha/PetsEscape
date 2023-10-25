@@ -51,7 +51,7 @@ public class DogPlayerMovement : Animal
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jump(JUMP_SPEED_Y);
+            DogJump(JUMP_SPEED_Y);
         }
 
         if (Input.GetKeyDown(skillKey) && currentSceneIndex > 0)

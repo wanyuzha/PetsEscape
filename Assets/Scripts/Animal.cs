@@ -30,6 +30,10 @@ public class Animal : MonoBehaviour
 
     protected UnityEngine.KeyCode skillKey = KeyCode.Z;
 
+    public GameObject laser = null;
+
+    private string jumpFrom = "inital";
+
     // protected float tutorialShowTime = 0.0f;
 
     public Animal()
@@ -80,17 +84,31 @@ public class Animal : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, dirY * speed);
     }
 
-    protected void jump(float speed)
+    protected void DogJump(float speed)
+    {
+        // if (canJump && !isJumping)
+        if (!isJumping)
+        {    
+            // when jump from canCrunch item, use this, otherwise (jumping from ground) will use collide exit for isJumping = true
+            if(jumpFrom == "canCrunch") isJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, speed);
+            
+            //Debug.Log(string.Concat(AnimalName, isJumping));
+        }
+        
+    }
+
+    protected void FishJump(float speed)
     {
         // if (canJump && !isJumping)
         if (!isJumping)
         {
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
-            
+
             //Debug.Log(string.Concat(AnimalName, isJumping));
         }
-        
+
     }
 
     protected void fly(float speed)
@@ -125,12 +143,32 @@ public class Animal : MonoBehaviour
             // AnalyticsService.Instance.CustomData("birdDeadEvent");
             // AnalyticsService.Instance.Flush();
         }
+
+        if (coll.gameObject.name == "laserButton" && laser!=null)
+        {
+            if(laser.activeSelf)
+            laser.SetActive(false);
+
+            else laser.SetActive(true);
+
+        }
+
     }
+
+    // use for dog jump detection
+    protected virtual void OnCollisionExit2D(Collision2D coll)
+    {
+        jumpFrom = coll.gameObject.tag;
+        if (coll.gameObject.CompareTag("ground"))
+            isJumping = true;
+    }
+    /*
     protected virtual void OnCollisionStay2D(Collision2D coll)
     {
+        Debug.Log(isJumping);
         isJumping = false;
     }
-    
+    */
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
 

@@ -158,7 +158,7 @@ public class BirdPlayerMovement : Animal
             }
         }
 
-        if (collision.gameObject.CompareTag("canGrab"))
+        if (collision.gameObject.CompareTag("canGrab") || collision.gameObject.CompareTag("canCrunch"))
         {
             //Debug.Log("try picking");
             collideObject = collision.gameObject;
@@ -186,7 +186,7 @@ public class BirdPlayerMovement : Animal
         }
     }*/
 
-    private void OnCollisionExit2D(Collision2D collision)
+    override protected void OnCollisionExit2D(Collision2D collision)
     {
         //Debug.Log("gameobject name: " + collision.gameObject.name);
 
