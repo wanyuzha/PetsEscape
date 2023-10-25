@@ -99,6 +99,9 @@ public class FishPlayerMovement : Animal
         {
             bubble.SetActive(true);
             bubble.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+
+            //collect skill used event
+            Analytics.SkillUsedEvent();
         }
     }
 

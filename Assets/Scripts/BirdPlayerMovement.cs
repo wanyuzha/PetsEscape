@@ -55,8 +55,12 @@ public class BirdPlayerMovement : Animal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             fly(JUMP_SPEED_Y);
-
-            AnalyticsService.Instance.CustomData("birdFlyEvent");
+            int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "levelName", "level" + currentLevel.ToString() }
+            };
+            AnalyticsService.Instance.CustomData("birdFlyEvent", parameters);
             AnalyticsService.Instance.Flush();
         }
 
@@ -90,6 +94,9 @@ public class BirdPlayerMovement : Animal
                 // pickupObject.GetComponent<Rigidbody2D>().isKinematic = false;
                 pickupObject = null;
                 isPickupAnything = false;
+
+                //collect skill used event
+                Analytics.SkillUsedEvent();
             }
 
             else if (collideObject != null)
@@ -102,6 +109,9 @@ public class BirdPlayerMovement : Animal
                 // collideObject = null;
                 isPickupAnything = true;
                 //Debug.Log(dirY);
+
+                //collect skill used event
+                Analytics.SkillUsedEvent();
             }
 
             //firstTry = false;

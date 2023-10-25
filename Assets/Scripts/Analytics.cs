@@ -6,6 +6,7 @@ using Unity.Services.Analytics;
 
 using Unity.Services.Core.Environments;
 using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class Analytics : MonoBehaviour
 {
@@ -46,6 +47,18 @@ public class Analytics : MonoBehaviour
         };
 
         AnalyticsService.Instance.CustomData("birdFly", parameters);
+        AnalyticsService.Instance.Flush();
+    }
+
+    //this static function will be called when skill used event is triggered
+    public static void SkillUsedEvent()
+    {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+        Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "levelName", "level" + currentLevel.ToString() }
+            };
+        AnalyticsService.Instance.CustomData("skillUsedEvent", parameters);
         AnalyticsService.Instance.Flush();
     }
 }

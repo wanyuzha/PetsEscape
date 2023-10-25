@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.Services.Analytics;
 
 public class DogPlayerMovement : Animal
 {
@@ -67,6 +68,11 @@ public class DogPlayerMovement : Animal
             { //is nearby
                 Destroy(collideObject);
                 collideObject = null;
+
+                //collect skill used event
+                Analytics.SkillUsedEvent();
+
+
             }
         }
     }
