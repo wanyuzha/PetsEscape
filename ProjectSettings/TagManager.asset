@@ -8,6 +8,7 @@ TagManager:
   - canGrab
   - canCrunch
   - water
+  - Dust
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Fish
   - Dog
   - Light
-  - 
+  - Fluids
   - 
   - 
   - 

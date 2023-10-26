@@ -172,7 +172,7 @@ public class Animal : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
 
-        if (coll.gameObject.CompareTag("water"))
+        if (coll.gameObject.CompareTag("water") || coll.gameObject.CompareTag("Fluid"))
         {
             //Debug.Log(string.Concat(AnimalName, "enter water"));
             inWater = true;
@@ -182,7 +182,7 @@ public class Animal : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D coll)
     {
         //Debug.Log(coll.gameObject.name);
-        if (coll.gameObject.CompareTag("water"))
+        if (coll.gameObject.CompareTag("water") || coll.gameObject.CompareTag("Fluid"))
         {
             //Debug.Log(string.Concat(AnimalName, " leave water"));
             inWater = false;
