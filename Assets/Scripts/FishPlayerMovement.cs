@@ -11,8 +11,8 @@ public class FishPlayerMovement : Animal
 
     const int SPEED_IN_WATER = 5;
     const int SPEED_ON_GROUND = 1;
-    const int SPEED_JUMPING_Y = 5;
-    const int SPEED_JUMPING_X = 3;
+    const int SPEED_JUMPING_Y = 3;
+    const int SPEED_JUMPING_X = 1;
     const float gravityScaleInWater = 0f;
     const float gravityScaleOutWater = 1f;
     const float gravityScaleStep = 0.02f;

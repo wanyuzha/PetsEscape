@@ -71,9 +71,16 @@ public class DogPlayerMovement : Animal
 
                 //collect skill used event
                 Analytics.SkillUsedEvent();
-
-
             }
+            //ToDo: Not very accurate, need to be modified
+            /*if(collideObject.name == "Notch")
+            {
+                Destroy(collideObject);
+                collideObject = null;
+
+                //collect skill used event
+                Analytics.SkillUsedEvent();
+            }*/
         }
     }
 
@@ -108,6 +115,12 @@ public class DogPlayerMovement : Animal
                 firstWin = false;
             }
         }
+
+        /*if (collision.gameObject.name == "Notch")
+        {
+            Debug.Log("Yes it is");
+            collideObject = collision.gameObject;
+        }*/
     }
 
     /*     void OnTriggerExit2D(Collider2D coll)

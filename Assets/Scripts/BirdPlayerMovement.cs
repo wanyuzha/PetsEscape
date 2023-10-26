@@ -158,6 +158,12 @@ public class BirdPlayerMovement : Animal
             }
         }
 
+        if (collision.gameObject.name == "tapButton")
+        {
+            
+
+        }
+
         if (collision.gameObject.CompareTag("canGrab") || collision.gameObject.CompareTag("canCrunch"))
         {
             //Debug.Log("try picking");
