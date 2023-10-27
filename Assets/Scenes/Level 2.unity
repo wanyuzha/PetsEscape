@@ -408,6 +408,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3439228272811224488, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6643801522954159473, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
       propertyPath: m_Name
       value: obstacle (2)
@@ -7914,6 +7918,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3439228272811224488, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6643801522954159473, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
       propertyPath: m_Name
       value: obstacle (1)
@@ -7978,6 +7986,10 @@ PrefabInstance:
     - target: {fileID: 3291930225210708864, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
       propertyPath: m_Constraints
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439228272811224488, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6643801522954159473, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
       propertyPath: m_Name
