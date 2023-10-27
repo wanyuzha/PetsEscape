@@ -13,14 +13,14 @@ public static class HandleScene
     public static void LoadNextLevel()
     {
         Debug.Log("load next level");
-        if (SceneManager.GetActiveScene().buildIndex == 0) return;
+        if (SceneManager.GetActiveScene().buildIndex == LevelCount - 1) return;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public static void LoadPrevLevel()
     {
         Debug.Log("load prev level");
-        if (SceneManager.GetActiveScene().buildIndex == LevelCount - 1) return;
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
