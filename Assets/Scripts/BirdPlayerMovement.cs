@@ -37,12 +37,12 @@ public class BirdPlayerMovement : Animal
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (!gameObject.activeSelf)
-            return;
+        //if (!gameObject.activeSelf)
+        //    return;
 
         if (!isActivated)
             return;
-
+        Debug.Log(isActivated);
         undisplayArrow();
         // if (!firstTry)
         /*         if (currentSceneIndex > 0)
