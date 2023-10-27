@@ -64,26 +64,23 @@ public class DogPlayerMovement : Animal
     {
         if (collideObject != null)
         {
+            //ToDo: Not very accurate, need to be modified
             if (Vector2.Distance(collideObject.transform.position, transform.position) < 5)
             { //is nearby
                 if (Mathf.Abs(collideObject.transform.position.x - transform.position.x) >= (collideObject.GetComponent<Renderer>().bounds.size.x / 2))
                 {
+                    if (collideObject.name == "notch")
+                    {
+                        collideObject.GetComponent<TankWater>().activated();
+
+                    }
                     Destroy(collideObject);
                     collideObject = null;
-
-                    //collect skill used event
-                    Analytics.SkillUsedEvent();
                 }
             }
-            //ToDo: Not very accurate, need to be modified
-            /*if(collideObject.name == "Notch")
-            {
-                Destroy(collideObject);
-                collideObject = null;
 
-                //collect skill used event
-                Analytics.SkillUsedEvent();
-            }*/
+            //collect skill used event
+            Analytics.SkillUsedEvent();
         }
     }
 

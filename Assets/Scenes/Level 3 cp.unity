@@ -675,7 +675,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6643801522954159473, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
       propertyPath: m_Name
-      value: obstacle (4)
+      value: notch
       objectReference: {fileID: 0}
     - target: {fileID: 8883260838412796044, guid: fde372a2ce12940fa820001e85f8ee88, type: 3}
       propertyPath: m_LocalScale.x

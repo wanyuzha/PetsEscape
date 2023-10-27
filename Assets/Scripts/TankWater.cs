@@ -18,7 +18,7 @@ public class TankWater : MonoBehaviour
         
     }
 
-    void OnDestroy()
+    public void activated()
     {
         waterArea.GetComponent<DynamicWater2D>().waterLevelChange = true;
         waterArea.GetComponent<DynamicWater2D>().waterLevelDir = -1;
