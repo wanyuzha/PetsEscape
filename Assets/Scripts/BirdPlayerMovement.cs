@@ -42,7 +42,7 @@ public class BirdPlayerMovement : Animal
 
         if (!isActivated)
             return;
-        Debug.Log(isActivated);
+
         undisplayArrow();
         // if (!firstTry)
         /*         if (currentSceneIndex > 0)

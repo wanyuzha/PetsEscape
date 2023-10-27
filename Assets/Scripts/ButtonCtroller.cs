@@ -27,4 +27,9 @@ public class ButtonCtroller : MonoBehaviour
     {
         HandleScene.LoadNextLevel();
     }
+
+    public void LoadPrevLevel()
+    {
+        HandleScene.LoadPrevLevel();
+    }
 }

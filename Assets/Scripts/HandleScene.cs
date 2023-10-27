@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public static class HandleScene
 {
-    private static int LevelCount = 2;
+    private static int LevelCount = 3;
 
     public static void RestartGame()
     {
@@ -12,7 +12,16 @@ public static class HandleScene
 
     public static void LoadNextLevel()
     {
+        Debug.Log("load next level");
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public static void LoadPrevLevel()
+    {
+        Debug.Log("load prev level");
+        if (SceneManager.GetActiveScene().buildIndex == LevelCount - 1) return;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public static bool isMaxLevel()

@@ -112,7 +112,7 @@ public class DynamicWater2D : MonoBehaviour {
 	}
 
 	private void Update()
-	{
+	{/*
 		if (Input.GetKeyDown(KeyCode.Plus))
 		{
 			waterLevelChange = true;
@@ -124,7 +124,7 @@ public class DynamicWater2D : MonoBehaviour {
 			waterLevelChange = true;
 			waterLevelDir = -1;
             Debug.Log("water fall");
-        }
+        }*/
     }
 
     //changed to FixedUpdate
@@ -192,7 +192,7 @@ public class DynamicWater2D : MonoBehaviour {
 		timer = 3f;
 		float radius = col.bounds.max.x - col.bounds.min.x;
 		Vector3 center = new Vector2(col.bounds.center.x, bound.top);
-		Debug.Log(new Vector3(center.x, center.y + transform.position.y, 0));
+
 		// instantiate splash particle
 		//GameObject splashGO = Instantiate(splash, new Vector3(center.x, center.y+transform.position.y, 0), Quaternion.Euler(0,0,60));
         //Destroy(splashGO, 1f);

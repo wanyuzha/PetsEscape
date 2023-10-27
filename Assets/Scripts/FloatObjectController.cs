@@ -19,7 +19,6 @@ public class FloatObjectController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         //waterHeight = transform.position.y;
         waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
-        Debug.Log(waterHeight);
     }
 
     /*
