@@ -153,10 +153,10 @@ public class Animal : MonoBehaviour
 
         }
 
-        if (coll.gameObject.name == "tapButton")
-        {
-            TapStartWater.setTap();
-        }
+        //if (coll.gameObject.name == "tapButton")
+        //{
+        //    TapStartWater.setTap();
+        //}
 
     }
 

@@ -9,13 +9,17 @@ public class FloatObjectController : MonoBehaviour
     // public GameObject bubble;
 
     private float force;
-    private float waterHeight;
+
+    public float waterHeight;
+    public GameObject waterArea;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        waterHeight = transform.position.y;
+        //waterHeight = transform.position.y;
+        waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
+        Debug.Log(waterHeight);
     }
 
     /*

@@ -7,12 +7,10 @@ public class BubbleController : MonoBehaviour
 {
     // private Renderer rend;
     Rigidbody2D rb;
-    public Tilemap waterArea;
 
-    Vector3 posLeaveWater;
+    public float waterHeight;
+    public GameObject waterArea;
     const float HEIGHT_ABOVE_WATER = 2.5f;
-    bool inWater;
-    private bool initialRecord;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +18,9 @@ public class BubbleController : MonoBehaviour
         // rend = GetComponent<Renderer>();
         // rend.enabled = false;
         gameObject.SetActive(false);
-        initialRecord = true;
         rb = GetComponent<Rigidbody2D>();
+        waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
+
     }
 
     // Update is called once per frame
@@ -29,23 +28,8 @@ public class BubbleController : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-            if (initialRecord)
-            {
-                posLeaveWater = transform.position;
-                Vector3Int cellPosition = waterArea.WorldToCell(posLeaveWater);
-                if (waterArea.HasTile(cellPosition))
-                {
-                    inWater = true;
-                }
-                else
-                {
-                    inWater = false;
-                }
-                initialRecord = false;
-            }
-
             rb.velocity = Vector2.zero;
-            if (inWater || transform.position.y < HEIGHT_ABOVE_WATER + posLeaveWater.y)
+            if ( transform.position.y < HEIGHT_ABOVE_WATER + waterHeight)
                 rb.velocity = Vector2.up;
         }
     }
@@ -59,12 +43,4 @@ public class BubbleController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D coll)
-    {
-        if (coll.gameObject.CompareTag("water"))
-        {
-            posLeaveWater = transform.position;
-            inWater = false;
-        }
-    }
 }

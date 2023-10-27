@@ -64,13 +64,16 @@ public class DogPlayerMovement : Animal
     {
         if (collideObject != null)
         {
-            if (Vector2.Distance(collideObject.transform.position, transform.position) < 2)
+            if (Vector2.Distance(collideObject.transform.position, transform.position) < 5)
             { //is nearby
-                Destroy(collideObject);
-                collideObject = null;
+                if (Mathf.Abs(collideObject.transform.position.x - transform.position.x) >= (collideObject.GetComponent<Renderer>().bounds.size.x / 2))
+                {
+                    Destroy(collideObject);
+                    collideObject = null;
 
-                //collect skill used event
-                Analytics.SkillUsedEvent();
+                    //collect skill used event
+                    Analytics.SkillUsedEvent();
+                }
             }
             //ToDo: Not very accurate, need to be modified
             /*if(collideObject.name == "Notch")
@@ -96,13 +99,18 @@ public class DogPlayerMovement : Animal
 
         if (collision.gameObject.CompareTag("canCrunch"))
         {
-            //Debug.Log("try biting");
-            collideObject = collision.gameObject;
-            //if trying to pick up the item for the first time, show tutorial text
-            if (firstTry)
+            //Debug.Log(collision.gameObject.transform.position.x - transform.position.x);
+            //Debug.Log(collision.gameObject.GetComponent<Renderer>().bounds.size.x / 2);
+            if (Mathf.Abs(collision.gameObject.transform.position.x - transform.position.x) >= (collision.gameObject.GetComponent<Renderer>().bounds.size.x/2))
             {
-                showTutorialText("Use [Z] to crunch the obstacle!\nPress [Enter] to continue!");
-                firstTry = false;
+                Debug.Log("try biting");
+                collideObject = collision.gameObject;
+                //if trying to pick up the item for the first time, show tutorial text
+                if (firstTry)
+                {
+                    showTutorialText("Use [Z] to crunch the obstacle!\nPress [Enter] to continue!");
+                    firstTry = false;
+                }
             }
         }
 

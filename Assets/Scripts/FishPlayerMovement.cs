@@ -7,15 +7,15 @@ using UnityEngine.SceneManagement;
 public class FishPlayerMovement : Animal
 {
     public int health;
-    const int initialHealth = 5;
+    const int initialHealth = 10;
 
     const int SPEED_IN_WATER = 5;
-    const int SPEED_ON_GROUND = 1;
-    const int SPEED_JUMPING_Y = 3;
-    const int SPEED_JUMPING_X = 1;
+    const int SPEED_ON_GROUND = 3;
+    const int SPEED_JUMPING_Y = 8;
+    const int SPEED_JUMPING_X = 5;
     const float gravityScaleInWater = 0f;
     const float gravityScaleOutWater = 1f;
-    const float gravityScaleStep = 0.02f;
+    const float gravityScaleStep = 0.01f;
 
     public GameObject bubble;
 
@@ -36,7 +36,7 @@ public class FishPlayerMovement : Animal
     {
         if (health <= 0)
         {
-            EndGame("Fish died in lack of water!");
+            EndGame("Fish stranded!");
         }
 
         if (!isActivated)
@@ -90,7 +90,7 @@ public class FishPlayerMovement : Animal
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !inWater)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             FishJump(SPEED_JUMPING_Y);
         }
