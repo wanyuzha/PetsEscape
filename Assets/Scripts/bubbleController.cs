@@ -8,9 +8,9 @@ public class BubbleController : MonoBehaviour
     // private Renderer rend;
     Rigidbody2D rb;
 
-    public float waterHeight;
+    private float waterHeight;
     public GameObject waterArea;
-    const float HEIGHT_ABOVE_WATER = 2.5f;
+    const float HEIGHT_ABOVE_WATER = 3f;
 
     // Start is called before the first frame update
     void Start()

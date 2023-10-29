@@ -6,7 +6,7 @@ using Unity.Services.Analytics;
 
 using Unity.Services.Core.Environments;
 using UnityEngine.Analytics;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 
 public class Analytics : MonoBehaviour
 {

@@ -9,7 +9,7 @@ public class FishPlayerMovement : Animal
     private int health;
     public int initialHealth = 5;
 
-    const int SPEED_IN_WATER = 5;
+    const int SPEED_IN_WATER = 8;
     const int SPEED_ON_GROUND = 3;
     const int SPEED_JUMPING_Y = 8;
     const int SPEED_JUMPING_X = 5;
@@ -124,25 +124,24 @@ public class FishPlayerMovement : Animal
                 firstWin = false;
             }
         }
+        /*
+            else if (coll.gameObject.name == "DetectFish")
+            {
+                Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+                // Debug.Log(colliderComponent);
 
-        else if (coll.gameObject.name == "DetectFish")
-        {
-            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-            // Debug.Log(colliderComponent);
-
-            /*
                 if (firstTry)
                 {
                     showTutorialText("Use [Z] to bubble!\nPress [Enter] to continue!");
                     firstTry = false;
                 }
-            */
 
-            if (colliderComponent != null)
-            {
-                Destroy(colliderComponent);
+                if (colliderComponent != null)
+                {
+                    Destroy(colliderComponent);
+                }
             }
-        }
+        */
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)

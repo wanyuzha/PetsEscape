@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7003791283303809512}
   - component: {fileID: 8082747752206545664}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: redarrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2214426910521847034}
   - component: {fileID: 2384015370880238571}
   - component: {fileID: 1104318710508238504}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: bird
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -260,4 +260,3 @@ MonoBehaviour:
   panel: {fileID: 0}
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
-  laser: {fileID: 0}

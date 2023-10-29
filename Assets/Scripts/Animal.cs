@@ -19,6 +19,9 @@ public class Animal : MonoBehaviour
     protected bool inWater;
     // protected bool canJump = true;
     protected bool isJumping = false;
+    private bool leaveGround = false;
+    private float jumpStartY;
+    const float JUMP_STEP_THRESHOLD = 0.1f;
 
     protected Rigidbody2D rb;
     // protected List<string> targetName;
@@ -28,7 +31,7 @@ public class Animal : MonoBehaviour
     protected bool firstWin;
     // protected int currentSceneIndex;
 
-    protected UnityEngine.KeyCode skillKey = KeyCode.Z;
+    protected UnityEngine.KeyCode skillKey = KeyCode.LeftShift;
 
     // public GameObject laser = null;
 
@@ -88,11 +91,19 @@ public class Animal : MonoBehaviour
 
     protected void DogJump(float speed)
     {
+        if (isJumping && !leaveGround)
+        {
+            if (transform.position.y - jumpStartY < JUMP_STEP_THRESHOLD)
+            {
+                isJumping = false;
+            }
+        }
         // if (canJump && !isJumping)
         if (!isJumping)
         {
             // when jump from canCrunch item, use this, otherwise (jumping from ground) will use collide exit for isJumping = true
-            // if(jumpFrom == "canCrunch") isJumping = true;
+            // if(jumpFrom == "canCrunch") 
+            isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
 
             //Debug.Log(string.Concat(AnimalName, isJumping));
@@ -104,7 +115,7 @@ public class Animal : MonoBehaviour
         // if (canJump && !isJumping)
         if (!isJumping)
         {
-            // isJumping = true;
+            isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
 
             //Debug.Log(string.Concat(AnimalName, isJumping));
@@ -124,6 +135,7 @@ public class Animal : MonoBehaviour
             //Debug.Log(string.Concat(AnimalName, " touches ground"));
             isJumping = false;
             // previousHeight = transform.position.y;
+            jumpStartY = transform.position.y;
         }
 
         if (coll.gameObject.name == "LightSaber")
@@ -172,16 +184,17 @@ public class Animal : MonoBehaviour
         if (coll.gameObject.CompareTag("ground") || coll.gameObject.CompareTag("canCrunch"))
         {
             isJumping = true;
+            leaveGround = true;
         }
     }
 
-    /*
-        protected virtual void OnCollisionStay2D(Collision2D coll)
+    protected void OnCollisionStay2D(Collision2D coll)
+    {
+        if (coll.gameObject.CompareTag("ground") || coll.gameObject.CompareTag("canCrunch"))
         {
-            Debug.Log(isJumping);
-            isJumping = false;
+            leaveGround = false;
         }
-    */
+    }
 
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {

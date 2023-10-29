@@ -11,9 +11,9 @@ public class DogPlayerMovement : Animal
     // private float previousHeight;
 
     private GameObject collideObject = null;
-    const int SPEED = 6;
+    const int SPEED = 8;
     const int JUMP_SPEED_X = 6;
-    const int JUMP_SPEED_Y = 6;
+    const int JUMP_SPEED_Y = 10;
 
     public DogPlayerMovement()
     {
@@ -74,7 +74,7 @@ public class DogPlayerMovement : Animal
                         collideObject.GetComponent<TankWater>().activated();
                     }
 
-                    Destroy(collideObject);
+                    collideObject.SetActive(false);
                     collideObject = null;
                 }
             }
@@ -111,7 +111,6 @@ public class DogPlayerMovement : Animal
                     firstTry = false;
                 }
             */
-            // }
         }
 
         /*if (collision.gameObject.name == "Notch")

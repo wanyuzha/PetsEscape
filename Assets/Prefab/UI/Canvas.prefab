@@ -384,16 +384,13 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Switch Pet
 
-    Move
+    Move Pet
 
-    Move
+    Move Pet
 
     Jump/Fly
 
-    Use Pet Skill
-
-    Close
-    Tutorial'
+    Use Pet Skill'
 --- !u!1 &2354038215472460246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,7 +1169,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1601,7 +1598,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Tab\nWASD\n\u2191\u2193\u2190\u2192\nSpace\nZ\nEnter"
+  m_Text: "Tab\nWASD\n\u2191\u2193\u2190\u2192\nSpace\nLeft Shift"
 --- !u!1 &7749007057876583360
 GameObject:
   m_ObjectHideFlags: 0

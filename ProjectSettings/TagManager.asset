@@ -8,6 +8,8 @@ TagManager:
   - canGrab
   - canCrunch
   - water
+  - Fluid
+  - Dust
   layers:
   - Default
   - TransparentFX
@@ -15,11 +17,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Bird
-  - Fish
-  - Dog
-  - Light
-  - Fluids
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -42,9 +44,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Fluids
-    uniqueID: 2288774751
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

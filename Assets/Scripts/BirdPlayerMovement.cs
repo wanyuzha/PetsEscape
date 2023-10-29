@@ -9,8 +9,8 @@ using Unity.Services.Analytics;
 public class BirdPlayerMovement : Animal
 {
 
-    const int SPEED = 5;
-    const int JUMP_SPEED_Y = 3;
+    const int SPEED = 6;
+    const int JUMP_SPEED_Y = 4;
 
     private bool isPickupAnything = false;
     private GameObject collideObject = null;

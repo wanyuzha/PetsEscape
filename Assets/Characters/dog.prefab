@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2524104818331710286}
   - component: {fileID: 1606632989141453858}
   - component: {fileID: 7130262893755489857}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: dog
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -104,7 +104,6 @@ MonoBehaviour:
   panel: {fileID: 0}
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
-  laser: {fileID: 0}
 --- !u!50 &1606632989141453858
 Rigidbody2D:
   serializedVersion: 4
@@ -187,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3228315972762404939}
   - component: {fileID: 9094917193626822090}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: redarrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

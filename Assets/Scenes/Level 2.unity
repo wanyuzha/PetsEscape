@@ -245,7 +245,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.7, y: 6}
+  m_Size: {x: 12.5, y: 10.15}
   m_EdgeRadius: 0
 --- !u!212 &70226066
 SpriteRenderer:
@@ -447,10 +447,6 @@ PrefabInstance:
       value: dog
       objectReference: {fileID: 0}
     - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
-      propertyPath: laser
-      value: 
-      objectReference: {fileID: 767663571}
-    - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
       propertyPath: panel
       value: 
       objectReference: {fileID: 199833820}
@@ -517,7 +513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166314723}
   - component: {fileID: 166314722}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: LightSaber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5404,10 +5400,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 291997610937448909, guid: d91d4218eb51e4228a83d9c938ded36b, type: 3}
-      propertyPath: laser
-      value: 
-      objectReference: {fileID: 767663571}
-    - target: {fileID: 291997610937448909, guid: d91d4218eb51e4228a83d9c938ded36b, type: 3}
       propertyPath: panel
       value: 
       objectReference: {fileID: 199833820}
@@ -5798,7 +5790,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 639117933, guid: c56629c727d90904ba2d6299fe132eca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5824,7 +5816,7 @@ GameObject:
   - component: {fileID: 767663577}
   - component: {fileID: 767663576}
   - component: {fileID: 767663575}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: LightSaber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6218,7 +6210,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6591,10 +6583,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1104318710508238504, guid: 090095ba00d124d3da4048e5a9732b8f, type: 3}
-      propertyPath: laser
-      value: 
-      objectReference: {fileID: 767663571}
     - target: {fileID: 1104318710508238504, guid: 090095ba00d124d3da4048e5a9732b8f, type: 3}
       propertyPath: panel
       value: 
@@ -7116,7 +7104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1591484940
 Transform:
   m_ObjectHideFlags: 0
@@ -7261,7 +7249,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -4801923697170587870, guid: be1a5bd13766ec048bab6f4c578baa0f, type: 3}
+  m_Sprite: {fileID: -3443555461527096104, guid: be1a5bd13766ec048bab6f4c578baa0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7282,7 +7270,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2, y: -8, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7299,7 +7287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99393329883d547a6b71529fa5af3a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterHeight: 0
   waterArea: {fileID: 555044038}
 --- !u!58 &1637303028
 CircleCollider2D:
@@ -7335,7 +7322,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.11
 --- !u!1 &1758695140
 GameObject:
   m_ObjectHideFlags: 0
