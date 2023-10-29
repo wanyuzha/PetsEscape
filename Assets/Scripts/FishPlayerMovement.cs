@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 
 public class FishPlayerMovement : Animal
 {
-    public int health;
-    const int initialHealth = 10;
+    private int health;
+    public int initialHealth = 5;
 
     const int SPEED_IN_WATER = 5;
     const int SPEED_ON_GROUND = 3;
@@ -90,6 +90,7 @@ public class FishPlayerMovement : Animal
             }
         }
 
+        // TODO: Fish can jump whenever it's close to the water surface, while dog cannot
         if (Input.GetKeyDown(KeyCode.Space))
         {
             FishJump(SPEED_JUMPING_Y);
@@ -128,11 +129,14 @@ public class FishPlayerMovement : Animal
         {
             Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
             // Debug.Log(colliderComponent);
-            if (firstTry)
-            {
-                showTutorialText("Use [Z] to bubble!\nPress [Enter] to continue!");
-                firstTry = false;
-            }
+
+            /*
+                if (firstTry)
+                {
+                    showTutorialText("Use [Z] to bubble!\nPress [Enter] to continue!");
+                    firstTry = false;
+                }
+            */
 
             if (colliderComponent != null)
             {
@@ -146,6 +150,10 @@ public class FishPlayerMovement : Animal
         base.OnCollisionEnter2D(collision);
     }
 
+    protected override void OnCollisionExit2D(Collision2D coll)
+    {
+        base.OnCollisionExit2D(coll);
+    }
 
     protected override void CheckInWater()
     {

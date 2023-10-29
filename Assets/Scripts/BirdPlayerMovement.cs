@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.Services.Analytics;
 
@@ -55,11 +55,13 @@ public class BirdPlayerMovement : Animal
         if (Input.GetKeyDown(KeyCode.Space))
         {
             fly(JUMP_SPEED_Y);
-            int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+
+            // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "levelName", "level" + currentLevel.ToString() }
+                { "levelNumber", "Level " + HandleScene.LevelNumber() }
             };
+
             AnalyticsService.Instance.CustomData("birdFlyEvent", parameters);
             AnalyticsService.Instance.Flush();
         }
@@ -78,7 +80,7 @@ public class BirdPlayerMovement : Animal
         */
 
         // level 1 not trigger the pickup skill for bird
-        if (Input.GetKeyDown(skillKey) && currentSceneIndex > 0)
+        if (Input.GetKeyDown(skillKey))
         {
             /*
              * collideObject: only valid when there is collision otherwise it will be null
@@ -146,53 +148,53 @@ public class BirdPlayerMovement : Animal
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if (collision.gameObject.name == "Window")
-        {   
-            Collider2D colliderComponent = collision.gameObject.GetComponent<Collider2D>();
-            if(colliderComponent != null) Destroy(colliderComponent);
-            LevelWinManager.BirdTouchGate();
-            if (firstWin)
+        /*
+            if (collision.gameObject.name == "Window")
             {
-                showTutorialText("Bird reaches the Window!\nPress [Enter] to continue!");
-                firstWin = false;
+                Collider2D colliderComponent = collision.gameObject.GetComponent<Collider2D>();
+                if (colliderComponent != null) Destroy(colliderComponent);
+                LevelWinManager.BirdTouchGate();
+                if (firstWin)
+                {
+                    showTutorialText("Bird reaches the Window!\nPress [Enter] to continue!");
+                    firstWin = false;
+                }
             }
-        }
-
-        if (collision.gameObject.name == "tapButton")
-        {
-            
-
-        }
+        */
 
         if (collision.gameObject.CompareTag("canGrab") || collision.gameObject.CompareTag("canCrunch"))
         {
             //Debug.Log("try picking");
             collideObject = collision.gameObject;
-            //if trying to pick up the item for the first time, show tutorial text
-            if (firstTry)
-            {
-                showTutorialText("Use [Z] to grab the item!\nPress again to Release.\nPress [Enter] to continue!");
-                firstTry = false;
-            }
+            /*
+                //if trying to pick up the item for the first time, show tutorial text
+                if (firstTry)
+                {
+                    showTutorialText("Use [Z] to grab the item!\nPress again to Release.\nPress [Enter] to continue!");
+                    firstTry = false;
+                }
+            */
         }
     }
+
     /*
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("canGrab"))
+        private void OnCollisionStay2D(Collision2D collision)
         {
-            //Debug.Log("try picking");
-            collideObject = collision.gameObject;
-            //if trying to pick up the item for the first time, show tutorial text
-            if (firstTry)
+            if (collision.gameObject.CompareTag("canGrab"))
             {
-                showTutorialText("Use [Z] to grab the item\nPress again to Release\nPress [Enter] to continue!");
-                firstTry = false;
+                //Debug.Log("try picking");
+                collideObject = collision.gameObject;
+                //if trying to pick up the item for the first time, show tutorial text
+                if (firstTry)
+                {
+                    showTutorialText("Use [Z] to grab the item\nPress again to Release\nPress [Enter] to continue!");
+                    firstTry = false;
+                }
             }
         }
-    }*/
+    */
 
-    override protected void OnCollisionExit2D(Collision2D collision)
+    protected override void OnCollisionExit2D(Collision2D collision)
     {
         //Debug.Log("gameobject name: " + collision.gameObject.name);
 
@@ -204,5 +206,25 @@ public class BirdPlayerMovement : Animal
                 collideObject = null;
             }
         }
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+
+        if (collision.gameObject.name == "Window")
+        {
+            LevelWinManager.BirdTouchGate();
+            if (firstWin)
+            {
+                showTutorialText("Bird reaches the Window!\nPress [Enter] to continue!");
+                firstWin = false;
+            }
+        }
+    }
+
+    protected override void CheckInWater()
+    {
+        base.CheckInWater();
     }
 }

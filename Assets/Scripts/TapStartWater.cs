@@ -8,30 +8,12 @@ public class TapStartWater : MonoBehaviour
     public GameObject tapWater;
     public GameObject waterArea;
 
-    static bool isOpen = false;
+    // private bool isOpen = false;
 
     // Start is called before the first frame update
     void Start()
     {
         tapWater.SetActive(false);
-    }
-
-    public void setTap()
-    {
-        if (!isOpen)
-        {
-            isOpen = true;
-            tapWater.SetActive(true);
-            waterArea.GetComponent<DynamicWater2D>().waterLevelChange = true;
-            waterArea.GetComponent<DynamicWater2D>().waterLevelDir = 1;
-        }
-        else
-        {
-            isOpen = false;
-            tapWater.SetActive(false);
-            waterArea.GetComponent<DynamicWater2D>().waterLevelChange = false;
-        }
-
     }
 
     // Update is called once per frame
@@ -40,12 +22,40 @@ public class TapStartWater : MonoBehaviour
 
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnCollisionStay2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Player")
+        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("canGrab") || coll.gameObject.CompareTag("canCrunch"))
         {
-            setTap();
+            setTapActive();
         }
     }
 
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("canGrab") || coll.gameObject.CompareTag("canCrunch"))
+        {
+            setTapInactive();
+        }
+    }
+
+    private void setTapActive()
+    {
+        if (!tapWater.activeSelf)
+        {
+            // isOpen = true;
+            tapWater.SetActive(true);
+            waterArea.GetComponent<DynamicWater2D>().waterLevelChange = true;
+            waterArea.GetComponent<DynamicWater2D>().waterLevelDir = 1;
+        }
+    }
+
+    private void setTapInactive()
+    {
+        if (tapWater.activeSelf)
+        {
+            // isOpen = false;
+            tapWater.SetActive(false);
+            waterArea.GetComponent<DynamicWater2D>().waterLevelChange = false;
+        }
+    }
 }

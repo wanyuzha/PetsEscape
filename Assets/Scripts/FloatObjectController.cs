@@ -9,8 +9,7 @@ public class FloatObjectController : MonoBehaviour
     // public GameObject bubble;
 
     private float force;
-
-    public float waterHeight;
+    private float waterHeight;
     public GameObject waterArea;
 
     // Start is called before the first frame update
@@ -24,7 +23,7 @@ public class FloatObjectController : MonoBehaviour
     /*
     Apply buoyancy to objects in water, and remove the force once the object is out of water.
     */
-    void FixedUpdate()
+    void LateUpdate()
     {
         force = -1 * Physics.gravity.y * 3f;
         float difference = transform.position.y - waterHeight;

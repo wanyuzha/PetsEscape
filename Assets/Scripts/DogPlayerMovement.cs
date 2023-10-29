@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.Services.Analytics;
 
@@ -54,7 +54,7 @@ public class DogPlayerMovement : Animal
             DogJump(JUMP_SPEED_Y);
         }
 
-        if (Input.GetKeyDown(skillKey) && currentSceneIndex > 0)
+        if (Input.GetKeyDown(skillKey))
         {
             crunch();
         }
@@ -67,13 +67,13 @@ public class DogPlayerMovement : Animal
             //ToDo: Not very accurate, need to be modified
             if (Vector2.Distance(collideObject.transform.position, transform.position) < 5)
             { //is nearby
-                if (Mathf.Abs(collideObject.transform.position.x - transform.position.x) >= (collideObject.GetComponent<Renderer>().bounds.size.x / 2))
+                if (Mathf.Abs(collideObject.transform.position.x - transform.position.x) > (collideObject.GetComponent<Renderer>().bounds.size.x / 2))
                 {
                     if (collideObject.name == "notch")
                     {
                         collideObject.GetComponent<TankWater>().activated();
-
                     }
+
                     Destroy(collideObject);
                     collideObject = null;
                 }
@@ -98,27 +98,20 @@ public class DogPlayerMovement : Animal
         {
             //Debug.Log(collision.gameObject.transform.position.x - transform.position.x);
             //Debug.Log(collision.gameObject.GetComponent<Renderer>().bounds.size.x / 2);
-            if (Mathf.Abs(collision.gameObject.transform.position.x - transform.position.x) >= (collision.gameObject.GetComponent<Renderer>().bounds.size.x/2))
-            {
-                Debug.Log("try biting");
-                collideObject = collision.gameObject;
+            // if (Mathf.Abs(collision.gameObject.transform.position.x - transform.position.x) > (collision.gameObject.GetComponent<Renderer>().bounds.size.x / 2))
+            // {
+            // Debug.Log("try biting");
+            collideObject = collision.gameObject;
+
+            /*
                 //if trying to pick up the item for the first time, show tutorial text
                 if (firstTry)
                 {
                     showTutorialText("Use [Z] to crunch the obstacle!\nPress [Enter] to continue!");
                     firstTry = false;
                 }
-            }
-        }
-
-        if (collision.gameObject.name == "DoorKnob" && LevelWinManager.GetKey)
-        {
-            LevelWinManager.DogTouchDoor();
-            if (firstWin)
-            {
-                showTutorialText("Dog unlocks the Door!\nPress [Enter] to continue!");
-                firstWin = false;
-            }
+            */
+            // }
         }
 
         /*if (collision.gameObject.name == "Notch")
@@ -138,25 +131,42 @@ public class DogPlayerMovement : Animal
 
         } */
 
+    protected override void OnCollisionExit2D(Collision2D coll)
+    {
+        base.OnCollisionExit2D(coll);
+    }
+
     protected override void OnTriggerEnter2D(Collider2D coll)
     {
         base.OnTriggerEnter2D(coll);
 
-        if (coll.gameObject.name == "Door")
-        {
-            Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
-
-            if (currentSceneIndex == 0)
+        /*
+            if (coll.gameObject.name == "Door")
             {
-                if (!LevelWinManager.GetKey)
+                Collider2D colliderComponent = coll.gameObject.GetComponent<Collider2D>();
+
+                if (currentSceneIndex == 0)
                 {
-                    showTutorialText("Door is locked! Get the key and touch the door knob to unlock!\nPress [Enter] to continue!");
+                    if (!LevelWinManager.GetKey)
+                    {
+                        showTutorialText("Door is locked! Get the key and touch the door to unlock!\nPress [Enter] to continue!");
+                    }
+                }
+
+                if (colliderComponent != null)
+                {
+                    Destroy(colliderComponent);
                 }
             }
+        */
 
-            if (colliderComponent != null)
+        if (coll.gameObject.name == "Door" && LevelWinManager.GetKey)
+        {
+            LevelWinManager.DogTouchDoor();
+            if (firstWin)
             {
-                Destroy(colliderComponent);
+                showTutorialText("Dog unlocks the Door!\nPress [Enter] to continue!");
+                firstWin = false;
             }
         }
     }

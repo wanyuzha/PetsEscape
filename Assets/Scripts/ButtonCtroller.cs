@@ -11,18 +11,18 @@ public class ButtonCtroller : MonoBehaviour
 
     public void RestartGame()
     {
-        int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-        
-        // collect restart event
+        HandleScene.RestartGame();
+
+        // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
         Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "levelName", "level" + currentLevel.ToString() }
+                { "levelNumber", "Level " + HandleScene.LevelNumber() }
             };
+
         AnalyticsService.Instance.CustomData("restartEvent", parameters);
         AnalyticsService.Instance.Flush();
-        
-        HandleScene.RestartGame();
     }
+
     public void LoadNextLevel()
     {
         HandleScene.LoadNextLevel();

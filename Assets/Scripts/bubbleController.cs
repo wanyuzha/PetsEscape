@@ -20,7 +20,6 @@ public class BubbleController : MonoBehaviour
         gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
-
     }
 
     // Update is called once per frame
@@ -29,8 +28,10 @@ public class BubbleController : MonoBehaviour
         if (gameObject.activeSelf)
         {
             rb.velocity = Vector2.zero;
-            if ( transform.position.y < HEIGHT_ABOVE_WATER + waterHeight)
+            if (transform.position.y < HEIGHT_ABOVE_WATER + waterHeight)
+            {
                 rb.velocity = Vector2.up;
+            }
         }
     }
 
@@ -42,5 +43,4 @@ public class BubbleController : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
 }

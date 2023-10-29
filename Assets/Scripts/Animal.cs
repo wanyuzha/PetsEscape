@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Animal : MonoBehaviour
@@ -24,21 +24,21 @@ public class Animal : MonoBehaviour
     // protected List<string> targetName;
     protected List<string> items;
 
-    protected bool firstTry;
+    // protected bool firstTry;
     protected bool firstWin;
-    protected int currentSceneIndex;
+    // protected int currentSceneIndex;
 
     protected UnityEngine.KeyCode skillKey = KeyCode.Z;
 
-    public GameObject laser = null;
+    // public GameObject laser = null;
 
-    private string jumpFrom = "inital";
+    // private string jumpFrom;
 
     // protected float tutorialShowTime = 0.0f;
 
     public Animal()
     {
-        firstTry = false;
+        // firstTry = false;
         firstWin = true;
         // targetName = new List<string>();
         items = new List<string>();
@@ -47,11 +47,13 @@ public class Animal : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (currentSceneIndex == 1)
-        {
-            firstTry = true;
-        }
+        /*
+            currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            if (currentSceneIndex == 1)
+            {
+                firstTry = true;
+            }
+        */
         // Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("CheckInWater", 1, 1);
@@ -88,14 +90,13 @@ public class Animal : MonoBehaviour
     {
         // if (canJump && !isJumping)
         if (!isJumping)
-        {    
+        {
             // when jump from canCrunch item, use this, otherwise (jumping from ground) will use collide exit for isJumping = true
-            if(jumpFrom == "canCrunch") isJumping = true;
+            // if(jumpFrom == "canCrunch") isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
-            
+
             //Debug.Log(string.Concat(AnimalName, isJumping));
         }
-        
     }
 
     protected void FishJump(float speed)
@@ -103,12 +104,11 @@ public class Animal : MonoBehaviour
         // if (canJump && !isJumping)
         if (!isJumping)
         {
-            isJumping = true;
+            // isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
 
             //Debug.Log(string.Concat(AnimalName, isJumping));
         }
-
     }
 
     protected void fly(float speed)
@@ -125,6 +125,7 @@ public class Animal : MonoBehaviour
             isJumping = false;
             // previousHeight = transform.position.y;
         }
+
         if (coll.gameObject.name == "LightSaber")
         {
             // touch the wire
@@ -144,40 +145,47 @@ public class Animal : MonoBehaviour
             // AnalyticsService.Instance.Flush();
         }
 
-        if (coll.gameObject.name == "laserButton" && laser!=null)
-        {
-            if(laser.activeSelf)
-            laser.SetActive(false);
-
-            else laser.SetActive(true);
-
-        }
+        /*
+            if (coll.gameObject.name == "laserButton" && laser != null)
+            {
+                if (laser.activeSelf)
+                {
+                    laser.SetActive(false);
+                }
+                else
+                {
+                    laser.SetActive(true);
+                }
+            }
+        */
 
         //if (coll.gameObject.name == "tapButton")
         //{
         //    TapStartWater.setTap();
         //}
-
     }
 
     // use for dog jump detection
     protected virtual void OnCollisionExit2D(Collision2D coll)
     {
-        jumpFrom = coll.gameObject.tag;
-        if (coll.gameObject.CompareTag("ground"))
+        // jumpFrom = coll.gameObject.tag;
+        if (coll.gameObject.CompareTag("ground") || coll.gameObject.CompareTag("canCrunch"))
+        {
             isJumping = true;
+        }
     }
+
     /*
-    protected virtual void OnCollisionStay2D(Collision2D coll)
-    {
-        Debug.Log(isJumping);
-        isJumping = false;
-    }
+        protected virtual void OnCollisionStay2D(Collision2D coll)
+        {
+            Debug.Log(isJumping);
+            isJumping = false;
+        }
     */
+
     protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
-
-        if (coll.gameObject.CompareTag("water") || coll.gameObject.CompareTag("Fluid"))
+        if (coll.gameObject.CompareTag("water"))
         {
             //Debug.Log(string.Concat(AnimalName, "enter water"));
             inWater = true;
@@ -187,7 +195,7 @@ public class Animal : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D coll)
     {
         //Debug.Log(coll.gameObject.name);
-        if (coll.gameObject.CompareTag("water") || coll.gameObject.CompareTag("Fluid"))
+        if (coll.gameObject.CompareTag("water"))
         {
             //Debug.Log(string.Concat(AnimalName, " leave water"));
             inWater = false;
@@ -195,7 +203,7 @@ public class Animal : MonoBehaviour
     }
 
     protected virtual void CheckInWater()
-    {   
+    {
         if (inWater)
         {
             EndGame(AnimalName + " died of water!");

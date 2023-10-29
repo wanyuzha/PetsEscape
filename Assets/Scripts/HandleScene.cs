@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public static class HandleScene
 {
-    private static int LevelCount = 3;
+    private static int levelCount = 2;
+    private static int firstLevel = 3;
 
     public static void RestartGame()
     {
@@ -12,21 +13,35 @@ public static class HandleScene
 
     public static void LoadNextLevel()
     {
-        Debug.Log("load next level");
-        if (SceneManager.GetActiveScene().buildIndex == LevelCount - 1) return;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // Debug.Log("load next level");
+        if (LevelNumber() < levelCount)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public static void LoadPrevLevel()
     {
-        Debug.Log("load prev level");
-        if (SceneManager.GetActiveScene().buildIndex == 0) return;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        // Debug.Log("load prev level");
+        if (LevelNumber() > 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
     }
 
     public static bool isMaxLevel()
     {
-        return SceneManager.GetActiveScene().buildIndex == LevelCount - 1;
+        return LevelNumber() == levelCount;
+    }
+
+    public static bool isFirstLevel()
+    {
+        return LevelNumber() == 1;
+    }
+
+    public static int LevelNumber()
+    {
+        return SceneManager.GetActiveScene().buildIndex - firstLevel + 1;
     }
 
     public static GameObject FindSiblingGameObject(string name)

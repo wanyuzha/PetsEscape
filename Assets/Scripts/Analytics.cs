@@ -39,25 +39,28 @@ public class Analytics : MonoBehaviour
         }
     */
 
-    public void BirdFlyCustomEvent()
-    {
-        Dictionary<string, object> parameters = new Dictionary<string, object>()
+    /*
+        public void BirdFlyCustomEvent()
         {
-            {"birdFly", "birdFly"}
-        };
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "birdFly", "birdFly" }
+                };
 
-        AnalyticsService.Instance.CustomData("birdFly", parameters);
-        AnalyticsService.Instance.Flush();
-    }
+            AnalyticsService.Instance.CustomData("birdFly", parameters);
+            AnalyticsService.Instance.Flush();
+        }
+    */
 
     //this static function will be called when skill used event is triggered
     public static void SkillUsedEvent()
     {
-        int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
+        // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
         Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "levelName", "level" + currentLevel.ToString() }
+                { "levelNumber", "Level " + HandleScene.LevelNumber() }
             };
+
         AnalyticsService.Instance.CustomData("skillUsedEvent", parameters);
         AnalyticsService.Instance.Flush();
     }

@@ -8,8 +8,6 @@ TagManager:
   - canGrab
   - canCrunch
   - water
-  - Dust
-  - Fluid
   layers:
   - Default
   - TransparentFX

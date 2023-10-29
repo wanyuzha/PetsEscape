@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5627197078271885112
+--- !u!1001 &7905846065727747873
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7248252264500335105, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
       propertyPath: m_Name
-      value: laserButton
+      value: tapButton Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8870662080634372584, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.5
+      value: -13.5
       objectReference: {fileID: 0}
     - target: {fileID: 8870662080634372584, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.3
+      value: 5.7
       objectReference: {fileID: 0}
     - target: {fileID: 8870662080634372584, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -58,23 +58,25 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7248252264500335105, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6363542400375803149}
+      addedObject: {fileID: 7112835076757946524}
   m_SourcePrefab: {fileID: 100100000, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
---- !u!1 &3062771989404216633 stripped
+--- !u!1 &658020411852301600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7248252264500335105, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
-  m_PrefabInstance: {fileID: 5627197078271885112}
+  m_PrefabInstance: {fileID: 7905846065727747873}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6363542400375803149
+--- !u!114 &7112835076757946524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062771989404216633}
+  m_GameObject: {fileID: 658020411852301600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6c6f13defb744acb6a15340815486d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a85a34363a722b4f89715994a672667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserBeam: {fileID: 0}
+  tap: {fileID: 0}
+  tapWater: {fileID: 0}
+  waterArea: {fileID: 0}

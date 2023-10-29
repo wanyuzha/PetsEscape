@@ -13,8 +13,8 @@ public class ShowLevelWelcome : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        level.text = "Level " + (SceneManager.GetActiveScene().buildIndex + 1);
-        if (SceneManager.GetActiveScene().buildIndex > 0)
+        level.text = "Level " + HandleScene.LevelNumber();
+        if (!HandleScene.isFirstLevel())
         {
             hint.text = "Press [Enter] to continue!";
         }
