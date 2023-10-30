@@ -205,6 +205,7 @@ public class DynamicWater2D : MonoBehaviour
         //Debug.Log(col.gameObject.name);
         if (col.gameObject.CompareTag("Player"))
         {
+			//closer to surface, larger force
 			float distUnderSurface = bound.top + transform.position.y - col.gameObject.transform.position.y;
 			if (distUnderSurface < 1)
 			{
