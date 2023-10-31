@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public static class HandleScene
 {
     private static int levelCount = 2;
-    private static int firstLevel = 3;
+    private static int firstLevel = 4;
 
     public static void RestartGame()
     {
@@ -31,7 +31,7 @@ public static class HandleScene
 
     public static void LoadFirstNonTutorialLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
+        SceneManager.LoadScene(firstLevel);
     }
 
     public static bool isMaxLevel()
