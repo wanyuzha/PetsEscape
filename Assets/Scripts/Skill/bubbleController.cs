@@ -11,7 +11,7 @@ public class BubbleController : MonoBehaviour
     private float waterHeight;
     public GameObject waterArea;
     const float HEIGHT_ABOVE_WATER = 3f;
-
+    private float mass = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +31,7 @@ public class BubbleController : MonoBehaviour
             if (transform.position.y < HEIGHT_ABOVE_WATER + waterHeight)
             {
                 rb.velocity = Vector2.up;
+                rb.AddForce(Vector3.up * mass, ForceMode2D.Force);
             }
         }
     }
@@ -41,6 +42,12 @@ public class BubbleController : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             gameObject.SetActive(false);
+        }
+        else
+        {
+            Rigidbody2D collideObjectRB = collision.collider.GetComponent<Rigidbody2D>();
+            mass = collideObjectRB.mass;
+            //Debug.Log(mass);
         }
     }
 }

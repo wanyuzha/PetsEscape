@@ -6,18 +6,26 @@ using UnityEngine;
 public class FloatObjectController : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
+
     // public GameObject bubble;
 
     private float force;
     private float waterHeight;
+    private float mass;
     public GameObject waterArea;
+    private float floatObjectHeight;
+    bool underWater = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        //waterHeight = transform.position.y;
-        waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
+        BoxCollider2D boxCollider;boxCollider = GetComponent<BoxCollider2D>();
+        //waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
+        waterHeight = waterArea.GetComponent<DynamicWater2D>().bound.top+0.5f;
+        mass = rigidBody.mass;
+        floatObjectHeight = boxCollider.size.y;
+
     }
 
     /*
@@ -25,11 +33,32 @@ public class FloatObjectController : MonoBehaviour
     */
     void LateUpdate()
     {
-        force = -1 * Physics.gravity.y * 3f;
+
+        //force = -1 * Physics.gravity.y * 3f;
+        
         float difference = transform.position.y - waterHeight;
+        Vector3 force = Vector3.up * 2f* mass * Math.Abs(difference);
         if (difference < 0)
+        {   
+            rigidBody.AddForce(force, ForceMode2D.Force);
+            underWater = true;
+            SwitchState(underWater);
+        }
+        else{
+            underWater = false;
+            SwitchState(underWater);
+        }
+        Debug.Log(waterHeight);
+
+    }
+    void SwitchState(bool isUnderWater)
+    {
+        if(isUnderWater)
         {
-            rigidBody.AddForce(Vector3.up * force * Math.Abs(difference), ForceMode2D.Force);
+            rigidBody.drag = 5f;
+        }else
+        {
+            rigidBody.drag = 0f;
         }
     }
 }
