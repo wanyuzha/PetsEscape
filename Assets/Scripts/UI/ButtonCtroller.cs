@@ -32,4 +32,8 @@ public class ButtonCtroller : MonoBehaviour
     {
         HandleScene.LoadPrevLevel();
     }
+    public void SkipTutorialLevel()
+    {
+        HandleScene.LoadFirstNonTutorialLevel();
+    }
 }

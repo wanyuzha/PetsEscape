@@ -29,6 +29,11 @@ public static class HandleScene
         }
     }
 
+    public static void LoadFirstNonTutorialLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
+    }
+
     public static bool isMaxLevel()
     {
         return LevelNumber() == levelCount;
