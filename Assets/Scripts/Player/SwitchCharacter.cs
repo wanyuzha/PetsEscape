@@ -66,11 +66,29 @@ public class SwitchCharacter : MonoBehaviour
             {
                 dogScript.isActivated = true;
                 Analytics.AnimalSwitchEvent("Dog");
+
+                // when player switch to dog, if bird still grab dog, then set pick to false and pickupobject to null
+                if(birdScript.getIsPickupAnything() && birdScript.getPickupObject().CompareTag("Player"))
+                {
+                    birdScript.setIsPickupAnything(false);
+                    birdScript.getPickupObject().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    birdScript.setPickupObject(null);
+                }
             }
             else if (currentCharacterIndex == 2)
             {
                 fishScript.isActivated = true;
                 Analytics.AnimalSwitchEvent("Fish");
+
+                // if in the future bird need to catch fish, following code will be used. Currently no such demand.
+                /*
+                if (birdScript.getIsPickupAnything() && birdScript.getPickupObject().CompareTag("Player"))
+                {
+                    birdScript.setIsPickupAnything(false);
+                    birdScript.getPickupObject().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    birdScript.setPickupObject(null);
+                }
+                */
             }
             arrows[currentCharacterIndex].SetActive(true);
         }

@@ -16,7 +16,14 @@ public class BirdPlayerMovement : Animal
     private GameObject collideObject = null;
     private GameObject pickupObject = null;
     private Vector3 grabOffset;
+    private Color originalState;
+    private Color newState;
+    private bool isBirdBurst = false;
+    private new Renderer renderer;
 
+    //start time record when the bird's color is bright
+    private float startTime;
+    private float brightMaintainTime = 15.0f;
     public BirdPlayerMovement()
     {
         AnimalName = "Bird";
@@ -31,6 +38,7 @@ public class BirdPlayerMovement : Animal
     {
         base.Start();
         isActivated = true;
+        renderer = GetComponent<Renderer>();
         //Debug.Log(currentSceneIndex);
     }
 
@@ -66,7 +74,8 @@ public class BirdPlayerMovement : Animal
                 AnalyticsService.Instance.CustomData("birdFlyEvent", parameters);
                 AnalyticsService.Instance.Flush();
             }
-        } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             fall(JUMP_SPEED_Y);
         }
@@ -119,6 +128,32 @@ public class BirdPlayerMovement : Animal
         }
 
 
+        // when bird eat the apple and burst, it will be bright color and can grab dog temporarily
+        if (isBirdBurst)
+        {
+            float elapsedTime = Time.time - startTime;
+
+
+            if (elapsedTime < brightMaintainTime) renderer.material.color = newState;
+
+
+            else
+            {
+                renderer.material.color = originalState;
+
+                // if burst time is over, if the bird still grab dog, then bird will automatically release the dog
+                if (isPickupAnything && pickupObject.CompareTag("Player"))
+                {
+                    pickupObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    pickupObject = null;
+                    isPickupAnything = false;
+                }
+
+            }
+
+
+        }
+
     }
 
     private void pickup()
@@ -166,7 +201,7 @@ public class BirdPlayerMovement : Animal
             }
         */
 
-        if (collision.gameObject.CompareTag("canGrab") || collision.gameObject.CompareTag("canCrunch"))
+        if (collision.gameObject.CompareTag("canGrab") || collision.gameObject.CompareTag("canCrunch") || (collision.gameObject.CompareTag("Player") && isBirdBurst))
         {
             //Debug.Log("try picking");
             if (Mathf.Abs(collision.collider.bounds.center.y - transform.position.y) > (collision.collider.bounds.size.y / 2)) //is above
@@ -182,6 +217,22 @@ public class BirdPlayerMovement : Animal
                 }
             */
         }
+
+        if (collision.gameObject.CompareTag("canEat"))
+        {
+            collision.gameObject.SetActive(false);
+
+
+            isBirdBurst = true;
+
+            startTime = Time.time;
+
+            originalState = renderer.material.color;
+            newState = renderer.material.color * 1.8f;
+
+        }
+
+
     }
 
     /*
@@ -234,4 +285,31 @@ public class BirdPlayerMovement : Animal
     {
         base.CheckInWater();
     }
+
+
+
+
+
+
+
+
+    public bool getIsPickupAnything()
+    {
+        return isPickupAnything;
+    }
+    public void setIsPickupAnything(bool boolValue)
+    {
+        isPickupAnything = boolValue;
+    }
+
+    public GameObject getPickupObject()
+    {
+        return pickupObject;
+    }
+
+    public void setPickupObject(GameObject obj)
+    {
+        pickupObject = obj;
+    }
+
 }
