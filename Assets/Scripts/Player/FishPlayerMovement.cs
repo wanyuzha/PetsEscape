@@ -8,11 +8,11 @@ public class FishPlayerMovement : Animal
 {
     const int SPEED_IN_WATER = 5;
     const int SPEED_ON_GROUND = 3;
-    const int SPEED_JUMPING_Y = 8;
+    const int SPEED_JUMPING_Y = 7;
     const int SPEED_JUMPING_X = 5;
     const float gravityScaleInWater = 0f;
     const float gravityScaleOutWater = 1f;
-    const float gravityScaleStep = 0.01f;
+    const float gravityScaleStep = 0.005f;
 
     public GameObject bubble;
 
@@ -68,6 +68,7 @@ public class FishPlayerMovement : Animal
                 rb.gravityScale = gravityScaleInWater;
                 moveX(SPEED_IN_WATER);
                 moveY(SPEED_IN_WATER);
+                isJumping = false;
             }
         }
 
@@ -88,7 +89,10 @@ public class FishPlayerMovement : Animal
         // TODO: Fish can jump whenever it's close to the water surface, while dog cannot
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log(isJumping);
             jump(SPEED_JUMPING_Y);
+            rb.gravityScale = gravityScaleOutWater;
+            Debug.Log(rb.velocity);
         }
 
         if (inWater && Input.GetKeyDown(skillKey))
@@ -116,7 +120,11 @@ public class FishPlayerMovement : Animal
     protected override void OnTriggerEnter2D(Collider2D coll)
     {
         base.OnTriggerEnter2D(coll);
-
+        if (coll.gameObject.CompareTag("water"))
+        {
+            //Debug.Log(string.Concat(AnimalName, " leave water"));
+            isJumping = false;
+        }
         if (coll.gameObject.name == "FishGoal")
         {
             LevelWinManager.FishTouchGoal();

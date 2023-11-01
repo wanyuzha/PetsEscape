@@ -30,7 +30,6 @@ public class DynamicWater2D : MonoBehaviour
 	public GameObject splash;
 
 	private Vector3[] vertices;
-
 	private Mesh mesh;
 
 	[Header("Physics Settings")]
@@ -38,8 +37,10 @@ public class DynamicWater2D : MonoBehaviour
 	public float damping = 0.1f;
 	public float spread = 0.1f;
 	public float collisionVelocityFactor = 0.04f;
+	private float DistUnderSurfaceEffect = 2.0f;
+	private float UnderSurfaceEffect = 0.08f;
 
-	float[] velocities;
+    float[] velocities;
 	float[] accelerations;
 	float[] leftDeltas;
 	float[] rightDeltas;
@@ -207,10 +208,10 @@ public class DynamicWater2D : MonoBehaviour
         {
 			//closer to surface, larger force
 			float distUnderSurface = bound.top + transform.position.y - col.gameObject.transform.position.y;
-			if (distUnderSurface < 1)
+			if (distUnderSurface < DistUnderSurfaceEffect)
 			{
 				Rigidbody2D rb = col.GetComponent<Rigidbody2D>();
-				Splash(col.bounds, (rb.velocity.y+ Mathf.Abs(rb.velocity.x))*(1- distUnderSurface)* 0.1f * collisionVelocityFactor, false);
+				Splash(col.bounds, (rb.velocity.y+ Mathf.Abs(rb.velocity.x))*(DistUnderSurfaceEffect - distUnderSurface)* UnderSurfaceEffect * collisionVelocityFactor, false);
 			}
             
         }

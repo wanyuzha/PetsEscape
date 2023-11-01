@@ -98,12 +98,11 @@ public class Animal : MonoBehaviour
 
     protected virtual void jump(float speed)
     {
-        // if (canJump && !isJumping)
         if (!isJumping)
         {
             isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, speed);
-
+            Debug.Log(rb.velocity);
             //Debug.Log(string.Concat(AnimalName, isJumping));
         }
     }
