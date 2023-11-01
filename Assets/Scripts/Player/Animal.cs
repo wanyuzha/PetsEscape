@@ -10,6 +10,8 @@ public class Animal : MonoBehaviour
 {
     protected string AnimalName;
     // protected int direction = 1;
+    protected int health;
+    public int initialHealth = 10;
 
     public bool isActivated = false;
     public GameObject panel;
@@ -24,6 +26,8 @@ public class Animal : MonoBehaviour
     protected const float JUMP_STEP_THRESHOLD = 0.1f;
 
     protected Rigidbody2D rb;
+    private SpriteRenderer sr;
+    private Color originColor;
     // protected List<string> targetName;
     protected List<string> items;
 
@@ -62,6 +66,9 @@ public class Animal : MonoBehaviour
         InvokeRepeating("CheckInWater", 1, 1);
         panel.SetActive(false);
         tutorialText.SetActive(false);
+        sr = GetComponent<SpriteRenderer>();
+        originColor = sr.color;
+        health = initialHealth;
     }
 
     protected void undisplayArrow()
@@ -141,9 +148,10 @@ public class Animal : MonoBehaviour
             inWater = true;
         }
         else if (coll.gameObject.CompareTag("Laser"))
-            {
+        {
             // touch the wire
             // Destroy(gameObject);
+            Damage(10);
             EndGame(AnimalName + " died of laser!");
         }
     }
@@ -155,7 +163,6 @@ public class Animal : MonoBehaviour
         {
             //Debug.Log(string.Concat(AnimalName, " leave water"));
             inWater = false;
-            isJumping = true;
         }
     }
 
@@ -189,6 +196,19 @@ public class Animal : MonoBehaviour
             }
         }
     */
+
+    protected void Damage(int hp)
+    {
+        health -= hp;
+        //red flash
+        sr.color = Color.red;
+        Invoke("setOriginColor", 0.2f);
+    }
+
+    private void setOriginColor()
+    {
+        sr.color = originColor;
+    }
 
     protected void EndGame(string str)
     {

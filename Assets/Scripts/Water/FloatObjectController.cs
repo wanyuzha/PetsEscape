@@ -48,7 +48,7 @@ public class FloatObjectController : MonoBehaviour
             underWater = false;
             SwitchState(underWater);
         }
-        Debug.Log(waterHeight);
+        //Debug.Log(waterHeight);
 
     }
     void SwitchState(bool isUnderWater)

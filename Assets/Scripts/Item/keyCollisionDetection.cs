@@ -30,6 +30,9 @@ public class KeyCollisionDetection : MonoBehaviour
         {
             // being picked up by dog
             gameObject.SetActive(false);
+        } else
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         }
     }
 }

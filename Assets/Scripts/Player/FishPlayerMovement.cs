@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class FishPlayerMovement : Animal
 {
-    private int health;
-    public int initialHealth = 10;
-
     const int SPEED_IN_WATER = 5;
     const int SPEED_ON_GROUND = 3;
     const int SPEED_JUMPING_Y = 8;
@@ -28,7 +25,6 @@ public class FishPlayerMovement : Animal
     protected override void Start()
     {
         base.Start();
-        health = initialHealth;
     }
 
     // Update is called once per frame
@@ -108,6 +104,13 @@ public class FishPlayerMovement : Animal
     protected override void OnTriggerExit2D(Collider2D coll)
     {
         base.OnTriggerExit2D(coll);
+        //Debug.Log(coll.gameObject.name);
+        if (coll.gameObject.CompareTag("water"))
+        {
+            //Debug.Log(string.Concat(AnimalName, " leave water"));
+            isJumping = true;
+            rb.gravityScale = gravityScaleOutWater;
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D coll)
@@ -157,7 +160,7 @@ public class FishPlayerMovement : Animal
     {
         if (!inWater)
         {
-            health--;
+            Damage(1);
         }
     }
 }

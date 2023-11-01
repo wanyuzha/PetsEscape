@@ -184,11 +184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9f8bba2c131dc46a3c5219ffe30ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialHealth: 6
   isActivated: 0
   panel: {fileID: 0}
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
-  initialHealth: 5
   bubble: {fileID: 0}
 --- !u!50 &1949116984938561833
 Rigidbody2D:
