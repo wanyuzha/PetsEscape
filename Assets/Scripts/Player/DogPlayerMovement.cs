@@ -101,7 +101,7 @@ public class DogPlayerMovement : Animal
             }
 
             //collect skill used event
-            Analytics.SkillUsedEvent();
+            Analytics.SkillUsedEvent("Dog");
         }
     }
 

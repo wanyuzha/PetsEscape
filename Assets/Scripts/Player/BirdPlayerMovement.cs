@@ -55,13 +55,17 @@ public class BirdPlayerMovement : Animal
             fly(JUMP_SPEED_Y);
 
             // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            int levelNumber = HandleScene.LevelNumber();
+            if (levelNumber > 0)
             {
-                { "levelNumber", "Level " + HandleScene.LevelNumber() }
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "levelNumber", "Level " + levelNumber.ToString() }
             };
 
-            AnalyticsService.Instance.CustomData("birdFlyEvent", parameters);
-            AnalyticsService.Instance.Flush();
+                AnalyticsService.Instance.CustomData("birdFlyEvent", parameters);
+                AnalyticsService.Instance.Flush();
+            }
         } else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             fall(JUMP_SPEED_Y);
@@ -98,7 +102,7 @@ public class BirdPlayerMovement : Animal
                 isPickupAnything = false;
 
                 //collect skill used event
-                Analytics.SkillUsedEvent();
+                Analytics.SkillUsedEvent("Bird");
             }
 
             else
@@ -131,7 +135,7 @@ public class BirdPlayerMovement : Animal
             //Debug.Log(dirY);
 
             //collect skill used event
-            Analytics.SkillUsedEvent();
+            Analytics.SkillUsedEvent("Bird");
         }
     }
 

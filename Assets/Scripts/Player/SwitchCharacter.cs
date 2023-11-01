@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SwitchCharacter : MonoBehaviour
 {
     public GameObject bird;
@@ -58,14 +59,18 @@ public class SwitchCharacter : MonoBehaviour
             if (currentCharacterIndex == 0)
             {
                 birdScript.isActivated = true;
+                // collect switch anmial event
+                Analytics.AnimalSwitchEvent("Bird");
             }
             else if (currentCharacterIndex == 1)
             {
                 dogScript.isActivated = true;
+                Analytics.AnimalSwitchEvent("Dog");
             }
             else if (currentCharacterIndex == 2)
             {
                 fishScript.isActivated = true;
+                Analytics.AnimalSwitchEvent("Fish");
             }
             arrows[currentCharacterIndex].SetActive(true);
         }
