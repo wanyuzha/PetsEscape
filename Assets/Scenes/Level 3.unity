@@ -7100,6 +7100,10 @@ PrefabInstance:
       propertyPath: splash
       value: 
       objectReference: {fileID: 1458402465880904, guid: 951a9bcb679301d48863885f3a69fd00, type: 3}
+    - target: {fileID: 4274761558273583883, guid: af1cb017170fb5b41a39d881e7b6d2fe, type: 3}
+      propertyPath: quality
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 7703714724943005892, guid: af1cb017170fb5b41a39d881e7b6d2fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -55,7 +55,7 @@ MonoBehaviour:
   waterLevelChange: 0
   waterLevelDir: -1
   waterLevelVelo: 0.1
-  quality: 40
+  quality: 80
   waterMaterial: {fileID: 2100000, guid: 356112ca8327c92438437007b621b319, type: 2}
   splash: {fileID: 1458402465880904, guid: 951a9bcb679301d48863885f3a69fd00, type: 3}
   springconstant: 0.02

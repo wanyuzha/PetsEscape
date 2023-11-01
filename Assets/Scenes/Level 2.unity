@@ -6646,6 +6646,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water 2D
       objectReference: {fileID: 0}
+    - target: {fileID: 4274761558273583883, guid: af1cb017170fb5b41a39d881e7b6d2fe, type: 3}
+      propertyPath: quality
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 7703714724943005892, guid: af1cb017170fb5b41a39d881e7b6d2fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

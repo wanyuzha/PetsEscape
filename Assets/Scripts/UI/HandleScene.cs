@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public static class HandleScene
 {
-    private static int levelCount = 2;
+    private static int levelCount = 3;
     private static int firstLevel = 4;
 
     public static void RestartGame()

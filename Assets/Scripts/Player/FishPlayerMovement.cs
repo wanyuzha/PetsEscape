@@ -89,10 +89,8 @@ public class FishPlayerMovement : Animal
         // TODO: Fish can jump whenever it's close to the water surface, while dog cannot
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log(isJumping);
             jump(SPEED_JUMPING_Y);
             rb.gravityScale = gravityScaleOutWater;
-            Debug.Log(rb.velocity);
         }
 
         if (inWater && Input.GetKeyDown(skillKey))
