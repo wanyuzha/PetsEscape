@@ -26,7 +26,6 @@ public class BirdPlayerMovement : Animal
     private float brightMaintainTime = 15.0f;
 
     private Animator anim;
-    bool playShiftAnim = false;
     public BirdPlayerMovement()
     {
         AnimalName = "Bird";

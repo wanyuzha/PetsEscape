@@ -14,7 +14,13 @@ public class FishPlayerMovement : Animal
     const float gravityScaleOutWater = 1f;
     const float gravityScaleStep = 0.005f;
 
+    public float scaleX = 1;
+    public float scaleY = 1;
+
     public GameObject bubble;
+
+    private Animator anim;
+    private Vector3 initialScale;
 
     public FishPlayerMovement()
     {
@@ -25,6 +31,8 @@ public class FishPlayerMovement : Animal
     protected override void Start()
     {
         base.Start();
+        anim = GetComponent<Animator>();
+        initialScale =transform.localScale;
     }
 
     // Update is called once per frame
@@ -34,6 +42,19 @@ public class FishPlayerMovement : Animal
         {
             EndGame("Fish stranded!");
         }
+
+        // we want to see the anim no matter it is activated or not
+        Vector3 scale = initialScale;
+        if(transform.localScale.x < 0)
+        {
+            scale.x *= -scaleX;
+        }
+        else
+        {
+            scale.x *= scaleX;
+        }
+        scale.y *= scaleY;
+        transform.localScale = scale;
 
         if (!isActivated)
             return;
@@ -96,11 +117,13 @@ public class FishPlayerMovement : Animal
         if (inWater && Input.GetKeyDown(skillKey))
         {
             bubble.SetActive(true);
-            bubble.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+            bubble.transform.position = transform.position + new Vector3(0, 1.5f, 0);
 
             //collect skill used event
             Analytics.SkillUsedEvent("Fish");
         }
+
+        setAnimation();
     }
 
     protected override void OnTriggerExit2D(Collider2D coll)
@@ -150,6 +173,11 @@ public class FishPlayerMovement : Animal
                 }
             }
         */
+    }
+
+    public void setAnimation()
+    {
+        anim.SetFloat("velocityX", Mathf.Abs(rb.velocity.x));
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
