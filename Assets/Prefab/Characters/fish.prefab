@@ -190,6 +190,8 @@ MonoBehaviour:
   panel: {fileID: 0}
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
+  scaleX: 1
+  scaleY: 1
   bubble: {fileID: 0}
 --- !u!50 &1949116984938561833
 Rigidbody2D:
@@ -250,7 +252,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
