@@ -24,6 +24,9 @@ public class BirdPlayerMovement : Animal
     //start time record when the bird's color is bright
     private float startTime;
     private float brightMaintainTime = 15.0f;
+
+    private Animator anim;
+    bool playShiftAnim = false;
     public BirdPlayerMovement()
     {
         AnimalName = "Bird";
@@ -40,6 +43,7 @@ public class BirdPlayerMovement : Animal
         isActivated = true;
         renderer = GetComponent<Renderer>();
         //Debug.Log(currentSceneIndex);
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -150,9 +154,9 @@ public class BirdPlayerMovement : Animal
                 }
 
             }
-
-
         }
+
+        setAnimation();
 
     }
 
@@ -171,6 +175,8 @@ public class BirdPlayerMovement : Animal
 
             //collect skill used event
             Analytics.SkillUsedEvent("Bird");
+            // Ready to play the anim of picking up
+            anim.SetTrigger("shiftTrigger");
         }
     }
 
@@ -251,6 +257,11 @@ public class BirdPlayerMovement : Animal
             }
         }
     */
+
+    public void setAnimation()
+    {
+        anim.SetFloat("velocityX", Mathf.Abs(rb.velocity.x));
+    }
 
     protected override void OnCollisionExit2D(Collision2D collision)
     {
