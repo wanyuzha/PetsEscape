@@ -30,17 +30,17 @@ public class FloatObjectController : MonoBehaviour
     /*
     Apply buoyancy to objects in water, and remove the force once the object is out of water.
     */
-    void FixedUpdate()
+    void LateUpdate()
     {
         //force = -1 * Physics.gravity.y * 3f;
         float difference = transform.position.y - waterHeight;
         if (difference < 0)
         {
-            Vector2 force = Vector2.up * 10f * rb.mass * Math.Abs(difference);
+            Vector2 force = Vector2.up * 2f * rb.mass * Math.Abs(difference);
             rb.AddForce(force, ForceMode2D.Force);
             // underWater = true;
             // SwitchState(underWater);
-            rb.drag = 10f;
+            rb.drag = 5f;
         }
         else
         {
