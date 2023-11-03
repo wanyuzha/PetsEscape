@@ -21,7 +21,7 @@ public class FloatObjectController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // BoxCollider2D boxCollider;
         // boxCollider = GetComponent<BoxCollider2D>();
-        waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y + 0.5f;
+        waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
         // waterHeight = waterArea.GetComponent<DynamicWater2D>().bound.top + 0.5f;
         // mass = rb.mass;
         // floatObjectHeight = boxCollider.size.y;
@@ -30,13 +30,13 @@ public class FloatObjectController : MonoBehaviour
     /*
     Apply buoyancy to objects in water, and remove the force once the object is out of water.
     */
-    void LateUpdate()
+    void FixedUpdate()
     {
         //force = -1 * Physics.gravity.y * 3f;
         float difference = transform.position.y - waterHeight;
         if (difference < 0)
         {
-            Vector2 force = Vector2.up * 2f * rb.mass * Math.Abs(difference);
+            Vector2 force = -Vector2.up * 10f * rb.mass * difference;
             rb.AddForce(force, ForceMode2D.Force);
             // underWater = true;
             // SwitchState(underWater);

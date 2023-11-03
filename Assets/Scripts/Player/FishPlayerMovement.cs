@@ -116,8 +116,9 @@ public class FishPlayerMovement : Animal
 
         if (inWater && Input.GetKeyDown(skillKey))
         {
+            bubble.SetActive(false);
+            bubble.transform.position = transform.position + new Vector3(0, scale.y*1.5f, 0);
             bubble.SetActive(true);
-            bubble.transform.position = transform.position + new Vector3(0, 1.5f, 0);
 
             //collect skill used event
             Analytics.SkillUsedEvent("Fish");

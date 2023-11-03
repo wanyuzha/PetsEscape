@@ -11,7 +11,7 @@ public class BubbleController : MonoBehaviour
     private float waterHeight;
     public GameObject waterArea;
     const float HEIGHT_ABOVE_WATER = 3f;
-    private float mass = 0;
+    // private float mass = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,15 +23,14 @@ public class BubbleController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (gameObject.activeSelf)
         {
-            rb.velocity = Vector2.zero;
             if (transform.position.y < HEIGHT_ABOVE_WATER + waterHeight)
             {
                 rb.velocity = Vector2.up;
-                rb.AddForce(Vector3.up * mass, ForceMode2D.Force);
+                // rb.AddForce(Vector3.up * mass, ForceMode2D.Force);
             }
         }
     }
@@ -43,11 +42,23 @@ public class BubbleController : MonoBehaviour
             rb.velocity = Vector2.zero;
             gameObject.SetActive(false);
         }
-        else
+        /*
+            else
+            {
+                Rigidbody2D collideObjectRB = collision.collider.GetComponent<Rigidbody2D>();
+                mass = collideObjectRB.mass;
+                //Debug.Log(mass);
+            }
+        */
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "canCrunch")
         {
-            Rigidbody2D collideObjectRB = collision.collider.GetComponent<Rigidbody2D>();
-            mass = collideObjectRB.mass;
-            //Debug.Log(mass);
+            float mass = collision.gameObject.GetComponent<Rigidbody2D>().mass;
+            // Debug.Log(mass);
+            rb.AddForce(10 * Vector2.up * mass, ForceMode2D.Force);
         }
     }
 }
