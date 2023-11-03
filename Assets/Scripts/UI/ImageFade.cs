@@ -36,5 +36,6 @@ public class ImageFade : MonoBehaviour
 
         // 
         canvasGroup.alpha = 0f;
+        gameObject.SetActive(false);
     }
 }

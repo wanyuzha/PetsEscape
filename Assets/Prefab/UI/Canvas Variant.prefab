@@ -254,10 +254,6 @@ PrefabInstance:
       propertyPath: m_Text
       value: "WASD\n\u2191\u2193\u2190\u2192\nSpace\nLeft Shift"
       objectReference: {fileID: 0}
-    - target: {fileID: 2841350346428605996, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3770911940794623517, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
       propertyPath: m_Name
       value: Canvas Variant
@@ -272,14 +268,10 @@ PrefabInstance:
 
         Use Pet Skill'
       objectReference: {fileID: 0}
-    - target: {fileID: 8004750829915120329, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
-    - {fileID: 1303316715551168501, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
-    - {fileID: 5807979187878741917, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
+    - {fileID: 2204079475794499519, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
+    - {fileID: 438739020084300983, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1277063363826980364, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
       insertIndex: 0

@@ -40,7 +40,7 @@ public class FloatObjectController : MonoBehaviour
             rb.AddForce(force, ForceMode2D.Force);
             // underWater = true;
             // SwitchState(underWater);
-            rb.drag = 5f;
+            rb.drag = 10f;
         }
         else
         {

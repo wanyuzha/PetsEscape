@@ -5478,10 +5478,6 @@ PrefabInstance:
 
         and unlock the Door!'
       objectReference: {fileID: 0}
-    - target: {fileID: 8521446606528412622, guid: c18830cc916364644996275bf29e578e, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

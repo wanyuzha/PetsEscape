@@ -6577,7 +6577,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -6690,10 +6690,6 @@ PrefabInstance:
 
         Move Oven away to
         reach Window!'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8521446606528412622, guid: c18830cc916364644996275bf29e578e, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
