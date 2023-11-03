@@ -5454,7 +5454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1638861135377254020, guid: c18830cc916364644996275bf29e578e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -300
+      value: -240
       objectReference: {fileID: 0}
     - target: {fileID: 1638861135377254020, guid: c18830cc916364644996275bf29e578e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5470,11 +5470,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4742560597439748612, guid: c18830cc916364644996275bf29e578e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 130
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7223370703867174619, guid: c18830cc916364644996275bf29e578e, type: 3}
       propertyPath: m_Text
-      value: '[Left Shift] Crunch obstacles!'
+      value: '[Left Shift] Crunch obstacles
+
+        and unlock the Door!'
       objectReference: {fileID: 0}
     - target: {fileID: 8521446606528412622, guid: c18830cc916364644996275bf29e578e, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
