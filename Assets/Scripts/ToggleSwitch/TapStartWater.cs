@@ -24,7 +24,7 @@ public class TapStartWater : ToggleSwitch
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void tapWaterSplash()

@@ -25,6 +25,6 @@ public class LaserSwitch : ToggleSwitch
 
     protected override void setInactive()
     {
-        if (laserBeam) laserBeam.SetActive(true);
+        laserBeam.SetActive(true);
     }
 }

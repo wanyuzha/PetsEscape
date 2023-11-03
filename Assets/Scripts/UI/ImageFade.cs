@@ -10,7 +10,7 @@ public class ImageFade : MonoBehaviour
     public float displayTime = 1.5f;
 
     void Start()
-    { 
+    {
         StartCoroutine(FadeImage());
     }
 
@@ -33,9 +33,8 @@ public class ImageFade : MonoBehaviour
             canvasGroup.alpha = 1 - (elapsed / fadeOutTime);
             yield return null;
         }
-        
+
         // 
         canvasGroup.alpha = 0f;
     }
 }
-

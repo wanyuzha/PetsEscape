@@ -5,6 +5,7 @@ using UnityEngine;
 public class StartMenuManager : MonoBehaviour
 {
     public GameObject skipTutorialCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +15,11 @@ public class StartMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    public void AskSkipTutorial(){
+
+    public void AskSkipTutorial()
+    {
         skipTutorialCanvas.SetActive(true);
     }
 }

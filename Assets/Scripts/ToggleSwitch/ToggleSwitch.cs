@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class ToggleSwitch : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     protected virtual void setActive()
     {
 
@@ -28,7 +16,7 @@ public class ToggleSwitch : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("canGrab") || coll.gameObject.CompareTag("canCrunch"))
+        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("canCrunch"))
         {
             setActive();
         }
@@ -36,7 +24,7 @@ public class ToggleSwitch : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("canGrab") || coll.gameObject.CompareTag("canCrunch"))
+        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("canCrunch"))
         {
             setInactive();
         }

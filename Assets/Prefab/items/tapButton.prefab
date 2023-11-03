@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7248252264500335105, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
       propertyPath: m_Name
-      value: tapButton Variant
+      value: tapButton
       objectReference: {fileID: 0}
     - target: {fileID: 8870662080634372584, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
       propertyPath: m_LocalPosition.x

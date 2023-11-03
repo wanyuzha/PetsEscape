@@ -52,10 +52,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8987019555675979790, guid: 33ea0ac5c5ab2644d8603e4174b1f74c, type: 3}
-      propertyPath: m_Size.y
-      value: 0.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -81,4 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6c6f13defb744acb6a15340815486d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserBeam: {fileID: 0}
+  laserBeam: {fileID: 7509869289320259971, guid: 2524a391e123a944db62eec70d538079, type: 3}

@@ -7,16 +7,15 @@ using UnityEngine.UI;
 
 public class ButtonCtroller : MonoBehaviour
 {
-    public Button button;
+    // public Button button;
 
     public void RestartGame()
     {
         HandleScene.RestartGame();
 
         // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-
-        int levelNumber = HandleScene.LevelNumber();
-        if (levelNumber > 0)
+        // int levelNumber = HandleScene.LevelNumber();
+        if (HandleScene.LevelNumber() > 0)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
@@ -25,7 +24,6 @@ public class ButtonCtroller : MonoBehaviour
 
             AnalyticsService.Instance.CustomData("restartEvent", parameters);
             AnalyticsService.Instance.Flush();
-
         }
     }
 
@@ -38,8 +36,16 @@ public class ButtonCtroller : MonoBehaviour
     {
         HandleScene.LoadPrevLevel();
     }
-    public void SkipTutorialLevel()
+
+    /*
+        public void SkipTutorialLevel()
+        {
+            HandleScene.LoadFirstNonTutorialLevel();
+        }
+    */
+
+    public void LoadLevelNumber(int levelNumber)
     {
-        HandleScene.LoadFirstNonTutorialLevel();
+        HandleScene.LoadLevelNumber(levelNumber);
     }
 }

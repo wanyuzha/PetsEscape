@@ -24,5 +24,4 @@ public class TankWater : MonoBehaviour
         waterArea.GetComponent<DynamicWater2D>().waterLevelDir = -1;
         waterArea.GetComponent<DynamicWater2D>().maxHeight = waterArea.GetComponent<DynamicWater2D>().minHeight + 0.5f;
     }
-
 }

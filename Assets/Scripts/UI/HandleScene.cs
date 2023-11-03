@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public static class HandleScene
 {
     private static int levelCount = 3;
-    private static int firstLevel = 4;
+    private static int firstLevel = 5;
 
     public static void RestartGame()
     {
@@ -29,10 +29,12 @@ public static class HandleScene
         }
     }
 
-    public static void LoadFirstNonTutorialLevel()
-    {
-        SceneManager.LoadScene(firstLevel);
-    }
+    /*
+        public static void LoadFirstNonTutorialLevel()
+        {
+            SceneManager.LoadScene(firstLevel);
+        }
+    */
 
     public static bool isMaxLevel()
     {
@@ -47,6 +49,11 @@ public static class HandleScene
     public static int LevelNumber()
     {
         return SceneManager.GetActiveScene().buildIndex - firstLevel + 1;
+    }
+
+    public static void LoadLevelNumber(int levelNumber)
+    {
+        SceneManager.LoadScene(levelNumber + firstLevel - 1);
     }
 
     public static GameObject FindSiblingGameObject(string name)

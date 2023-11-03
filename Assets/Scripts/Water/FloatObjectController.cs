@@ -36,7 +36,7 @@ public class FloatObjectController : MonoBehaviour
         float difference = transform.position.y - waterHeight;
         if (difference < 0)
         {
-            Vector2 force = -Vector2.up * 50f * rb.mass * difference;
+            Vector2 force = -Vector2.up * 10f * rb.mass * difference;
             rb.AddForce(force, ForceMode2D.Force);
             // underWater = true;
             // SwitchState(underWater);

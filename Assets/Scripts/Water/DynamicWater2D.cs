@@ -40,14 +40,14 @@ public class DynamicWater2D : MonoBehaviour
 	private float DistUnderSurfaceEffect = 2.0f;
 	private float UnderSurfaceEffect = 0.08f;
 
-    float[] velocities;
+	float[] velocities;
 	float[] accelerations;
 	float[] leftDeltas;
 	float[] rightDeltas;
 
 	private List<GameObject> splashList;
 
-    private void Start()
+	private void Start()
 	{
 		InitializePhysics();
 		GenerateMesh();
@@ -140,7 +140,6 @@ public class DynamicWater2D : MonoBehaviour
 	//changed to FixedUpdate
 	private void FixedUpdate()
 	{
-
 		// updating physics
 		for (int i = 0; i < quality; i++)
 		{
@@ -187,50 +186,49 @@ public class DynamicWater2D : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D col)
 	{
-        if (col.gameObject.transform.position.y >= bound.top + transform.position.y - 1)
+		if (col.gameObject.transform.position.y >= bound.top + transform.position.y - 1)
 		{
 			Rigidbody2D rb = col.GetComponent<Rigidbody2D>();
 			Splash(col.bounds, rb.velocity.y * collisionVelocityFactor, true);
 		}
 	}
 
-    private void OnTriggerExit2D(Collider2D col)
+	private void OnTriggerExit2D(Collider2D col)
 	{
 		//Debug.Log(col.gameObject.name);
 		Rigidbody2D rb = col.GetComponent<Rigidbody2D>();
 		Splash(col.bounds, rb.velocity.y * collisionVelocityFactor, true);
 	}
 
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        //Debug.Log(col.gameObject.name);
-        if (col.gameObject.CompareTag("Player"))
-        {
+	private void OnTriggerStay2D(Collider2D col)
+	{
+		//Debug.Log(col.gameObject.name);
+		if (col.gameObject.CompareTag("Player"))
+		{
 			//closer to surface, larger force
 			float distUnderSurface = bound.top + transform.position.y - col.gameObject.transform.position.y;
 			if (distUnderSurface < DistUnderSurfaceEffect)
 			{
 				Rigidbody2D rb = col.GetComponent<Rigidbody2D>();
-				Splash(col.bounds, (rb.velocity.y+ Mathf.Abs(rb.velocity.x))*(DistUnderSurfaceEffect - distUnderSurface)* UnderSurfaceEffect * collisionVelocityFactor, false);
+				Splash(col.bounds, (rb.velocity.y + Mathf.Abs(rb.velocity.x)) * (DistUnderSurfaceEffect - distUnderSurface) * UnderSurfaceEffect * collisionVelocityFactor, false);
 			}
-            
-        }
-    }
+		}
+	}
 
-    public void Splash(Bounds bounds, float force, bool allowSplash)
+	public void Splash(Bounds bounds, float force, bool allowSplash)
 	{
 		float radius = bounds.max.x - bounds.min.x;
 		Vector3 center = new Vector2(bounds.center.x, bound.top);
 
-		if (Mathf.Abs(force) > 0.01f) 
+		if (Mathf.Abs(force) > 0.01f)
 		{
-            // instantiate splash particle
+			// instantiate splash particle
 			if (allowSplash)
 			{
-				GameObject splashGO = Instantiate(splash, new Vector3(center.x, center.y+transform.position.y, 0), Quaternion.Euler(0,0,60), transform);
+				GameObject splashGO = Instantiate(splash, new Vector3(center.x, center.y + transform.position.y, 0), Quaternion.Euler(0, 0, 60), transform);
 				Destroy(splashGO, 1f);
 			}
-            
+
 			// applying physics
 			for (int i = 0; i < quality; i++)
 			{
@@ -246,5 +244,4 @@ public class DynamicWater2D : MonoBehaviour
 	{
 		return Vector2.Distance(point, center) < radius;
 	}
-
 }

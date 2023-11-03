@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class SwitchCharacter : MonoBehaviour
 {
     public GameObject bird;
@@ -53,28 +52,32 @@ public class SwitchCharacter : MonoBehaviour
                 fishScript.isActivated = false;
             }
             arrows[currentCharacterIndex].SetActive(false);
+
             // update the activation
             //Debug.Log("current index is " + currentCharacterIndex);
             currentCharacterIndex = (currentCharacterIndex + 1) % 3;
+
             if (currentCharacterIndex == 0)
             {
                 birdScript.isActivated = true;
                 // collect switch anmial event
                 Analytics.AnimalSwitchEvent("Bird");
             }
+
             else if (currentCharacterIndex == 1)
             {
                 dogScript.isActivated = true;
                 Analytics.AnimalSwitchEvent("Dog");
 
                 // when player switch to dog, if bird still grab dog, then set pick to false and pickupobject to null
-                if(birdScript.getIsPickupAnything() && birdScript.getPickupObject().CompareTag("Player"))
+                if (birdScript.getIsPickupAnything())
                 {
                     birdScript.setIsPickupAnything(false);
                     birdScript.getPickupObject().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                     birdScript.setPickupObject(null);
                 }
             }
+
             else if (currentCharacterIndex == 2)
             {
                 fishScript.isActivated = true;
@@ -82,7 +85,7 @@ public class SwitchCharacter : MonoBehaviour
 
                 // if in the future bird need to catch fish, following code will be used. Currently no such demand.
                 /*
-                if (birdScript.getIsPickupAnything() && birdScript.getPickupObject().CompareTag("Player"))
+                if (birdScript.getIsPickupAnything())
                 {
                     birdScript.setIsPickupAnything(false);
                     birdScript.getPickupObject().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -90,6 +93,7 @@ public class SwitchCharacter : MonoBehaviour
                 }
                 */
             }
+
             arrows[currentCharacterIndex].SetActive(true);
         }
     }

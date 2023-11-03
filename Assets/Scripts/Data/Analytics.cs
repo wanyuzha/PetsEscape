@@ -55,16 +55,12 @@ public class Analytics : MonoBehaviour
     //this static function will be called when skill used event is triggered
     public static void SkillUsedEvent(string animalName)
     {
-        // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-
-        int levelNumber = HandleScene.LevelNumber();
-
         //exclude first three tutorial level -2, -1, 0
-        if (levelNumber > 0)
+        if (HandleScene.LevelNumber() > 0)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "levelNumber", "Level " + levelNumber.ToString() },
+                { "levelNumber", "Level " + HandleScene.LevelNumber().ToString() },
                 { "animalName",  animalName}
             };
 
@@ -75,16 +71,12 @@ public class Analytics : MonoBehaviour
 
     public static void AnimalSwitchEvent(string animalName)
     {
-        // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-
-        int levelNumber = HandleScene.LevelNumber();
-
         //exclude first three tutorial level -2, -1, 0
-        if (levelNumber > 0)
+        if (HandleScene.LevelNumber() > 0)
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "levelNumber", "Level " + levelNumber.ToString() },
+                { "levelNumber", "Level " + HandleScene.LevelNumber().ToString() },
                 { "animalName",  animalName}
             };
 
