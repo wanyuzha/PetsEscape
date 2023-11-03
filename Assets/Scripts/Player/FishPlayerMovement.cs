@@ -12,7 +12,7 @@ public class FishPlayerMovement : Animal
     const int SPEED_JUMPING_X = 5;
     const float gravityScaleInWater = 0f;
     const float gravityScaleOutWater = 1f;
-    const float gravityScaleStep = 0.005f;
+    const float gravityScaleStep = 0.01f;
 
     public float scaleX = 1;
     public float scaleY = 1;
@@ -117,7 +117,8 @@ public class FishPlayerMovement : Animal
         if (inWater && Input.GetKeyDown(skillKey))
         {
             bubble.SetActive(false);
-            bubble.transform.position = transform.position + new Vector3(0, scale.y*1.5f, 0);
+            bubble.transform.position = transform.position + new Vector3(0, scale.y*1.6f, 0);
+            bubble.GetComponent<BubbleController>().waterHeight=bubble.transform.position.y;
             bubble.SetActive(true);
 
             //collect skill used event

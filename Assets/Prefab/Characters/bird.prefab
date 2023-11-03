@@ -97,8 +97,7 @@ GameObject:
   - component: {fileID: 2214426910521847034}
   - component: {fileID: 1104318710508238504}
   - component: {fileID: 2214670790393409626}
-  - component: {fileID: 2703256947775556994}
-  - component: {fileID: 113413204157439329}
+  - component: {fileID: 3034463399045939506}
   m_Layer: 0
   m_Name: bird
   m_TagString: Player
@@ -239,70 +238,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!60 &2703256947775556994
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5100429253897759715}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.7936508}
-    newSize: {x: 1, y: 0.7936508}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 1
-  m_Points:
-    m_Paths:
-    - - {x: -0.3952381, y: -0.123809524}
-      - {x: -0.3253968, y: 0}
-      - {x: -0.2619048, y: 0.12698413}
-      - {x: -0.1888889, y: 0.1968254}
-      - {x: -0.1285714, y: 0.32380953}
-      - {x: -0.05238095, y: 0.3968254}
-      - {x: 0.331746, y: 0.3968254}
-      - {x: 0.5, y: 0.22857143}
-      - {x: 0.5, y: 0.11746032}
-      - {x: 0.4396825, y: 0.04761905}
-      - {x: 0.3761905, y: -0.2}
-      - {x: 0.3253968, y: -0.25396827}
-      - {x: 0.2619048, y: -0.32063493}
-      - {x: 0.1920635, y: -0.3968254}
-      - {x: -0.4396825, y: -0.3968254}
-      - {x: -0.5, y: -0.32380953}
-      - {x: -0.5, y: -0.24126984}
-  m_UseDelaunayMesh: 0
---- !u!66 &113413204157439329
-CompositeCollider2D:
+--- !u!61 &3034463399045939506
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -334,66 +271,15 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
-  m_GenerationType: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.7936508}
+    newSize: {x: 1, y: 0.7936508}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.8}
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 2703256947775556994}
-    m_ColliderPaths:
-    - - X: 7071430
-        Y: -8657143
-      - X: 8785714
-        Y: -6857143
-      - X: 10157144
-        Y: -5400000
-      - X: 11871428
-        Y: 1285714
-      - X: 13500000
-        Y: 3171428
-      - X: 13500000
-        Y: 6171428
-      - X: 8957142
-        Y: 10714287
-      - X: -1414285
-        Y: 10714287
-      - X: -3471428
-        Y: 8742858
-      - X: -5100000
-        Y: 5314286
-      - X: -7071430
-        Y: 3428571
-      - X: -8785714
-        Y: 0
-      - X: -10671428
-        Y: -3342857
-      - X: -13500000
-        Y: -6514286
-      - X: -13500000
-        Y: -8742858
-      - X: -11871428
-        Y: -10714287
-      - X: 5185714
-        Y: -10714287
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -1.067141, y: -0.3342827}
-      - {x: -1.35, y: -0.65143853}
-      - {x: -1.3499941, y: -0.8742929}
-      - {x: -1.1871305, y: -1.0714287}
-      - {x: 0.5185792, y: -1.0714202}
-      - {x: 0.7071432, y: -0.8657142}
-      - {x: 0.8785733, y: -0.6857124}
-      - {x: 1.015716, y: -0.5399939}
-      - {x: 1.1871467, y: 0.1285759}
-      - {x: 1.35, y: 0.3171525}
-      - {x: 1.3499924, y: 0.6171504}
-      - {x: 0.89570343, y: 1.0714287}
-      - {x: -0.141436, y: 1.0714215}
-      - {x: -0.3471449, y: 0.8742815}
-      - {x: -0.5100034, y: 0.5314253}
-      - {x: -0.70714504, y: 0.34285322}
-      - {x: -0.8785719, y: -0.000001}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
-  m_UseDelaunayMesh: 0
-  m_CompositeGameObject: {fileID: 5100429253897759715}

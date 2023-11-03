@@ -8,8 +8,8 @@ public class BubbleController : MonoBehaviour
     // private Renderer rend;
     Rigidbody2D rb;
 
-    private float waterHeight;
-    public GameObject waterArea;
+    public float waterHeight;
+    // public GameObject waterArea;
     const float HEIGHT_ABOVE_WATER = 3f;
     // private float mass = 0;
     // Start is called before the first frame update
@@ -19,7 +19,6 @@ public class BubbleController : MonoBehaviour
         // rend.enabled = false;
         gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
-        waterHeight = waterArea.GetComponent<DynamicWater2D>().curHeight + waterArea.GetComponent<DynamicWater2D>().bound.bottom + waterArea.transform.position.y;
     }
 
     // Update is called once per frame
@@ -27,10 +26,14 @@ public class BubbleController : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-            if (transform.position.y < HEIGHT_ABOVE_WATER + waterHeight)
+            if (transform.position.y < transform.localScale.y * HEIGHT_ABOVE_WATER + waterHeight)
             {
                 rb.velocity = Vector2.up;
                 // rb.AddForce(Vector3.up * mass, ForceMode2D.Force);
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
             }
         }
     }
@@ -58,7 +61,15 @@ public class BubbleController : MonoBehaviour
         {
             float mass = collision.gameObject.GetComponent<Rigidbody2D>().mass;
             // Debug.Log(mass);
-            rb.AddForce(10 * Vector2.up * mass, ForceMode2D.Force);
+            rb.AddForce(10f * Vector2.up * mass, ForceMode2D.Force);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "water")
+        {
+            waterHeight = collision.gameObject.GetComponent<DynamicWater2D>().curHeight + collision.gameObject.GetComponent<DynamicWater2D>().bound.bottom + collision.gameObject.transform.position.y;
         }
     }
 }

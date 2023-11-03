@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 648851819100708746}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.72, y: 0.72, z: 1}
+  m_LocalPosition: {x: 0, y: 1.9, z: 0}
+  m_LocalScale: {x: 1.08, y: 1.08, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3812039981477020058}
@@ -114,9 +114,9 @@ Transform:
   m_GameObject: {fileID: 4428562691141504604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.5, y: -6.5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1.3333334}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7249691056246973977}
   m_Father: {fileID: 0}
@@ -185,14 +185,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9f8bba2c131dc46a3c5219ffe30ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 6
+  initialHealth: 7
   isActivated: 0
   panel: {fileID: 0}
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
   scaleX: 1
   scaleY: 1
-  bubble: {fileID: 0}
+  bubble: {fileID: 1852015004246943503, guid: ff0b9dfe3530443ec8dbd70aef33b26c, type: 3}
 --- !u!50 &1949116984938561833
 Rigidbody2D:
   serializedVersion: 4
@@ -252,7 +252,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -263,7 +263,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.75}
+  m_Size: {x: 1.375, y: 1}
   m_EdgeRadius: 0
 --- !u!95 &3905444706553789509
 Animator:
