@@ -16,14 +16,13 @@ public class BirdPlayerMovement : Animal
     private GameObject collideObject = null;
     private GameObject pickupObject = null;
     private Vector3 grabOffset;
-    private Color originalState;
-    private Color newState;
-    private bool isBirdBurst = false;
-    private new Renderer renderer;
 
+    private Color originalState;
+    private bool isBurst;
+    private new Renderer renderer;
     //start time record when the bird's color is bright
-    private float startTime;
-    private float brightMaintainTime = 15.0f;
+    private float burstStartTime;
+    public float burstMaintainTime = 15f;
 
     private Animator anim;
     public BirdPlayerMovement()
@@ -41,6 +40,8 @@ public class BirdPlayerMovement : Animal
         base.Start();
         isActivated = true;
         renderer = GetComponent<Renderer>();
+        originalState = renderer.material.color;
+        isBurst = false;
         //Debug.Log(currentSceneIndex);
         anim = GetComponent<Animator>();
     }
@@ -48,6 +49,11 @@ public class BirdPlayerMovement : Animal
     // Update is called once per frame
     private void LateUpdate()
     {
+        if (HandleScene.GetPauseStatus())
+        {
+            return;
+        }
+
         //if (!gameObject.activeSelf)
         //    return;
 
@@ -66,18 +72,18 @@ public class BirdPlayerMovement : Animal
             fly(JUMP_SPEED_Y);
 
             // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
-            int levelNumber = HandleScene.LevelNumber();
-            if (levelNumber > 0)
+            if (HandleScene.LevelNumber() > 0)
             {
                 Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "levelNumber", "Level " + levelNumber.ToString() }
+                { "levelNumber", "Level " + HandleScene.LevelNumber().ToString() }
             };
 
                 AnalyticsService.Instance.CustomData("birdFlyEvent", parameters);
                 AnalyticsService.Instance.Flush();
             }
         }
+
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             fall(JUMP_SPEED_Y);
@@ -130,18 +136,17 @@ public class BirdPlayerMovement : Animal
             pickupObject.transform.position = transform.position + grabOffset;
         }
 
-
         // when bird eat the apple and burst, it will be bright color and can grab dog temporarily
-        if (isBirdBurst)
+        if (isBurst)
         {
-            float elapsedTime = Time.time - startTime;
-
-
-            if (elapsedTime < brightMaintainTime) renderer.material.color = newState;
-
+            if (Time.time - burstStartTime < burstMaintainTime)
+            {
+                renderer.material.color = originalState * 2f;
+            }
 
             else
             {
+                isBurst = false;
                 renderer.material.color = originalState;
 
                 // if burst time is over, if the bird still grab dog, then bird will automatically release the dog
@@ -151,7 +156,6 @@ public class BirdPlayerMovement : Animal
                     pickupObject = null;
                     isPickupAnything = false;
                 }
-
             }
         }
 
@@ -206,10 +210,10 @@ public class BirdPlayerMovement : Animal
             }
         */
 
-        if (collision.gameObject.CompareTag("canGrab") || collision.gameObject.CompareTag("canCrunch") || (collision.gameObject.CompareTag("Player") && isBirdBurst))
+        if (collision.gameObject.CompareTag("canGrab") || collision.gameObject.CompareTag("canCrunch") || (collision.gameObject.CompareTag("Player") && isBurst))
         {
             //Debug.Log("try picking");
-            if (Mathf.Abs(collision.collider.bounds.center.y - transform.position.y) > (collision.collider.bounds.size.y / 2)) //is above
+            if (transform.position.y - collision.collider.bounds.center.y > (collision.collider.bounds.size.y / 2)) //is above
             {
                 collideObject = collision.gameObject;
             }
@@ -226,18 +230,9 @@ public class BirdPlayerMovement : Animal
         if (collision.gameObject.CompareTag("canEat"))
         {
             collision.gameObject.SetActive(false);
-
-
-            isBirdBurst = true;
-
-            startTime = Time.time;
-
-            originalState = renderer.material.color;
-            newState = renderer.material.color * 1.8f;
-
+            isBurst = true;
+            burstStartTime = Time.time;
         }
-
-
     }
 
     /*
@@ -296,13 +291,6 @@ public class BirdPlayerMovement : Animal
         base.CheckInWater();
     }
 
-
-
-
-
-
-
-
     public bool getIsPickupAnything()
     {
         return isPickupAnything;
@@ -321,5 +309,4 @@ public class BirdPlayerMovement : Animal
     {
         pickupObject = obj;
     }
-
 }

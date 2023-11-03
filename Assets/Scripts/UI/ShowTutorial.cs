@@ -31,7 +31,7 @@ public class ShowTutorial : MonoBehaviour
             {
                 // hint.GetComponentInChildren<TMP_Text>().text = "";
                 gameObject.SetActive(false);
-                Time.timeScale = 1;
+                HandleScene.ResumeGame();
             }
         }
     }

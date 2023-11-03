@@ -145,11 +145,12 @@ public class Animal : MonoBehaviour
             //Debug.Log(string.Concat(AnimalName, "enter water"));
             inWater = true;
         }
+
         else if (coll.gameObject.CompareTag("Laser"))
         {
             // touch the wire
             // Destroy(gameObject);
-            Damage(10);
+            Damage(initialHealth / 2);
             EndGame(AnimalName + " died of laser!");
         }
     }
@@ -176,7 +177,7 @@ public class Animal : MonoBehaviour
     {
         tutorialText.GetComponentInChildren<TMP_Text>().text = str;
         tutorialText.SetActive(true);
-        Time.timeScale = 0;
+        HandleScene.PauseGame();
         // if(tutorialShowTime == 0.0f)
         // {
         // tutorialShowTime = Time.time;
@@ -211,7 +212,7 @@ public class Animal : MonoBehaviour
     protected void EndGame(string str)
     {
         textComponent.text = str;
-        Time.timeScale = 0;
         panel.SetActive(true);
+        HandleScene.PauseGame();
     }
 }

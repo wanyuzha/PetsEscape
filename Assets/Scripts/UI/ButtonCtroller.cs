@@ -12,6 +12,7 @@ public class ButtonCtroller : MonoBehaviour
     public void RestartGame()
     {
         HandleScene.RestartGame();
+        HandleScene.ResumeGame();
 
         // int currentLevel = SceneManager.GetActiveScene().buildIndex + 1;
         // int levelNumber = HandleScene.LevelNumber();

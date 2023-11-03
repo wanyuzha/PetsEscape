@@ -11,8 +11,8 @@ public class DogPlayerMovement : Animal
     // private float previousHeight;
 
     private GameObject collideObject = null;
-    const int SPEED = 5;
-    const int JUMP_SPEED_X = 5;
+    const int SPEED = 6;
+    const int JUMP_SPEED_X = 6;
     const int JUMP_SPEED_Y = 8;
 
     public DogPlayerMovement()
@@ -32,6 +32,11 @@ public class DogPlayerMovement : Animal
     // Update is called once per frame
     private void LateUpdate()
     {
+        if (HandleScene.GetPauseStatus())
+        {
+            return;
+        }
+
         if (!isActivated)
             return;
 

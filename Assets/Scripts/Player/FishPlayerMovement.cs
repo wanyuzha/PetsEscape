@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class FishPlayerMovement : Animal
 {
-    const int SPEED_IN_WATER = 5;
+    const int SPEED_IN_WATER = 6;
     const int SPEED_ON_GROUND = 3;
-    const int SPEED_JUMPING_Y = 7;
+    const int SPEED_JUMPING_Y = 5;
     const int SPEED_JUMPING_X = 5;
     const float gravityScaleInWater = 0f;
     const float gravityScaleOutWater = 1f;
@@ -22,6 +22,13 @@ public class FishPlayerMovement : Animal
     private Animator anim;
     private Vector3 initialScale;
 
+    private Color originalState;
+    private bool isBurst;
+    private new Renderer renderer;
+    //start time record when the bird's color is bright
+    private float burstStartTime;
+    public float burstMaintainTime = 5f;
+
     public FishPlayerMovement()
     {
         AnimalName = "Fish";
@@ -32,12 +39,20 @@ public class FishPlayerMovement : Animal
     {
         base.Start();
         anim = GetComponent<Animator>();
-        initialScale =transform.localScale;
+        initialScale = transform.localScale;
+        renderer = GetComponent<Renderer>();
+        originalState = renderer.material.color;
+        isBurst = false;
     }
 
     // Update is called once per frame
     private void LateUpdate()
     {
+        if (HandleScene.GetPauseStatus())
+        {
+            return;
+        }
+
         if (health <= 0)
         {
             EndGame("Fish stranded!");
@@ -45,7 +60,7 @@ public class FishPlayerMovement : Animal
 
         // we want to see the anim no matter it is activated or not
         Vector3 scale = initialScale;
-        if(transform.localScale.x < 0)
+        if (transform.localScale.x < 0)
         {
             scale.x *= -scaleX;
         }
@@ -77,7 +92,9 @@ public class FishPlayerMovement : Animal
 
         if (inWater)
         {
+            isBurst = false;
             health = initialHealth;
+            renderer.material.color = originalState;
 
             if (rb.gravityScale > gravityScaleInWater)
             {
@@ -117,12 +134,26 @@ public class FishPlayerMovement : Animal
         if (inWater && Input.GetKeyDown(skillKey))
         {
             bubble.SetActive(false);
-            bubble.transform.position = transform.position + new Vector3(0, scale.y*1.6f, 0);
-            bubble.GetComponent<BubbleController>().waterHeight=bubble.transform.position.y;
+            bubble.transform.position = transform.position + new Vector3(0, initialScale.y * 1.6f, 0);
+            bubble.GetComponent<BubbleController>().waterHeight = bubble.transform.position.y;
             bubble.SetActive(true);
 
             //collect skill used event
             Analytics.SkillUsedEvent("Fish");
+        }
+
+        if (isBurst)
+        {
+            if (Time.time - burstStartTime < burstMaintainTime)
+            {
+                renderer.material.color = originalState * 2f;
+            }
+
+            else
+            {
+                isBurst = false;
+                renderer.material.color = originalState;
+            }
         }
 
         setAnimation();
@@ -148,6 +179,7 @@ public class FishPlayerMovement : Animal
             //Debug.Log(string.Concat(AnimalName, " leave water"));
             isJumping = false;
         }
+
         if (coll.gameObject.name == "FishGoal")
         {
             LevelWinManager.FishTouchGoal();
@@ -185,6 +217,14 @@ public class FishPlayerMovement : Animal
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+
+        if (collision.gameObject.CompareTag("canEat"))
+        {
+            collision.gameObject.SetActive(false);
+            isBurst = true;
+            burstStartTime = Time.time;
+            health += 5;
+        }
     }
 
     protected override void OnCollisionExit2D(Collision2D coll)

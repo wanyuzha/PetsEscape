@@ -5,10 +5,27 @@ public static class HandleScene
 {
     private static int levelCount = 3;
     private static int firstLevel = 5;
+    private static bool isPaused = false;
 
     public static void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public static void PauseGame()
+    {
+        Time.timeScale = 0;
+        isPaused = true;
+    }
+
+    public static void ResumeGame()
+    {
+        Time.timeScale = 1;
+        isPaused = false;
+    }
+
+    public static bool GetPauseStatus()
+    {
+        return isPaused;
     }
 
     public static void LoadNextLevel()
