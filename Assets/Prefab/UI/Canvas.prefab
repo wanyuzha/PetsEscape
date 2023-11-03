@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2353302999791007669}
         m_TargetAssemblyTypeName: ButtonCtroller, Assembly-CSharp
         m_MethodName: LoadPrevLevel
         m_Mode: 1
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 749630350060328831}
         m_TargetAssemblyTypeName: ButtonCtroller, Assembly-CSharp
         m_MethodName: LoadNextLevel
         m_Mode: 1

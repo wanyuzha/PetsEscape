@@ -21,7 +21,7 @@ public class FloatObjectController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // BoxCollider2D boxCollider;
         // boxCollider = GetComponent<BoxCollider2D>();
-        waterHeight = waterArea.GetComponent<DynamicWater2D>().bound.top + waterArea.transform.position.y + 1.5f;
+        waterHeight = waterArea.GetComponent<DynamicWater2D>().bound.top + waterArea.transform.position.y;
         // waterHeight = waterArea.GetComponent<DynamicWater2D>().bound.top + 0.5f;
         // mass = rb.mass;
         // floatObjectHeight = boxCollider.size.y;

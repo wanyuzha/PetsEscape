@@ -72,7 +72,7 @@ public class BubbleController : MonoBehaviour
     {
         if (collision.gameObject.tag == "water")
         {
-            waterHeight = collision.gameObject.GetComponent<DynamicWater2D>().curHeight + collision.gameObject.GetComponent<DynamicWater2D>().bound.bottom + collision.gameObject.transform.position.y;
+            waterHeight = collision.gameObject.GetComponent<DynamicWater2D>().bound.top + collision.gameObject.transform.position.y;
         }
     }
 }

@@ -144,6 +144,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
+      propertyPath: JUMP_SPEED_Y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2524104818331710286, guid: ce61f9e85ad7244aaabe11a1dab06111, type: 3}
       propertyPath: tutorialText
       value: 
       objectReference: {fileID: 1356348503}

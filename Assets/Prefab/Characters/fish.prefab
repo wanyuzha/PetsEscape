@@ -190,9 +190,11 @@ MonoBehaviour:
   panel: {fileID: 0}
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
+  SPEED_JUMPING_Y: 5
   scaleX: 1
   scaleY: 1
   bubble: {fileID: 1852015004246943503, guid: ff0b9dfe3530443ec8dbd70aef33b26c, type: 3}
+  burstMaintainTime: 5
 --- !u!50 &1949116984938561833
 Rigidbody2D:
   serializedVersion: 4
@@ -205,7 +207,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.01
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

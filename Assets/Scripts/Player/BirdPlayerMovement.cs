@@ -10,7 +10,7 @@ public class BirdPlayerMovement : Animal
 {
 
     const int SPEED = 6;
-    const int JUMP_SPEED_Y = 4;
+    public int JUMP_SPEED_Y = 4;
 
     private bool isPickupAnything = false;
     private GameObject collideObject = null;

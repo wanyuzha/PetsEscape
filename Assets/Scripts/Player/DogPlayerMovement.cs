@@ -13,7 +13,7 @@ public class DogPlayerMovement : Animal
     private GameObject collideObject = null;
     const int SPEED = 6;
     const int JUMP_SPEED_X = 6;
-    const int JUMP_SPEED_Y = 8;
+    public int JUMP_SPEED_Y = 8;
 
     public DogPlayerMovement()
     {
