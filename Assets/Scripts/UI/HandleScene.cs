@@ -10,7 +10,9 @@ public static class HandleScene
     public static void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        HandleScene.ResumeGame();
     }
+
     public static void PauseGame()
     {
         Time.timeScale = 0;

@@ -56,6 +56,7 @@ public class FishPlayerMovement : Animal
         if (health <= 0)
         {
             EndGame("Fish stranded!");
+            health = initialHealth;
         }
 
         // we want to see the anim no matter it is activated or not
