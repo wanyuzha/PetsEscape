@@ -8,7 +8,7 @@ public class FishPlayerMovement : Animal
 {
     const int SPEED_IN_WATER = 6;
     const int SPEED_ON_GROUND = 3;
-    public int SPEED_JUMPING_Y = 5;
+    const int SPEED_JUMPING_Y = 8;
     const int SPEED_JUMPING_X = 5;
     const float gravityScaleInWater = 0f;
     const float gravityScaleOutWater = 1f;
