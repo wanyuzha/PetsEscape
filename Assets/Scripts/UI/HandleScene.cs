@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,10 @@ public static class HandleScene
     private static int levelCount = 3;
     private static int firstLevel = 5;
     private static bool isPaused = false;
+    
+    private static float startTime;
+    private static float timePeriod = 0f;
+    
 
     public static void RestartGame()
     {
@@ -32,20 +37,34 @@ public static class HandleScene
 
     public static void LoadNextLevel()
     {
+        // stop timer and event collection cannot be put into if sentence like load prev level
+        // because when the final level is finished, it also need to call this function for stop timer
+          StopTimer();
         // Debug.Log("load next level");
+        Analytics.LevelPlayTime(timePeriod);
         if (LevelNumber() < levelCount)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
         }
+
+        StartTimer();
+
     }
 
     public static void LoadPrevLevel()
     {
-        // Debug.Log("load prev level");
+      
         if (LevelNumber() > 1)
         {
+            StopTimer();
+
+            // Debug.Log("load prev level");
+            Analytics.LevelPlayTime(timePeriod);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            StartTimer();
         }
+       
     }
 
     /*
@@ -89,4 +108,21 @@ public static class HandleScene
 
         return null;
     }
+
+    public static void StartTimer()
+    {
+       
+        startTime = Time.time;
+        timePeriod = 0f;
+    }
+
+    public static void StopTimer()
+    {
+        timePeriod = Time.time - startTime;
+        timePeriod = (float)Math.Round(timePeriod / 60.0, 1);
+        //Debug.Log("level play time:" + timePeriod);
+        
+    }
+
+    
 }

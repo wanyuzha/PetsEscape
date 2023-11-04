@@ -30,13 +30,17 @@ public class LevelWinManager : MonoBehaviour
         // {
         // HandleScene.RestartGame();
         // }
-
+        //
         if (WinCondition() && !tutorial.activeSelf)
         {
             if (HandleScene.isMaxLevel())
             {
+                // execute only one time for stop the timer, because this is the final level, so no next level will be loaded 
+                if (!panel.activeSelf) HandleScene.LoadNextLevel();
+
                 panelText.text = "Game Complete!!!";
                 panel.SetActive(true);
+               
             }
             else
             {

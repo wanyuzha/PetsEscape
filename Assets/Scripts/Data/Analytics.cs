@@ -84,4 +84,20 @@ public class Analytics : MonoBehaviour
             AnalyticsService.Instance.Flush();
         }
     }
+
+    public static void LevelPlayTime(float time)
+    {
+        //exclude first three tutorial level -2, -1, 0
+        if (HandleScene.LevelNumber() > 0)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { "levelNumber", "Level " + HandleScene.LevelNumber().ToString() },
+                { "playTime",  time}
+            };
+
+            AnalyticsService.Instance.CustomData("levelPlayTime", parameters);
+            AnalyticsService.Instance.Flush();
+        }
+    }
 }
