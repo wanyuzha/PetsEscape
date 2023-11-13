@@ -15,6 +15,8 @@ public class DogPlayerMovement : Animal
     const int JUMP_SPEED_X = 6;
     public int JUMP_SPEED_Y = 8;
 
+    private Animator anim;
+
     public DogPlayerMovement()
     {
         AnimalName = "Dog";
@@ -27,6 +29,7 @@ public class DogPlayerMovement : Animal
     protected override void Start()
     {
         base.Start();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -63,6 +66,8 @@ public class DogPlayerMovement : Animal
         {
             crunch();
         }
+
+        setAnimation();
     }
 
     protected override void jump(float speed)
@@ -104,7 +109,7 @@ public class DogPlayerMovement : Animal
                     collideObject = null;
                 }
             }
-
+            anim.SetTrigger("shiftTrigger");
             //collect skill used event
             Analytics.SkillUsedEvent("Dog");
         }
@@ -194,6 +199,11 @@ public class DogPlayerMovement : Animal
                 firstWin = false;
             }
         }
+    }
+
+    public void setAnimation()
+    {
+        anim.SetFloat("velocityX", Mathf.Abs(rb.velocity.x));
     }
 
     protected override void CheckInWater()
