@@ -36,6 +36,7 @@ public class FloatObjectController : MonoBehaviour
         {
             return;
         }
+        waterHeight = waterArea.GetComponent<DynamicWater2D>().bound.top + waterArea.transform.position.y;
 
         //force = -1 * Physics.gravity.y * 3f;
         float difference = transform.position.y - waterHeight;
