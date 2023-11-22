@@ -5485,8 +5485,17 @@ PrefabInstance:
 
         and unlock the Door!'
       objectReference: {fileID: 0}
+    - target: {fileID: 8478909556966707047, guid: c18830cc916364644996275bf29e578e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478909556966707047, guid: c18830cc916364644996275bf29e578e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5368931917691857770, guid: c18830cc916364644996275bf29e578e, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 643415163820396299, guid: c18830cc916364644996275bf29e578e, type: 3}
       insertIndex: 2

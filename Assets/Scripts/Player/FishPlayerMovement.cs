@@ -28,6 +28,7 @@ public class FishPlayerMovement : Animal
     //start time record when the bird's color is bright
     private float burstStartTime;
     public float burstMaintainTime = 5f;
+    private GameObject powerupCanvas;
 
     public FishPlayerMovement()
     {
@@ -43,6 +44,8 @@ public class FishPlayerMovement : Animal
         renderer = GetComponent<Renderer>();
         originalState = renderer.material.color;
         isBurst = false;
+
+        if(transform.Find("fishHealthCanvas") != null) powerupCanvas = transform.Find("fishHealthCanvas").gameObject;
     }
 
     // Update is called once per frame
@@ -95,6 +98,10 @@ public class FishPlayerMovement : Animal
         {
             isBurst = false;
             health = initialHealth;
+            HealthBar.SetHealth((float)health);
+            if(powerupCanvas != null) powerupCanvas.SetActive(false);
+
+            if(HealthBar.GetMaxHealth()> 5f) HealthBar.EndPower();
             renderer.material.color = originalState;
 
             if (rb.gravityScale > gravityScaleInWater)
@@ -154,6 +161,10 @@ public class FishPlayerMovement : Animal
             {
                 isBurst = false;
                 renderer.material.color = originalState;
+  
+                // reset the max health of health bar
+                HealthBar.EndPower();
+               // Debug.Log("endPower");
             }
         }
 
@@ -225,7 +236,8 @@ public class FishPlayerMovement : Animal
             isBurst = true;
             burstStartTime = Time.time;
             health += 5;
-        }
+            // add the max health and current health of health bar
+            HealthBar.EatPower();       }
     }
 
     protected override void OnCollisionExit2D(Collision2D coll)
@@ -238,6 +250,11 @@ public class FishPlayerMovement : Animal
         if (!inWater)
         {
             Damage(1);
+            HealthBar.SetHealth((float)health);
+            if (powerupCanvas != null)
+            {
+                if (!powerupCanvas.activeSelf) powerupCanvas.SetActive(true);
+            }
         }
     }
 }

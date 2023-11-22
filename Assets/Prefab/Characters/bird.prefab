@@ -218,7 +218,6 @@ MonoBehaviour:
   tutorialText: {fileID: 0}
   textComponent: {fileID: 0}
   JUMP_SPEED_Y: 4
-  burstMaintainTime: 15
 --- !u!95 &2214670790393409626
 Animator:
   serializedVersion: 5

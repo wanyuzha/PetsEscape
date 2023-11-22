@@ -22,7 +22,9 @@ public class BirdPlayerMovement : Animal
     private new Renderer renderer;
     //start time record when the bird's color is bright
     private float burstStartTime;
-    public float burstMaintainTime = 15f;
+    private float burstMaintainTime = 20f;
+
+    private GameObject powerupCanvas;
 
     private Animator anim;
     public BirdPlayerMovement()
@@ -43,7 +45,11 @@ public class BirdPlayerMovement : Animal
         originalState = renderer.material.color;
         isBurst = false;
         //Debug.Log(currentSceneIndex);
+
+        if(transform.Find("powerupCanvas") != null) powerupCanvas = transform.Find("powerupCanvas").gameObject;
+
         anim = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -148,7 +154,7 @@ public class BirdPlayerMovement : Animal
             {
                 isBurst = false;
                 renderer.material.color = originalState;
-
+                if(powerupCanvas != null) powerupCanvas.SetActive(false);
                 // if burst time is over, if the bird still grab dog, then bird will automatically release the dog
                 if (isPickupAnything && pickupObject.CompareTag("Player"))
                 {
@@ -232,6 +238,11 @@ public class BirdPlayerMovement : Animal
             collision.gameObject.SetActive(false);
             isBurst = true;
             burstStartTime = Time.time;
+
+            //show the powerup canvas (including powerup progress bar)
+            if (powerupCanvas != null) powerupCanvas.SetActive(true);
+            ProgressBar.ResetProgressBar();
+
         }
     }
 
