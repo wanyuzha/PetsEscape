@@ -67,12 +67,10 @@ public static class HandleScene
        
     }
 
-    /*
-        public static void LoadFirstNonTutorialLevel()
-        {
-            SceneManager.LoadScene(firstLevel);
-        }
-    */
+    public static void LoadHome()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     public static bool isMaxLevel()
     {

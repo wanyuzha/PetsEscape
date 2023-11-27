@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ButtonCtroller : MonoBehaviour
 {
-    // public Button button;
+    
 
     public void RestartGame()
     {
@@ -47,5 +47,14 @@ public class ButtonCtroller : MonoBehaviour
     public void LoadLevelNumber(int levelNumber)
     {
         HandleScene.LoadLevelNumber(levelNumber);
+    }
+    public void LoadHomeMenu()
+    {
+        HandleScene.LoadHome();
+    }
+    public void TogglePause()
+    {
+        if(Time.timeScale==0) HandleScene.ResumeGame();
+        else HandleScene.PauseGame();
     }
 }

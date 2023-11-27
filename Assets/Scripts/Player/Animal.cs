@@ -17,7 +17,6 @@ public class Animal : MonoBehaviour
     public GameObject panel;
     public GameObject tutorialText;
     public Text textComponent;
-
     protected bool inWater;
     // protected bool canJump = true;
     protected bool isJumping = false;
@@ -199,6 +198,7 @@ public class Animal : MonoBehaviour
             }
         }
     */
+
 
     protected void Damage(int hp)
     {

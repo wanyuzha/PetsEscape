@@ -6800,7 +6800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7223370703867174619, guid: c18830cc916364644996275bf29e578e, type: 3}
       propertyPath: m_Text
-      value: '[Left Shift] Grab/Release items at top!
+      value: '[Left Shift] Grab/Release items from top!
 
         Move Oven away to
         reach Window!'

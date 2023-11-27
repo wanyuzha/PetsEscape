@@ -11,7 +11,6 @@ public class BirdPlayerMovement : Animal
 
     const int SPEED = 6;
     public int JUMP_SPEED_Y = 4;
-
     private bool isPickupAnything = false;
     private GameObject collideObject = null;
     private GameObject pickupObject = null;
@@ -23,9 +22,8 @@ public class BirdPlayerMovement : Animal
     //start time record when the bird's color is bright
     private float burstStartTime;
     private float burstMaintainTime = 20f;
-
     private GameObject powerupCanvas;
-
+    private GameObject popupText = null;
     private Animator anim;
     public BirdPlayerMovement()
     {
@@ -47,7 +45,7 @@ public class BirdPlayerMovement : Animal
         //Debug.Log(currentSceneIndex);
 
         if(transform.Find("powerupCanvas") != null) powerupCanvas = transform.Find("powerupCanvas").gameObject;
-
+        popupText = HandleScene.FindSiblingGameObject("Popup");
         anim = GetComponent<Animator>();
         
     }
@@ -235,6 +233,8 @@ public class BirdPlayerMovement : Animal
 
         if (collision.gameObject.CompareTag("canEat"))
         {
+            //show pop up text bird can grab dog now
+            if(popupText != null)ShowPopup();
             collision.gameObject.SetActive(false);
             isBurst = true;
             burstStartTime = Time.time;
@@ -319,5 +319,15 @@ public class BirdPlayerMovement : Animal
     public void setPickupObject(GameObject obj)
     {
         pickupObject = obj;
+    }
+    public void ShowPopup()
+    {
+        popupText.SetActive(true);
+        StartCoroutine(HidePopup());
+    }
+        IEnumerator HidePopup()
+    {
+        yield return new WaitForSeconds(2f);
+        popupText.SetActive(false);
     }
 }
