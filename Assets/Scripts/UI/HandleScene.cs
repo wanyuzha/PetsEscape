@@ -15,7 +15,7 @@ public static class HandleScene
     public static void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        HandleScene.ResumeGame();
+        ResumeGame();
     }
 
     public static void PauseGame()
@@ -45,6 +45,7 @@ public static class HandleScene
         if (LevelNumber() < levelCount)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            ResumeGame();
         }
 
         StartTimer();
@@ -58,6 +59,7 @@ public static class HandleScene
 
             Analytics.LevelPlayTime(timePeriod);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            ResumeGame();
 
             StartTimer();
         }
@@ -66,7 +68,7 @@ public static class HandleScene
     public static void LoadHome()
     {
         SceneManager.LoadScene(1);
-        HandleScene.ResumeGame();
+        ResumeGame();
     }
 
     public static bool isMaxLevel()
@@ -87,6 +89,7 @@ public static class HandleScene
     public static void LoadLevelNumber(int levelNumber)
     {
         SceneManager.LoadScene(levelNumber + firstLevel - 1);
+        ResumeGame();
     }
 
     public static GameObject FindSiblingGameObject(string name)

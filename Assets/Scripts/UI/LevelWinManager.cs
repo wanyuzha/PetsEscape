@@ -13,6 +13,7 @@ public class LevelWinManager : MonoBehaviour
     private GameObject panel;
     private GameObject tutorial;
     private Text panelText;
+    private bool showWin = true;
 
     //public GameObject textMesh;
     void Start()
@@ -32,8 +33,9 @@ public class LevelWinManager : MonoBehaviour
         // }
         //
 
-        if (WinCondition() && !tutorial.activeSelf)
+        if (WinCondition())
         {
+            /*
             if (HandleScene.isMaxLevel())
             {
                 // execute only one time for stop the timer, because this is the final level, so no next level will be loaded 
@@ -46,6 +48,30 @@ public class LevelWinManager : MonoBehaviour
             else
             {
                 HandleScene.LoadNextLevel();
+            }
+            */
+            if (HandleScene.LevelNumber() < 0)
+            {
+                if (!tutorial.activeSelf)
+                {
+                    HandleScene.LoadNextLevel();
+                }
+            }
+            else
+            {
+                if (showWin)
+                {
+                    tutorial.SetActive(true);
+                    HandleScene.PauseGame();
+                    showWin = false;
+                }
+                else
+                {
+                    if (!tutorial.activeSelf)
+                    {
+                        HandleScene.LoadNextLevel();
+                    }
+                }
             }
         }
     }

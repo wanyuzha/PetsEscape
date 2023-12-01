@@ -231,10 +231,16 @@ public class DogPlayerMovement : Animal
         if (coll.gameObject.name == "Door" && LevelWinManager.GetKey)
         {
             LevelWinManager.DogTouchDoor();
-            if (firstWin)
+            if (HandleScene.LevelNumber() < 0)
             {
                 showTutorialText("Dog unlocks the Door!\nPress [Enter] to continue!");
-                firstWin = false;
+            }
+            else
+            {
+                if (flag != null)
+                {
+                    flag.SetActive(true);
+                }
             }
         }
     }

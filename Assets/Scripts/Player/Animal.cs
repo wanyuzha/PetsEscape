@@ -33,7 +33,7 @@ public class Animal : MonoBehaviour
     protected List<string> items;
 
     // protected bool firstTry;
-    protected bool firstWin;
+    public GameObject flag = null;
     // protected int currentSceneIndex;
 
     protected UnityEngine.KeyCode skillKey = KeyCode.LeftShift;
@@ -47,7 +47,7 @@ public class Animal : MonoBehaviour
     public Animal()
     {
         // firstTry = false;
-        firstWin = true;
+        // firstWin = true;
         // targetName = new List<string>();
         items = new List<string>();
     }
@@ -72,6 +72,10 @@ public class Animal : MonoBehaviour
         health = initialHealth;
         powerupCanvas = transform.Find("powerupCanvas").gameObject;
         powerupCanvas.SetActive(false);
+        if (flag != null)
+        {
+            flag.SetActive(false);
+        }
     }
 
     protected void undisplayArrow()

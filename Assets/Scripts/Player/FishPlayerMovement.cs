@@ -193,10 +193,16 @@ public class FishPlayerMovement : Animal
         if (coll.gameObject.name == "FishGoal")
         {
             LevelWinManager.FishTouchGoal();
-            if (firstWin)
+            if (HandleScene.LevelNumber() < 0)
             {
                 showTutorialText("Fish reaches the end!\nPress [Enter] to continue!");
-                firstWin = false;
+            }
+            else
+            {
+                if (flag != null)
+                {
+                    flag.SetActive(true);
+                }
             }
         }
         /*

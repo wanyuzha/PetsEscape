@@ -22,10 +22,10 @@ public class BirdPlayerMovement : Animal
     //start time record when the bird's color is bright
     private float burstStartTime;
     private float burstMaintainTime = 20f;
-    public GameObject popupText = null;
+    private GameObject popupText = null;
     private bool firstPopup = true;
     private Animator anim;
-    
+
     public BirdPlayerMovement()
     {
         AnimalName = "Bird";
@@ -43,6 +43,7 @@ public class BirdPlayerMovement : Animal
         renderer = GetComponent<Renderer>();
         originalState = renderer.material.color;
         isBurst = false;
+        popupText = HandleScene.FindSiblingGameObject("Popup");
 
         anim = GetComponent<Animator>();
     }
@@ -289,10 +290,16 @@ public class BirdPlayerMovement : Animal
         if (collision.gameObject.name == "Window")
         {
             LevelWinManager.BirdTouchGate();
-            if (firstWin)
+            if (HandleScene.LevelNumber() < 0)
             {
                 showTutorialText("Bird reaches the Window!\nPress [Enter] to continue!");
-                firstWin = false;
+            }
+            else
+            {
+                if (flag != null)
+                {
+                    flag.SetActive(true);
+                }
             }
         }
     }
