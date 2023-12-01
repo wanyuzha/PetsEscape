@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public static class HandleScene
 {
-    private static int levelCount = 3;
+    private static int levelCount = 4;
     private static int firstLevel = 5;
     private static bool isPaused = false;
     
@@ -44,6 +44,7 @@ public static class HandleScene
         Analytics.LevelPlayTime(timePeriod);
         if (LevelNumber() < levelCount)
         {
+            Debug.Log(SceneManager.GetActiveScene().buildIndex);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             
         }

@@ -64,7 +64,9 @@ public class LevelWinManager : MonoBehaviour
 
     public static void BirdTouchGate()
     {
+   
         BirdArrives = true;
+
     }
 
     public static void DogGetKey()
@@ -74,11 +76,13 @@ public class LevelWinManager : MonoBehaviour
 
     public static void DogTouchDoor()
     {
+  
         DogArrives = true;
     }
 
     public static void FishTouchGoal()
     {
+       
         FishArrives = true;
     }
 }
