@@ -42,7 +42,7 @@ public static class HandleScene
         StopTimer();
 
         Analytics.LevelPlayTime(timePeriod);
-        if (LevelNumber() < levelCount)
+        if (LevelNumber() <= levelCount)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             ResumeGame();

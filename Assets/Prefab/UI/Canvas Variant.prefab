@@ -252,7 +252,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1311426549476212195, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
       propertyPath: m_Text
-      value: "WASD\n\u2191\u2193\u2190\u2192\nSpace\nLeft Shift"
+      value: 'WASD
+
+        4 Arrows
+
+        Space
+
+        Left Shift'
       objectReference: {fileID: 0}
     - target: {fileID: 3770911940794623517, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
       propertyPath: m_Name

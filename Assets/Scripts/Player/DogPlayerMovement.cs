@@ -180,6 +180,7 @@ public class DogPlayerMovement : Animal
         if (collision.gameObject.CompareTag("canEat"))
         {
             collision.gameObject.SetActive(false);
+            JUMP_SPEED_Y = 12;
             isBurst = true;
             burstStartTime = Time.time;
 
