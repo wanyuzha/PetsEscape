@@ -31,6 +31,7 @@ public class LevelWinManager : MonoBehaviour
         // HandleScene.RestartGame();
         // }
         //
+
         if (WinCondition() && !tutorial.activeSelf)
         {
             if (HandleScene.isMaxLevel())
@@ -40,8 +41,8 @@ public class LevelWinManager : MonoBehaviour
 
                 panelText.text = "Game Complete!!!";
                 panel.SetActive(true);
-               
             }
+
             else
             {
                 HandleScene.LoadNextLevel();

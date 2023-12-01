@@ -22,9 +22,10 @@ public class BirdPlayerMovement : Animal
     //start time record when the bird's color is bright
     private float burstStartTime;
     private float burstMaintainTime = 20f;
-    private GameObject powerupCanvas;
-    private GameObject popupText = null;
+    public GameObject popupText = null;
+    private bool firstPopup = true;
     private Animator anim;
+    
     public BirdPlayerMovement()
     {
         AnimalName = "Bird";
@@ -42,12 +43,8 @@ public class BirdPlayerMovement : Animal
         renderer = GetComponent<Renderer>();
         originalState = renderer.material.color;
         isBurst = false;
-        //Debug.Log(currentSceneIndex);
 
-        if(transform.Find("powerupCanvas") != null) powerupCanvas = transform.Find("powerupCanvas").gameObject;
-        popupText = HandleScene.FindSiblingGameObject("Popup");
         anim = GetComponent<Animator>();
-        
     }
 
     // Update is called once per frame
@@ -152,7 +149,7 @@ public class BirdPlayerMovement : Animal
             {
                 isBurst = false;
                 renderer.material.color = originalState;
-                if(powerupCanvas != null) powerupCanvas.SetActive(false);
+                if (powerupCanvas != null) powerupCanvas.SetActive(false);
                 // if burst time is over, if the bird still grab dog, then bird will automatically release the dog
                 if (isPickupAnything && pickupObject.CompareTag("Player"))
                 {
@@ -164,7 +161,6 @@ public class BirdPlayerMovement : Animal
         }
 
         setAnimation();
-
     }
 
     private void pickup()
@@ -234,7 +230,12 @@ public class BirdPlayerMovement : Animal
         if (collision.gameObject.CompareTag("canEat"))
         {
             //show pop up text bird can grab dog now
-            if(popupText != null)ShowPopup();
+            if (firstPopup && popupText != null)
+            {
+                firstPopup = false;
+                ShowPopup();
+            }
+
             collision.gameObject.SetActive(false);
             isBurst = true;
             burstStartTime = Time.time;
@@ -242,7 +243,6 @@ public class BirdPlayerMovement : Animal
             //show the powerup canvas (including powerup progress bar)
             if (powerupCanvas != null) powerupCanvas.SetActive(true);
             ProgressBar.ResetProgressBar();
-
         }
     }
 
@@ -320,14 +320,16 @@ public class BirdPlayerMovement : Animal
     {
         pickupObject = obj;
     }
+
     public void ShowPopup()
     {
         popupText.SetActive(true);
         StartCoroutine(HidePopup());
     }
-        IEnumerator HidePopup()
+
+    IEnumerator HidePopup()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         popupText.SetActive(false);
     }
 }

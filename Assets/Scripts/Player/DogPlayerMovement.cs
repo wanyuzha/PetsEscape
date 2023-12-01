@@ -17,6 +17,13 @@ public class DogPlayerMovement : Animal
 
     private Animator anim;
 
+    private Color originalState;
+    private bool isBurst;
+    private new Renderer renderer;
+    //start time record when the bird's color is bright
+    private float burstStartTime;
+    private float burstMaintainTime = 10f;
+
     public DogPlayerMovement()
     {
         AnimalName = "Dog";
@@ -30,6 +37,9 @@ public class DogPlayerMovement : Animal
     {
         base.Start();
         anim = GetComponent<Animator>();
+        renderer = GetComponent<Renderer>();
+        originalState = renderer.material.color;
+        isBurst = false;
     }
 
     // Update is called once per frame
@@ -65,6 +75,23 @@ public class DogPlayerMovement : Animal
         if (Input.GetKeyDown(skillKey))
         {
             crunch();
+        }
+
+        // when bird eat the apple and burst, it will be bright color and can grab dog temporarily
+        if (isBurst)
+        {
+            if (Time.time - burstStartTime < burstMaintainTime)
+            {
+                renderer.material.color = originalState * 2f;
+            }
+
+            else
+            {
+                isBurst = false;
+                renderer.material.color = originalState;
+                if (powerupCanvas != null) powerupCanvas.SetActive(false);
+                JUMP_SPEED_Y = 8;
+            }
         }
 
         setAnimation();
@@ -149,6 +176,17 @@ public class DogPlayerMovement : Animal
             Debug.Log("Yes it is");
             collideObject = collision.gameObject;
         }*/
+
+        if (collision.gameObject.CompareTag("canEat"))
+        {
+            collision.gameObject.SetActive(false);
+            isBurst = true;
+            burstStartTime = Time.time;
+
+            //show the powerup canvas (including powerup progress bar)
+            if (powerupCanvas != null) powerupCanvas.SetActive(true);
+            ProgressBarDog.ResetProgressBar();
+        }
     }
 
     /*     void OnTriggerExit2D(Collider2D coll)

@@ -269,9 +269,7 @@ PrefabInstance:
         Use Pet Skill'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2204079475794499519, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
-    - {fileID: 438739020084300983, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1277063363826980364, guid: fcd4b3f1486014ced925bfca270fc4a0, type: 3}
       insertIndex: 0

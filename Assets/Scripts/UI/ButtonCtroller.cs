@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class ButtonCtroller : MonoBehaviour
 {
-    
-
     public void RestartGame()
     {
         HandleScene.RestartGame();
@@ -52,9 +50,14 @@ public class ButtonCtroller : MonoBehaviour
     {
         HandleScene.LoadHome();
     }
+
     public void TogglePause()
     {
-        if(Time.timeScale==0) HandleScene.ResumeGame();
-        else HandleScene.PauseGame();
+        HandleScene.PauseGame();
+    }
+
+    public void ToggleResume()
+    {
+        HandleScene.ResumeGame();
     }
 }

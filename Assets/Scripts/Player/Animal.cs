@@ -27,6 +27,8 @@ public class Animal : MonoBehaviour
     protected Rigidbody2D rb;
     private SpriteRenderer sr;
     private Color originColor;
+    protected GameObject powerupCanvas;
+
     // protected List<string> targetName;
     protected List<string> items;
 
@@ -68,6 +70,8 @@ public class Animal : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         originColor = sr.color;
         health = initialHealth;
+        powerupCanvas = transform.Find("powerupCanvas").gameObject;
+        powerupCanvas.SetActive(false);
     }
 
     protected void undisplayArrow()
@@ -88,8 +92,7 @@ public class Animal : MonoBehaviour
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
 
             // make the progress bar not flip with bird's flying, flip the powerup progress bar again to offset the bird's flipping
-            if (transform.Find("powerupCanvas") != null) transform.Find("powerupCanvas").localScale = new Vector3(-transform.Find("powerupCanvas").localScale.x, transform.Find("powerupCanvas").localScale.y, 1);
-            //if (transform.Find("fishHealthCanvas") != null) transform.Find("fishHealthCanvas").localScale = new Vector3(-transform.Find("fishHealthCanvas").localScale.x, transform.Find("fishHealthCanvas").localScale.y, 1);
+            powerupCanvas.transform.localScale = new Vector3(-powerupCanvas.transform.localScale.x, powerupCanvas.transform.localScale.y, 1);
         }
     }
 
@@ -198,7 +201,6 @@ public class Animal : MonoBehaviour
             }
         }
     */
-
 
     protected void Damage(int hp)
     {

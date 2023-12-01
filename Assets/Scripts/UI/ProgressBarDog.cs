@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//This bar only used by bird catching
-public class ProgressBar : MonoBehaviour
+//This bar only used by dog
+public class ProgressBarDog : MonoBehaviour
 {
     private Slider slider;
 
-    private static float powerupDuration = 20f;
+    private static float powerupDuration = 10f;
     private static float currentTime;
 
     // Start is called before the first frame update

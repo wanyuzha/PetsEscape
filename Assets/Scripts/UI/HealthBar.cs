@@ -6,17 +6,18 @@ using UnityEngine.UI;
 // this bar only used by fish
 public class HealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Slider slider;
 
-      private static float maxHealth;
+    private static float maxHealth = 5f;
     private static float currentHealth;
+
+    // Start is called before the first frame update
     void Start()
     {
         slider = gameObject.GetComponent<Slider>();
         slider.value = 1f;
-        maxHealth = 5f;
-        currentHealth = 5f;
+
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -25,7 +26,6 @@ public class HealthBar : MonoBehaviour
         slider.value = currentHealth / maxHealth;
     }
 
-
     public static void SetHealth(float health)
     {
         currentHealth = health;
@@ -33,21 +33,14 @@ public class HealthBar : MonoBehaviour
 
     public static void EatPower()
     {
-        currentHealth = currentHealth + 5;
-        maxHealth = maxHealth + 5;
-      
+        currentHealth += 5f;
+        // maxHealth += 5f;
     }
 
-    public static void EndPower()
-    {
-        maxHealth = maxHealth - 5;
-       
-    }
-
-    public static float GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
-   
+    /*
+        public static void EndPower()
+        {
+            maxHealth = 5f;
+        }
+    */
 }
